@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
 
 def index(request):
     if request.moethd == "POST":
@@ -19,6 +20,11 @@ def index(request):
 
 def login(request):
     return render(request, 'login.html')
+
+
+def logout(request):
+    logout(request)
+    return redirect('index.html')
 
 
 def user_view(request):
