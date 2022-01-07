@@ -42,7 +42,7 @@ class User(AbstractBaseUser):
     object = UserManager()
 
     USERNAME_FIELD = 'email' #usernameFild를 email로
-    REQUIRED_FIELDS = ['phone_num'] #필수로 받고 싶은 필드
+    REQUIRED_FIELDS = ['phone_num','username'] #필수로 받고 싶은 필드
 
     def __str__(self):
         return self.email
