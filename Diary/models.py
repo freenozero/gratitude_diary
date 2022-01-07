@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, password, email, phone_num):
+    def create_user(self, email=None, username=None, password=None, phone_num=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -11,19 +11,22 @@ class UserManager(BaseUserManager):
             username=self.model.normalize_username(username),
             phone_num = phone_num,
         )
+        print(email,"print")
+        print(username,"print")
+        print(phone_num,"print")
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, password, email, phone_num):
+    def create_superuser(self, email, username, password, phone_num):
         user = self.create_user(
             email=email,
             username=username,
             password=password,
             phone_num=phone_num,
         )
-
+        print("우왕 수퍼유저에요")
         user.is_admin = True
         user.save(using=self.db)
         return user
@@ -34,7 +37,7 @@ class User(AbstractBaseUser):
                               max_length=255,
                               unique=True,)
     username = models.CharField(max_length=30)
-    phone_num = models.IntegerField()
+    phone_num = models.CharField(max_length=30)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -42,7 +45,7 @@ class User(AbstractBaseUser):
     object = UserManager()
 
     USERNAME_FIELD = 'email' #usernameFild를 email로
-    REQUIRED_FIELDS = ['phone_num','username'] #필수로 받고 싶은 필드
+    REQUIRED_FIELDS = ['username', 'phone_num'] #필수로 받고 싶은 필드
 
     def __str__(self):
         return self.email

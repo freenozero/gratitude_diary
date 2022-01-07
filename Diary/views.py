@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import UserManager, User
 from django.contrib.auth import login, authenticate
-from django.contrib import auth
 
 
 def signup(request):
     if request.method == "POST": #POST 방식일때
         if request.POST['password'] == request.POST['confirm']: #입력한 패스워드가 일치할 경우
             user = User.objects.create_user(username=request.POST["username"],
-                                            email=request.POST["email"],
-                                            password=request.POST["password"])
+                                            password=request.POST["password"],
+                                            email=request.POST["email"])
             # user.user_pwd = request.POST["password"] #모델 만든 후 해야함..
             # user.phone_number = request.POST["phone_num"]
             # user.user_id = request.POST["id"]
