@@ -1,25 +1,10 @@
 <div class="wrapper" style="text-align: center;">
     <h1>회원가입</h1>
-    <form method="POST" action="{% url 'signup' %}">
+    <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        이름: <br>
-        <input name="username" type="text">
-        <br>
-        아이디: <br>
-        <input name="id" type="text">
-        <br>
-        비밀번호: <br>
-        <input name="password" type="password">
-        <br>
-        비밀번호 확인: <br>
-        <input name="confirm" type="password">
-        <br>
-        이메일: <br>
-        <input name="email" type="email">
-        <br>
-        핸드폰: <br>
-        <input name="phone_num" type="tel">
-        <br>
+        <table>
+            {{  form }}
+        </table>
         <br><br>
         <input type="submit" class="btn btn-primary" value="Sign Up">
     </form>
