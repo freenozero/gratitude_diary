@@ -6,12 +6,12 @@ from .models import User
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    age = forms.IntegerField(label='ages', widget=forms.NumberInput)
 
     class Meta:
         model = User
-        fields = ('email', 'date_of_birth')
+        fields = ('email', 'date_of_birth', 'age')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -33,7 +33,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'date_of_birth',
+        fields = ('email', 'password', 'date_of_birth','age',
                   'is_active', 'is_admin')
 
     def clean_password(self):
