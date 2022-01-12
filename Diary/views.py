@@ -17,18 +17,28 @@ def signup(request):
 
 
 def index(request):
-    # if request.method == "POST":
-    #     username = request.POST["username"]
-    #     password = request.POST["password"]
-    #     user = authenticate(username=username, password=password)
-    #     if user is not None:
-    #         # 로그인 성공
-    #         login(request, username)
-    #         return render(request, 'user.html', {'username': username, 'password': password})
-    #     else:
-    #         # 로그인 실패시 notUser 문자 반환
-    #         return render(request, 'index.html', {'notUser': True})
-    return render(request, 'index.html')
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
+
+        if login_form.is_valid():
+            email = login_form.cleaned_data['email']
+            password = login_form.cleaned_data['password']
+
+            user = authenticate(
+                email=email,
+                password=password
+            )
+            if user is not None:
+                print('인증성공')
+                login(request, user)
+            else:
+                login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
+    else:
+        login_form = LoginForm()
+    context = {
+        'login_form': login_form,
+    }
+    return render(request, 'index.html', context)
 
 
 def login_view(request):
