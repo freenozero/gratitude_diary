@@ -1,6 +1,9 @@
-<title>Logins</title>
+{% block title %}<title>로그인</title>{% endblock %}
 
-<body>
+{% block body %}
+    <a href="123">123</a>
+{% endblock %}
+{% block content %}
         <div class="login">
             <form action="" method="post">
                 {% csrf_token %}
@@ -24,3 +27,4 @@
             </form>
         </div>
 </body>
+{% endblock %}

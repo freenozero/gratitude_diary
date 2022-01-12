@@ -63,7 +63,7 @@ def login_view(request):
     context = {
         'login_form': login_form,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'Diary/../templates/index.html', context)
 
 def logout_view(request):
     logout(request)
