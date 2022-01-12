@@ -30,30 +30,34 @@ def index(request):
     #         return render(request, 'index.html', {'notUser': True})
     return render(request, 'index.html')
 
-def login(request):
-    if request.method == "POST":
-        login_form = login(request.POST)
+
+def login_view(request):
+    if request.method == 'POST':
         login_form = LoginForm(request.POST)
+
         if login_form.is_valid():
             email = login_form.cleaned_data['email']
             password = login_form.cleaned_data['password']
 
             user = authenticate(
-                email = email,
-                password = password
+                email=email,
+                password=password
             )
-
-            if user:
+            if user is not None:
+                print('인증성공')
                 login(request, user)
-                return redirect('signup')
-            login_form.add_error(None, '이메일 또는 패스워드가 올바르지 않습니다')
-        else:
-            login_form = LoginForm()
-        context = {
-            'login_form' : login_form,
-        }
-    return render(request, 'login.html', context)
+            else:
+                login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
+    else:
+        login_form = LoginForm()
+    context = {
+        'login_form': login_form,
+    }
+    return render(request, 'index.html', context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('login_view')
 
 def user(request):
     return render(request, 'user.html')

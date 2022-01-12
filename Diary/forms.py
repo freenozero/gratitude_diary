@@ -7,18 +7,17 @@ from .models import User
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-    password3 = forms.CharField(label='3차 비밀번호',widget=forms.PasswordInput)
     #age = forms.IntegerField(label='ages', widget=forms.NumberInput)
 
     class Meta:
         model = User
-        fields = ('email', 'date_of_birth', 'age', 'passwoord')
+        fields = ('email', 'date_of_birth', 'age')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError(password1 + "," + password2 + "아저씨 비밀번호 틀림")
+            raise forms.ValidationError("Passwords don't match")
         return password2
 
     def save(self, commit=True):
