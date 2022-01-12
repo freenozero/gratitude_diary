@@ -1,13 +1,18 @@
 {% extends "login.html" %}
-
-<head style='border:solid'>
-</head>
 {% block body %}
-    <body style='border:solid'>
+{% load static %}
+<head style='border:solid'>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "style.css" %}">
+<div style='border:solid'>머리</div>
+</head>
+    <body>
+        hihihihi
+        <img src="{% static "img/test2.png" %}"/>
         <nav style='border:solid'>Nav
         </nav>
     </body>
-{% endblock %}
 <footer style='border:solid'>
     <div style='border:solid'>발바닥</div>
 </footer>
+{% endblock %}
