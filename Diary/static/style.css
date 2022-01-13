@@ -1,7 +1,8 @@
 #head {
-    /*border: solid;*/
+    border: solid;
     height: 10rem;
-    color: red
+    color: red;
+    text-align: center;
 }
 body{
     background-image: url("img/image3.jpg");
@@ -12,8 +13,31 @@ body{
     width: 100%;
 }
 
-#body {
-    /*border: solid;*/
+.form-group{
+    border: solid;
+    height: 2rem;
+    color: aqua;
+}
+
+.bt{
+    border: solid;
+    height: 2rem;
+    color: aliceblue;
+}
+
+.login{
+    min-width: 200px;
+    margin-left: 20rem;
+    margin-right: 20rem;
+    border: solid;
     height: 10rem;
-    color: blue
+    color: green;
+    text-align: center;
+}
+
+#body {
+    border: solid;
+    height: 10rem;
+    color: blue;
+    text-align: center;
 }
