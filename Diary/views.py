@@ -29,7 +29,6 @@ def index(request):
                 password=password
             )
             if user is not None:
-                print('인증성공')
                 login(request, user)
             else:
                 login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
@@ -54,7 +53,6 @@ def login_view(request):
                 password=password
             )
             if user is not None:
-                print('인증성공')
                 login(request, user)
             else:
                 login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
@@ -63,7 +61,7 @@ def login_view(request):
     context = {
         'login_form': login_form,
     }
-    return render(request, 'Diary/../templates/index.html', context)
+    return render(request, 'index.html', context)
 
 def logout_view(request):
     logout(request)

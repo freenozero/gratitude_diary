@@ -1,8 +1,8 @@
 {% block title %}<title>로그인</title>{% endblock %}
 
 {% block body %}
-    <a href="123">123</a>
 {% endblock %}
+
 {% block content %}
         <div class="login">
             <form action="" method="post">
@@ -24,6 +24,7 @@
                     {% endfor %}
                 {% endif %}
                 <button class="btn btn-primary btn-block">로그인</button>
+                <a href={% url 'signup' %}>회원가입 하시겠습니까?</a>
             </form>
         </div>
 </body>
