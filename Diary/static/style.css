@@ -23,12 +23,13 @@ body{
 
 .form_group{
     position: relative;
+    border: solid 1px;
 
 }
 
 .login_button{
-
-    border:none;
+    /*border:none;*/
+    border: solid 1px;
     background:url("img/lock.png");
 
     height: 100px;
@@ -42,10 +43,12 @@ body{
 
 .login_button:hover{
     cursor: pointer;
+    border: solid 1px;
 }
 
 .login{
 
+    border: solid 1px;
     width: 400px;
     bottom: 300px;
     margin: 0 auto;
