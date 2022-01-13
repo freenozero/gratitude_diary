@@ -7,11 +7,11 @@ from .models import User
 
 
 class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ('email', 'date_of_birth', 'name', 'phone_num')
+    password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

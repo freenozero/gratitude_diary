@@ -32,11 +32,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(verbose_name='email', max_length=255, unique=True)
-    date_of_birth = models.DateField(null=False)
-    phone_num = models.CharField(max_length=11)
+    email = models.EmailField(verbose_name='이메일', max_length=255, unique=True)
+    date_of_birth = models.DateField(verbose_name="생년월일", null=False)
+    phone_num = models.CharField(verbose_name="전화번호", max_length=11)
     age = models.PositiveIntegerField(default=0, null=False, blank=False)
-    name = models.CharField(max_length=10)
+    name = models.CharField(verbose_name="이름", max_length=10)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()
