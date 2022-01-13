@@ -4,7 +4,6 @@
 {% endblock %}
 
 
-
 {% block content %}
         <div class="login">
             <form action="" method="post">
@@ -25,7 +24,7 @@
                         <p class="text-danger"><b>{{ error }}</b></p>
                     {% endfor %}
                 {% endif %}
-                <button class="bt">로그인</button>
+                <button class="login_bt">로그인</button><br>
                 <a href={% url 'signup' %}>회원가입 하시겠습니까?</a>
             </form>
         </div>

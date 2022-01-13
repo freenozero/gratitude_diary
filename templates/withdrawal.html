@@ -1,0 +1,12 @@
+<h1>{{ user.name }}님 탈퇴하시겠습니까?</h1>
+<h2>진짜로?</h2>
+<h3>양심</h3>
+<h3>진짜아??</h3>
+{% if request.user == user %}
+    <form action="{% url 'withdrawal' %}" method="POST">
+        {% csrf_token %}
+        <input type="password" name="pw" placeholder="pw">
+        <button class="btn btn-secondary">회원 탈퇴</button>
+    </form>
+{% endif %}
+<hr>
