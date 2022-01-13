@@ -1,11 +1,12 @@
 #head {
-    border: solid;
-    height: 10rem;
+    border: solid 1px;
+    height: 63%;
+    /*높이 전체의 63% 비율을 차지하게 하는 명령*/
+    margin: 0 auto;
     color: red;
     text-align: center;
 }
 body{
-    border: solid;
     margin: 0px;
     background-image: url("img/test7.jpg");
     background-size: cover;
@@ -14,32 +15,47 @@ body{
     height: 100vh;
     width: 100%;
 }
-
-.form-group{
-    border: solid;
-    height: 2rem;
-    color: aqua;
-}
-
 .bt{
-    border: solid;
+    border: solid 1px;
     height: 2rem;
     color: black;
 }
 
-.login{
-    min-width: 200px;
-    margin-left: 20rem;
-    margin-right: 20rem;
-    border: solid;
-    height: 10rem;
-    color: green;
-    text-align: center;
+.form_group{
+    position: relative;
+
 }
 
-#body {
-    border: solid;
-    height: 10rem;
+.login_button{
+
+    border:none;
+    background:url("img/lock.png");
+
+    height: 100px;
+    width: 100px;
+    background-size: 100px;
+    background-repeat: no-repeat;
+    position: relative;
+    right: -144px;
+    top: -78px;
+}
+
+.login_button:hover{
+    cursor: pointer;
+}
+
+.login{
+
+    width: 400px;
+    bottom: 300px;
+    margin: 0 auto;
+    border: solid 1px;
+    color: green;
+}
+
+#content {
+    height: 35%;
+    border: solid 1px;
     color: blue;
     text-align: center;
 }
