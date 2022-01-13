@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.contrib.auth.decorators import login_required
 from .forms import UserCreationForm, LoginForm
+from django.views.decorators.http import require_POST
 User = get_user_model()
 
 def signup(request):
@@ -30,6 +32,8 @@ def index(request):
             )
             if user is not None:
                 login(request, user)
+
+                return render(request, 'withdrawal.html')
             else:
                 login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
     else:
@@ -40,28 +44,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def login_view(request):
-    if request.method == 'POST':
-        login_form = LoginForm(request.POST)
-
-        if login_form.is_valid():
-            email = login_form.cleaned_data['email']
-            password = login_form.cleaned_data['password']
-
-            user = authenticate(
-                email=email,
-                password=password
-            )
-            if user is not None:
-                login(request, user)
-            else:
-                login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
-    else:
-        login_form = LoginForm()
-    context = {
-        'login_form': login_form,
-    }
-    return render(request, 'index.html', context)
 
 def logout_view(request):
     logout(request)
@@ -69,3 +51,17 @@ def logout_view(request):
 
 def user(request):
     return render(request, 'user.html')
+
+
+@login_required
+@require_POST
+def withdrawal(request):
+    if request.method == "POST":
+        pw = request.POST["pw"]
+        user = request.user
+        from django.contrib.auth.hashers import check_password
+        if check_password(pw, user.password):
+            request.user.delete()
+        else:
+            messages.error(request, 'Error!')
+    return redirect('index')
