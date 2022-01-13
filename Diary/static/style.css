@@ -1,4 +1,19 @@
+#head {
+    /*border: solid;*/
+    height: 10rem;
+    color: red
+}
+body{
+    background-image: url("img/image3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+}
 
-body {
-    color: red;
+#body {
+
+    /*border: solid;*/
+    height: 10rem;
+    color: blue
 }

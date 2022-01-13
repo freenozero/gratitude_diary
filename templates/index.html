@@ -1,18 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
 {% extends "login.html" %}
 {% block body %}
 {% load static %}
 <head style='border:solid'>
     {% load static %}
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static "style.css" %}">
-<div style='border:solid'>머리</div>
 </head>
-    <body>
-        hihihihi
-        <img src="{% static "img/test2.png" %}"/>
-        <nav style='border:solid'>Nav
-        </nav>
-    </body>
-<footer style='border:solid'>
-    <div style='border:solid'>발바닥</div>
-</footer>
+
+<body>
+    <div id="head">
+        머리
+    </div>
+    <div id="body">
+        몸
+    </div>
+</body>
 {% endblock %}
+
+</html>
