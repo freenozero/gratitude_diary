@@ -5,6 +5,7 @@
     text-align: center;
 }
 body{
+    border: solid;
     margin: 0px;
     background-image: url("img/test7.jpg");
     background-size: cover;

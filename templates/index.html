@@ -1,9 +1,11 @@
+
+{% include "login.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-{% extends "login.html" %}
-{% block head %}
-{% load static %}
+
 <head style='border:solid'>
+    {% block title %} {% endblock %}
     {% load static %}
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static "style.css" %}">
@@ -15,8 +17,9 @@
     </div>
     <div id="body">
         <p>#body</p>
+        {% block content %}
+        {% endblock %}
     </div>
 </body>
-{% endblock %}
 
 </html>
