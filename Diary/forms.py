@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -6,13 +8,10 @@ from .models import User
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-    #age = forms.IntegerField(label='ages', widget=forms.NumberInput)
-
+    password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ('email', 'date_of_birth', 'name')
-
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
@@ -20,10 +19,10 @@ class UserCreationForm(forms.ModelForm):
             raise forms.ValidationError("Passwords don't match")
         return password2
 
-
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
+        user.age = date.today().year
         if commit:
             user.save()
         return user
@@ -43,15 +42,15 @@ class UserChangeForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(
-            attrs={
-                'class':'form-control',
-            }
-        )
+        attrs={
+            'class': 'form-control',
+        }
+    )
     )
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'class':'form-control',
+                'class': 'form-control',
             }
         )
     )

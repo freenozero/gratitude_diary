@@ -8,27 +8,19 @@ class UserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, name=None, password=None):
         if not email:
             raise ValueError('Users must have an email address')
-        a = datetime.date.today() - date_of_birth
-        age = (a.days / 365.25)
-        print(age, a)
         user = self.model(
             email=self.normalize_email(email),
             date_of_birth=date_of_birth,
-            age=age,
             name=name
         )
-
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, date_of_birth, name=None, password=None):
-        a = datetime.date.today() - date_of_birth
-        age = (a.days / 365.25)
         user = self.create_user(
             email,
             date_of_birth=date_of_birth,
-            age=age,
             name=name
         )
         user.is_admin = True
@@ -39,15 +31,15 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=255, unique=True)
-    date_of_birth = models.DateTimeField()
-    age = models.IntegerField(default=0,null=False, blank=False)
+    date_of_birth = models.DateField()
+    age = models.PositiveIntegerField(default=0, null=False, blank=False)
     name = models.CharField(max_length=10)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth', 'name', 'age']
+    REQUIRED_FIELDS = ['date_of_birth', 'name']
 
     def __str__(self):
         return self.email
