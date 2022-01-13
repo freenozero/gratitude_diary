@@ -7,12 +7,12 @@ body{
     background-image: url("img/image3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    background-position: center;
+    height: 100vh;
     width: 100%;
 }
 
 #body {
-
     /*border: solid;*/
     height: 10rem;
     color: blue
