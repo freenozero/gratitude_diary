@@ -1,7 +1,16 @@
 {% if messages %}
     {% for message in messages %}
-        <div class="msg" id="msg" role="alert">
+        <div id="msg" role="alert">
             {{ message }}
         </div>
     {% endfor %}
 {% endif %}
+
+
+<script>
+    setTimeout(function (){
+        if($('#msg').length > 0){
+            $('#msg').remove();
+        }
+    }, 2000)
+</script>
