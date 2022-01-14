@@ -2,15 +2,10 @@
     {% for message in messages %}
         <div id="msg" role="alert">
             {{ message }}
+            <input id="msgRemove" type="button"
+                   onclick= 'msg.remove(); msgRemove.remove() '/>
         </div>
+
     {% endfor %}
 {% endif %}
 
-
-<script>
-    setTimeout(function (){
-        if($('#msg').length > 0){
-            $('#msg').remove();
-        }
-    }, 2000)
-</script>
