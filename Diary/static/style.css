@@ -26,9 +26,15 @@ body{
     border: solid 1px;
 
 }
+#msg{
+    position: relative;
+    background-color: wheat;
+    width: 300px;
+    margin: 0 auto;
+    border: solid 1px;
+}
 
 .login_button{
-    /*border:none;*/
     border: solid 1px;
     background:url("img/lock.png");
 
@@ -52,7 +58,6 @@ body{
     width: 400px;
     bottom: 300px;
     margin: 0 auto;
-    border: solid 1px;
     color: green;
 }
 

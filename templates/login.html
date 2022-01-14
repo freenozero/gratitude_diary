@@ -1,5 +1,5 @@
-{% block content %}
-    {% load static %}
+
+{% load static %}
     <div class="login">
         <form action="" method="post">
             {% csrf_token %}
@@ -9,11 +9,6 @@
             <div class="form-group">
                 <input type="password" name="password" class="form-control" required id="id_password" placeholder="비밀번호">
              </div>
-            <div class="login_warp">
-                <button class="login_button"></button>
-            </div>
+            <button class="login_button"></button>
         </form>
-        <button class="signup_button"><a href="{% url 'signup' %}">회원가입</a></button>
-        {% include 'messages.html'%}
     </div>
-{% endblock content%}
