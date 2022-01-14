@@ -3,7 +3,6 @@
     <div class="login">
         <form action="" method="post">
             {% csrf_token %}
-
              <div class="form-group">
                 <input type="email" name="email" class="form-control" required id="id_email" placeholder="아이디">
              </div>
@@ -17,5 +16,4 @@
         <button class="signup_button"><a href="{% url 'signup' %}">회원가입</a></button>
         {% include 'messages.html'%}
     </div>
-
 {% endblock content%}

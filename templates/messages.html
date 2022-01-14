@@ -2,10 +2,8 @@
     {% for message in messages %}
         <div id="msg" role="alert">
             {{ message }}
-            <input id="msgRemove" type="button"
-                   onclick= 'msg.remove(); msgRemove.remove() '/>
         </div>
-
+        <input id="msgRemove" type="button"
+                   onclick= 'msg.remove(); msgRemove.remove()'/>
     {% endfor %}
 {% endif %}
-
