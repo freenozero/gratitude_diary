@@ -1,22 +1,24 @@
 
+{% include "login.html" %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
+<head style='border:solid'>
+    {% block title %} {% endblock %}
+    {% load static %}
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static "style.css" %}">
-    {% block title %} {% endblock %}
 </head>
 
 <body>
-    <header>
-    <title>메인화면</title>
-    </header>
     <div id="head">
+        <p>#head</p>
     </div>
-    <div id="content">
-        {% include "login.html" %}
+    <div id="body">
+        <p>#body</p>
+        {% block content %}
+        {% endblock %}
     </div>
 </body>
 

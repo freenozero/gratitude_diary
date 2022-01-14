@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.decorators import login_required
 from .forms import UserCreationForm, LoginForm
 from django.views.decorators.http import require_POST
+
 User = get_user_model()
 
 def signup(request):
@@ -11,14 +12,14 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save() #새로 만들어진 User의 DB를 저장.
-            messages.success(request, "회원가입 됨")
+            messages.success(request, '회원가입이 정상적으로 되었습니다.') #회원가입 되었을때
             return redirect('/')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form' : form})
 
 
-def index(request):
+def login_view(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
 
@@ -32,10 +33,9 @@ def index(request):
             )
             if user is not None:
                 login(request, user)
-
                 return render(request, 'withdrawal.html')
             else:
-                login_form.add_error(None, '아이디 또는 비밀번호가 올바르지 않습니다')
+                messages.error(request, '없는 회원정보 입니다.')
     else:
         login_form = LoginForm()
     context = {
@@ -48,6 +48,7 @@ def index(request):
 def logout_view(request):
     logout(request)
     return redirect('login_view')
+
 
 def user(request):
     return render(request, 'user.html')
@@ -62,6 +63,7 @@ def withdrawal(request):
         from django.contrib.auth.hashers import check_password
         if check_password(pw, user.password):
             request.user.delete()
+            messages.success(request, '탈퇴가 정상적으로 되었습니다.')
         else:
-            messages.error(request, 'Error!')
+            messages.error(request, '탈퇴가 정상적으로 되지 않았습니다.')
     return redirect('index')
