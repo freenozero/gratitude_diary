@@ -38,7 +38,6 @@ def login_view(request):
                 messages.error(request, '없는 회원정보 입니다.')
     else:
         login_form = LoginForm()
-        messages.error(request, '나는 기본 오류 메시지이다!!')
     context = {
         'login_form': login_form,
     }
