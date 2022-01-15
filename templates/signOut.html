@@ -3,7 +3,7 @@
 <h3>양심</h3>
 <h3>진짜아??</h3>
 {% if request.user == user %}
-    <form action="{% url 'withdrawal' %}" method="POST">
+    <form action="{% url 'signOut' %}" method="POST">
         {% csrf_token %}
         <input type="password" name="pw" placeholder="pw">
         <button class="btn btn-secondary">회원 탈퇴</button>
