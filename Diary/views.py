@@ -20,8 +20,9 @@ def signup(request):
     return render(request, 'signup.html', {'form' : form})
 
 
-@login_required
-@require_POST
+def signout_view(request):
+    return render(request, 'signOut.html')
+
 def signOut(request):
     if request.method == "POST":
         pw = request.POST["pw"]
@@ -34,7 +35,8 @@ def signOut(request):
     return redirect('index')
 
 
-
+@login_required
+@require_POST
 def login_view(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
