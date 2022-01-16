@@ -8,20 +8,22 @@ from django.contrib.auth.hashers import check_password
 
 User = get_user_model()
 
+
 def signup(request):
-    if request.method == "POST": #POST 방식일때
+    if request.method == "POST":  # POST 방식일때
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save() #새로 만들어진 User의 DB를 저장.
-            messages.success(request, '회원가입이 정상적으로 되었습니다.') #회원가입 되었을때
+            form.save()  # 새로 만들어진 User의 DB를 저장.
+            messages.success(request, '회원가입이 정상적으로 되었습니다.')  # 회원가입 되었을때
             return redirect('/')
     else:
         form = UserCreationForm()
-    return render(request, 'signup.html', {'form' : form})
+    return render(request, 'signup.html', {'form': form})
 
 
-def signout_view(request):
+def signOut_view(request):
     return render(request, 'signOut.html')
+
 
 def signOut(request):
     if request.method == "POST":
@@ -35,8 +37,6 @@ def signOut(request):
     return redirect('index')
 
 
-@login_required
-@require_POST
 def login_view(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
@@ -62,7 +62,6 @@ def login_view(request):
     return render(request, 'index.html', context)
 
 
-
 def logout_view(request):
     logout(request)
     return redirect('login_view')
@@ -72,11 +71,9 @@ def user(request):
     return render(request, 'user.html')
 
 
-
 def Diary(request):
     return render(request, 'Diary.html')
 
 
 def main(request):
     return render(request, 'main.html')
-
