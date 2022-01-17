@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import check_password
 User = get_user_model()
 
 
-def signup_view(request):
+def signup(request):
     if request.method == "POST":  # POST 방식일때
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -21,7 +21,7 @@ def signup_view(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def signOut_view(request):
+def signOut(request):
     if request.method == "POST":
         pw = request.POST["pw"]
         user = request.user
@@ -63,6 +63,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login_view')
+
 
 def user(request):
     return render(request, 'user.html')
