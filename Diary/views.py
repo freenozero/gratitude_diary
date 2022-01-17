@@ -21,10 +21,6 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def signOut_view(request):
-    return render(request, 'signOut.html')
-
-
 def signOut(request):
     if request.method == "POST":
         pw = request.POST["pw"]
@@ -34,7 +30,9 @@ def signOut(request):
             messages.success(request, '탈퇴가 정상적으로 되었습니다.')
         else:
             messages.error(request, '탈퇴가 정상적으로 되지 않았습니다.')
-    return redirect('index')
+        return redirect('index')
+    else:
+        return render(request, 'signOut.html')
 
 
 def login_view(request):
@@ -70,10 +68,10 @@ def logout_view(request):
 def user(request):
     return render(request, 'user.html')
 
-
-def Diary(request):
-    return render(request, 'Diary.html')
-
-
-def main(request):
-    return render(request, 'main.html')
+#
+# def Diary(request):
+#     return render(request, 'Diary.html')
+#
+#
+# def main(request):
+#     return render(request, 'main.html')
