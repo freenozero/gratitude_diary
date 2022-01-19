@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
-from Diary_write.models import data
+from .models import Data
+import datetime
+from django.db import models
 # Create your views here.
 
 def main(request):
@@ -9,12 +11,11 @@ def main(request):
 
 def Diary_view(request):
     if request.method == "POST":
-        date = request.POST.get('inputDate', False)
-        email = request.user.email
-        datas = (data.objects.filter(date=date) & data.objects.filter(email=email)) #동일한 date, email 찾기
+        datas = Data.objects.filter(id=request.user.id)
+        print(datas)
         if datas.exists():
-            Mydata=datas.get(id=1)
-            return render(request, 'DiaryEdit.html',{"Mydata":Mydata})
+            mydata = datas.get(id=1)
+            return render(request, 'DiaryEdit.html',{"mydata":mydata})
         else:
             return redirect('DiaryWrite')
     return render(request, 'Diary.html')
@@ -23,12 +24,15 @@ def Diary_view(request):
 @csrf_protect
 def write_view(request):
     if request.method == "POST":
-        newData = data()
+        newData = Data()
+        newData.id = request.user.id
         newData.email = request.user.email
-        newData.date = '2022-01-20'
+        newData.edit_date = datetime.date.today()
+        newData.diary_date = request.POST.get('inputDate', False)
+        print(newData.diary_date)
         newData.content = request.POST['content']
         newData.save()
-        return redirect('Diary')
+        return render(request, 'DiaryWrite.html', {'newdata':newData})
     else:
         return render(request, 'DiaryWrite.html')
 
