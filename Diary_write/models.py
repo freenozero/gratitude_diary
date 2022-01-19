@@ -13,4 +13,4 @@ class Data(models.Model):
     content = models.CharField(max_length=500)
     edit_date = models.DateTimeField()
     write_date = models.DateTimeField()
-    diary_date = models.DateTimeField()
+    diary_date = models.DateField()
