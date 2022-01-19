@@ -1,8 +1,3 @@
 from django.contrib import admin
-from Diary_write.models import data
+from Diary_write.models import Data
 # Register your models here.
-
-class datainfo(admin.ModelAdmin):
-    list_display = ('id', 'email', 'content', 'date')
-
-admin.site.register(data, datainfo)
