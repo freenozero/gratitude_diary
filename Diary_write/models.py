@@ -7,7 +7,8 @@ from django.db import models
 
 
 class Data(models.Model):
-    id = models.IntegerField(primary_key=True)
+    diary_cnt = models.AutoField(primary_key=True)
+    id = models.IntegerField()
     email = models.EmailField(max_length=255)
     content = models.CharField(max_length=500)
     edit_date = models.DateTimeField()

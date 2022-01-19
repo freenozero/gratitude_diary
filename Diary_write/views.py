@@ -15,7 +15,6 @@ def diary_view(request):
     return render(request, 'Diary.html')
 
 
-@csrf_protect
 def write_view(request):
     if request.method == "POST":
         newData = Data()
@@ -25,13 +24,15 @@ def write_view(request):
         newData.diary_date = request.POST['inputDate']
         newData.content = request.POST['content']
         newData.save()
-        return render(request, 'DiaryWrite.html', {'newdata':newData})
+        return render(request, 'DiaryWrite.html')
     else:
         return render(request, 'DiaryWrite.html')
 
 
-def edit_view(request,Mydata): #수정될 내용도 저장해야함
-        return render(request, 'DiaryEdit.html')
+def edit_view(request):
+    date = request.POST.get('inputDate', False)
+    print(date)
+    return render(request, 'DiaryEdit.html')
 
 
 # def erase_view(request):
