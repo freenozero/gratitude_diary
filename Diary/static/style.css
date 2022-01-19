@@ -53,7 +53,7 @@ body{
     background-repeat: no-repeat;
     position: relative;
     right: -270px;
-    top: -100px;
+    top: -105px;
 }
 
 .login_button:hover{                      /*그림 마우스 -> 포인트*/
@@ -85,7 +85,6 @@ body{
     opacity:0.7;
     border: 1px solid black;
     border-radius: 10px;
-
 }
 #id_password{
     width: 165px;
@@ -96,5 +95,21 @@ body{
     opacity:0.7;
     border: 1px solid black;
     border-radius: 10px;
-
 }
+.change_password_button{
+    position: relative;
+    right: -530px;
+    top: -105px;
+}
+.signup_button{
+    width: 70px;
+    height: 25px;
+    position: relative;
+    right: -530px;
+    top: -105px;
+}
+a{
+    text-decoration-line: none;
+    color: black;
+}
+
