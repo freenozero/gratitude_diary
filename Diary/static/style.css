@@ -26,15 +26,24 @@ body{
     border: solid 1px;
 
 }
-#msg{
+#msg{                                   /*없는 회원 정보 메시지*/
     position: relative;
-    background-color: wheat;
+    background-color: thistle;
+    color: black;
     width: 300px;
+    height: 23px;
     margin: 0 auto;
-    border: solid 1px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#msgRemove{
+    width :12px;
+    height: 16px;
+    color : mediumpurple;
+    background-color: white;
 }
 
-.login_button{
+.login_button{                           /*자물쇠 그림*/
     border: solid 1px;
     background:url("img/lock.png");
 
@@ -43,16 +52,16 @@ body{
     background-size: 100px;
     background-repeat: no-repeat;
     position: relative;
-    right: -144px;
-    top: -78px;
+    right: -270px;
+    top: -100px;
 }
 
-.login_button:hover{
+.login_button:hover{                      /*그림 마우스 -> 포인트*/
     cursor: pointer;
     border: solid 1px;
 }
 
-.login{
+.login{                                   /**/
 
     border: solid 1px;
     width: 400px;
@@ -66,4 +75,26 @@ body{
     border: solid 1px;
     color: blue;
     text-align: center;
+}
+#id_email{
+    width: 165px;
+    height: 25px;
+    position: relative;
+    right: -100px;
+    top: -8px;
+    opacity:0.7;
+    border: 1px solid black;
+    border-radius: 10px;
+
+}
+#id_password{
+    width: 165px;
+    height: 25px;
+    position: relative;
+    right: -100px;
+    top: -5px;
+    opacity:0.7;
+    border: 1px solid black;
+    border-radius: 10px;
+
 }
