@@ -20,16 +20,16 @@ def write_view(request):
         newData.email = request.user.email
         newData.edit_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         newData.write_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        newData.diary_date = request.POST['inputDate']
+        newData.diary_date = request.POST['input_date']
         newData.content = request.POST['content']
         newData.save()
-        return redirect('DiaryWrite')
+        return redirect('Diary')
     else:
         return render(request, 'DiaryWrite.html', {"times":datetime.today()})
 
 
 def edit_view(request):
-    date = request.POST.get('inputDate', False)
+    date = request.POST.get('input_date', False)
     print(date)
     return render(request, 'DiaryEdit.html')
 
@@ -39,7 +39,10 @@ def edit_view(request):
 #
 #
 
-def read_view(request):
+def read_view(request, diary_cnt):
     if request.method == "POST":
-        diary_id = request.POST['diary_id']
-    return render(request, 'DiaryWrite.html')
+        print("포스트으으")
+        datas = Data.objects.filter(diary_cnt=diary_cnt)
+        return render(request, 'DiaryRead.html', {'datas':datas})
+    else:
+        return render(request, 'DiaryRead.html')
