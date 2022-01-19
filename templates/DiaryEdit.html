@@ -7,7 +7,9 @@
 <body>
 <form action="" method="POST">
     {% csrf_token %}
-    <textarea name="content" cols="100" rows="50" >{{ Mydata.content }}</textarea>
+    <input type="date" name="inputData" placeholder="연도,월,일" value="{{object.date|date:'Y-m-d'}}" required>
+
+    <textarea name="content" cols="30" rows="20" >{{ Mydata.content }}</textarea>
     <input type="submit" value="수정하기"/>
 </form>
 </body>

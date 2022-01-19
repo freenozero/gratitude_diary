@@ -5,13 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="date" name="inputDate" id="inputDate">
-    <input type="date" id="validationCustom03" placeholder="연도,월,일" name="date[]" value="{{object.date|date:'Y-m-d'}}" required>
-    <input type="submit" value="다이어리 수정&쓰기"/>
-    <input type="submit" value="다이어리 읽기"/>
-</form>
 
+<a href="{% url 'DiaryWrite' %}">다이어리 쓰기</a>
+<a href="{% url 'DiaryEdit' %}">다이어리 수정</a>
 </body>
 </html>

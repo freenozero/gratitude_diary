@@ -1,23 +1,17 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import Data
-import datetime
+from datetime import datetime
 from django.db import models
 # Create your views here.
 
 def main(request):
     return render(request, 'main.html')
 
-
-def Diary_view(request):
+def diary_view(request):
     if request.method == "POST":
         datas = Data.objects.filter(id=request.user.id)
-        print(datas)
-        if datas.exists():
-            mydata = datas.get(id=1)
-            return render(request, 'DiaryEdit.html',{"mydata":mydata})
-        else:
-            return redirect('DiaryWrite')
+        return render(request, 'DiaryWrite.html', {'datas':datas})
     return render(request, 'Diary.html')
 
 
@@ -27,9 +21,8 @@ def write_view(request):
         newData = Data()
         newData.id = request.user.id
         newData.email = request.user.email
-        newData.edit_date = datetime.date.today()
-        newData.diary_date = request.POST.get('inputDate', False)
-        print(newData.diary_date)
+        newData.edit_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        newData.diary_date = request.POST['inputDate']
         newData.content = request.POST['content']
         newData.save()
         return render(request, 'DiaryWrite.html', {'newdata':newData})
