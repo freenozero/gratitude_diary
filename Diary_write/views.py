@@ -39,7 +39,10 @@ def edit_view(request):
 #
 #
 
-def read_view(request):
+def read_view(request, diary_cnt):
     if request.method == "POST":
-        diary_id = request.POST['diary_id']
-    return render(request, 'DiaryWrite.html')
+        print("포스트으으")
+        datas = Data.objects.filter(diary_cnt=diary_cnt)
+        return render(request, 'DiaryRead.html', {'datas':datas})
+    else:
+        return render(request, 'DiaryRead.html')
