@@ -8,5 +8,15 @@
 
 <a href="{% url 'DiaryWrite' %}">다이어리 쓰기</a>
 <a href="{% url 'DiaryEdit' %}">다이어리 수정</a>
+<div>
+    {% for data in datas %}
+        <div style="border: 1px solid black;">
+        <p>이메일: {{ data.email}}</p>
+        <p>ID: {{ data.id}}</p>
+        <p>내용: {{ data.content}}</p>
+        <p>다이어리 날짜: {{ data.diary_date}}</p>
+        </div>
+    {% endfor %}
+</div>
 </body>
 </html>
