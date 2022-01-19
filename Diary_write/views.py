@@ -9,10 +9,8 @@ def main(request):
     return render(request, 'main.html')
 
 def diary_view(request):
-    if request.method == "POST":
-        datas = Data.objects.filter(id=request.user.id)
-        return render(request, 'DiaryWrite.html', {'datas':datas})
-    return render(request, 'Diary.html')
+    datas = Data.objects.filter(id=request.user.id)
+    return render(request, 'Diary.html', {'datas': datas})
 
 
 def write_view(request):
