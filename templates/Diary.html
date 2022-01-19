@@ -10,7 +10,7 @@
 <a href="{% url 'DiaryEdit' %}">다이어리 수정</a>
 <div>
     {% for data in datas %}
-        <div style="border: 1px solid black;">
+        <div style="border: 1px solid black;width:350px;">
         <p>이메일: {{ data.email}}</p>
         <p>ID: {{ data.id}}</p>
         <p>내용: {{ data.content}}</p>
