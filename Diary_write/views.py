@@ -37,7 +37,7 @@ def edit_view(request, diary_cnt):
         content = request.GET['content']
         datas.content = content
         datas.save()
-        return render(request, 'DiaryEdit.html', {'datas':datas})
+        return redirect('Diary')
     return render(request, 'DiaryEdit.html')
 
 
