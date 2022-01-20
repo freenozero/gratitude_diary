@@ -53,12 +53,9 @@ def read_view(request, diary_cnt):
 
 def erase_view(request, diary_cnt):
     datas = Data.objects.get(diary_cnt=diary_cnt)
-    if request.method == 'POST':
-        name = request.GET['name']
-        print(name)
-        if name == 're_ask':
-            datas.delete()
-            return redirect('Diary')
-        else:
-            return render(request, 'DiaryErase.html', {'datas':datas})
+    if 're_ask' in request.POST:
+        datas.delete()
+        return redirect('Diary')
+    if request.method == "POST":
+        return render(request, 'DiaryErase.html', {'datas':datas})
     return render(request, 'DiaryErase.html')
