@@ -9,6 +9,7 @@ from django.db import models
 def main(request):
     return render(request, 'main.html')
 
+
 def diary_view(request):
     datas = Data.objects.filter(id=request.user.id)
     return render(request, 'Diary.html', {'datas': datas})
@@ -42,15 +43,22 @@ def edit_view(request, diary_cnt):
     return render(request, 'Diary.html')
 
 
-# def erase_view(request):
-#     return render(request, 'DiaryWrite.html')
-#
-#
-
 def read_view(request, diary_cnt):
     if request.method == "POST":
         datas = Data.objects.get(diary_cnt=diary_cnt)
-
         return render(request, 'DiaryRead.html', {'datas': datas})
     else:
         return render(request, 'DiaryRead.html')
+
+
+def erase_view(request, diary_cnt):
+    datas = Data.objects.get(diary_cnt=diary_cnt)
+    if request.method == 'POST':
+        name = request.GET['name']
+        print(name)
+        if name == 're_ask':
+            datas.delete()
+            return redirect('Diary')
+        else:
+            return render(request, 'DiaryErase.html', {'datas':datas})
+    return render(request, 'DiaryErase.html')
