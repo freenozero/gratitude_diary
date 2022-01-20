@@ -1,4 +1,4 @@
-import data as data
+
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import Data
@@ -39,7 +39,7 @@ def edit_view(request, diary_cnt):
         datas.content = content
         datas.save()
         return redirect('Diary')
-    return render(request, 'DiaryEdit.html')
+    return render(request, 'Diary.html')
 
 
 # def erase_view(request):

@@ -6,7 +6,7 @@
     color: red;
     text-align: center;
 }
-body{
+#main_body{
     margin: 0px;
     background-image: url("img/test7.jpg");
     background-size: cover;
@@ -113,3 +113,21 @@ a{
     color: black;
 }
 
+.calendar_days {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.day {
+    width: calc(100% / 7);
+    text-align: center;
+    transition: all .3s;
+}
+
+.dates {
+    display: flex;
+    flex-flow: row wrap;
+    border: 1px solid #333333;
+}

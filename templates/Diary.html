@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "style.css" %}">
     <title>Title</title>
 </head>
 <body>
 
 <a href="{% url 'DiaryWrite' %}">다이어리 쓰기</a>
-<div>
-    {% for data in datas %}
-        <form action="{% url 'DiaryRead' data.diary_cnt %}" method="post">
-            {% csrf_token %}
-            <button name="input_num">
-                <div style="border: 1px solid black;width:350px;">
-                <p>{{ data.diary_cnt }}</p>
-                <p>이메일: {{ data.email}}</p>
-                <p>ID: {{ data.id}}</p>
-                <p>내용: {{ data.content}}</p>
-                <p>다이어리 날짜: {{ data.diary_date }}</p>
+<div class="calendar">
+    <div class="calendar_head">
+        <div class="ym-wrapper">
+            <span class="year"></span>년
+            <span class="month"></span>년
+        </div>
+    </div>
+    <div class="calendar_main">
+        <div class="calendar_days">
+            <div class="day">일</div>
+            <div class="day">월</div>
+            <div class="day">화</div>
+            <div class="day">수</div>
+            <div class="day">목</div>
+            <div class="day">금</div>
+            <div class="day">토</div>
+        </div>
+        <div class="dates">
+            {% for i in "x"|rjust:"6" %}
+                {% for i in "x"|rjust:"7" %}
+                <div class="Diary_day">
+                    <form action="{% url 'DiaryRead' forloop.counter %}" method="post">
+                        {% csrf_token %}
+                        <button name="input_num">
+                            <div style="border: 1px solid black;width:100px;">
+                            <p>{{ data.diary_cnt }}</p>
+                            <p>이메일: {{ data.email}}</p>
+                            <p>ID: {{ data.id}}</p>
+                            <p>내용: {{ data.content}}</p>
+                            <p>다이어리 날짜: {{ data.diary_date }}</p>
+                            </div>
+                        </button>
+                    </form>
                 </div>
-            </button>
-        </form>
-    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
 </div>
 </body>
 </html>
