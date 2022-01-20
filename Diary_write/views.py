@@ -24,10 +24,13 @@ def write_view(request):
         newData.write_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         newData.diary_date = request.POST['input_date']
         newData.content = request.POST['content']
-        newData.save()
-        return redirect('Diary')
-    else:
-        return render(request, 'DiaryWrite.html', {"times":datetime.today()})
+        try:
+            datas = Data.objects.get(id=request.user.id, diary_date=newData.diary_date)
+            return render(request, 'DiaryRead.html', {'datas':datas})
+        except Data.DoesNotExist: #datas로 받아온 다이어라가 없을 때 그냥 저장
+            newData.save()
+            return redirect('Diary')
+    return render(request, 'DiaryWrite.html', {"times":datetime.today()})
 
 
 def edit_view(request, diary_cnt):
@@ -38,6 +41,7 @@ def edit_view(request, diary_cnt):
         content = request.GET['content']
         datas.edit_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         datas.content = content
+        print(datas.content)
         datas.save()
         return redirect('Diary')
     return render(request, 'DiaryEdit.html')
