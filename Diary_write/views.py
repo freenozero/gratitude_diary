@@ -1,11 +1,6 @@
-
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
 from .models import Data
-from datetime import datetime
-import calendar
-from django.db import models
-# Create your views here.
+import datetime
 
 def main(request):
     return render(request, 'main.html')
@@ -13,7 +8,8 @@ def main(request):
 
 def diary_view(request):
     datas = Data.objects.filter(id=request.user.id)
-    return render(request, 'Diary.html', {'datas': datas})
+    times = datetime.date.today()
+    return render(request, 'Diary.html', {'datas':datas, 'times':times})
 
 
 def write_view(request):
@@ -21,8 +17,8 @@ def write_view(request):
         newData = Data()
         newData.id = request.user.id
         newData.email = request.user.email
-        newData.edit_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        newData.write_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        newData.edit_date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
+        newData.write_date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
         newData.diary_date = request.POST['input_date']
         newData.content = request.POST['content']
         try:
@@ -40,20 +36,18 @@ def edit_view(request, diary_cnt):
         return render(request, 'DiaryEdit.html', {'datas':datas})
     elif request.method == "GET":
         content = request.GET['content']
-        datas.edit_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        datas.edit_date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
         datas.content = content
+        print(datas.content)
         datas.save()
         return redirect('Diary')
     return render(request, 'Diary.html')
 
 
-def read_view(request, diary_cnt):
+def read_view(request, year, month, day):
     if request.method == "POST":
-        try:
-            datas = Data.objects.get(diary_cnt=diary_cnt)
-            return render(request, 'DiaryRead.html', {'datas': datas})
-        except Data.DoesNotExist:
-            return render(request, 'DiaryWrite.html')
+        datas = Data.objects.get(diary_date__year=year, diary_date__month=month, diary_date__day=day)
+        return render(request, 'DiaryRead.html', {'datas':datas})
     else:
         return render(request, 'DiaryRead.html')
 

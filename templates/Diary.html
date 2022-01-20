@@ -12,8 +12,9 @@
 <div class="calendar">
     <div class="calendar_head">
         <div class="ym-wrapper">
-            <span class="year"></span>년
-            <span class="month"></span>년
+            <span class="year">{{ times.year }}</span>년
+            <span class="month">{{ times.month }}</span>월
+            <span class="day">{{ times.day }}</span>일
         </div>
     </div>
     <div class="calendar_main">
@@ -27,16 +28,12 @@
             <div class="day">토</div>
         </div>
         <div class="dates">
-            {% for i in "y"|rjust:"6" %}
-                <div style="border:solid 1px;"class="week">
-                    {% for j in "x"|rjust:"7" %}
-                        <div class="Diary_day{{ i }}{{ j }}">
-                            <form action="{% url 'DiaryRead' forloop.counter %}" method="post">
-                                {% csrf_token %}
-                                <button name="input_num">버튼.</button>
-                            </form>
-                        </div>
-                    {% endfor %}
+            {% for j in "x"|rjust:"30" %}
+                <div class="Diary_day{{ i }}{{ j }}">
+                    <form action="{% url 'DiaryRead' 2022 01 forloop.counter %}" method="post">
+                        {% csrf_token %}
+                        <button name="input_num">{{ forloop.counter }}</button>
+                    </form>
                 </div>
             {% endfor %}
         </div>
