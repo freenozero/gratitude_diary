@@ -9,9 +9,11 @@
     <form action="{% url 'DiaryEdit' datas.diary_cnt %}" method="post">
         {% csrf_token %}
         <div>
-            {{ datas.diary_date }}
+            다이어리 날짜:{{ datas.diary_date }}
             <br>
             {{ datas.content }}
+            <br>
+            최종 수정 날짜: {{ datas.edit_date }}
             <br>
             <button class="edit_button">수정하기</button>
         </div>

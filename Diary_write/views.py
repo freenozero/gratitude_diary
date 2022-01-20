@@ -35,6 +35,7 @@ def edit_view(request, diary_cnt):
         return render(request, 'DiaryEdit.html', {'datas':datas})
     elif request.method == "GET":
         content = request.GET['content']
+        datas.edit_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         datas.content = content
         datas.save()
         return redirect('Diary')
@@ -49,6 +50,7 @@ def edit_view(request, diary_cnt):
 def read_view(request, diary_cnt):
     if request.method == "POST":
         datas = Data.objects.get(diary_cnt=diary_cnt)
+
         return render(request, 'DiaryRead.html', {'datas': datas})
     else:
         return render(request, 'DiaryRead.html')
