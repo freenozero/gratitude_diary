@@ -6,5 +6,6 @@ urlpatterns = [
     path('MyDiary/', views.diary_view, name='Diary'),
     path('MyDiary/write/', views.write_view, name='DiaryWrite'),
     path('MyDiary/read/<int:diary_cnt>', views.read_view, name='DiaryRead'),
-    path('MyDiary/edit/', views.edit_view, name='DiaryEdit')
+    path('MyDiary/edit/<int:diary_cnt>', views.edit_view, name='DiaryEdit'),
+    path('MyDiary/erase/<int:diary_cnt>', views.erase_view, name='DiaryErase')
 ]
