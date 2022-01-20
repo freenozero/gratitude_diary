@@ -2,7 +2,8 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import Data
-import datetime
+from datetime import datetime
+import calendar
 from django.db import models
 # Create your views here.
 
@@ -12,7 +13,7 @@ def main(request):
 
 def diary_view(request):
     datas = Data.objects.filter(id=request.user.id)
-    return render(request, 'Diary.html', {'datas': datas, 'datetime':datetime})
+    return render(request, 'Diary.html', {'datas': datas})
 
 
 def write_view(request):
