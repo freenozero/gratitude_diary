@@ -28,9 +28,10 @@ def write_view(request):
         return render(request, 'DiaryWrite.html', {"times":datetime.today()})
 
 
-def edit_view(request):
-    date = request.POST.get('input_date', False)
-    print(date)
+def edit_view(request, diary_cnt):
+    if request.method == "POST":
+        datas = Data.objects.get(diary_cnt=diary_cnt)
+        return render(request, 'DiaryEdit.html', {'datas':datas})
     return render(request, 'DiaryEdit.html')
 
 
@@ -41,8 +42,7 @@ def edit_view(request):
 
 def read_view(request, diary_cnt):
     if request.method == "POST":
-        print("포스트으으")
-        datas = Data.objects.filter(diary_cnt=diary_cnt)
-        return render(request, 'DiaryRead.html', {'datas':datas})
+        datas = Data.objects.get(diary_cnt=diary_cnt)
+        return render(request, 'DiaryRead.html', {'datas': datas})
     else:
         return render(request, 'DiaryRead.html')
