@@ -18,6 +18,10 @@
             <button class="edit_button">수정하기</button>
         </div>
     </form>
+    <form action="{% url 'DiaryErase' datas.diary_cnt %}" method="post">
+        {% csrf_token %}
+        <button class="erase_button">삭제하기</button>
+    </form>
 </div>
 
 </body>
