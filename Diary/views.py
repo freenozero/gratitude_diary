@@ -57,13 +57,14 @@ def login_view(request):
     }
     return render(request, 'index.html', context)
 
-def logout_view(request):
-    logout(request)
-    return redirect('login_view')
+def logout(request):
+    return redirect('index')
+
+def main(request):
+    return redirect('index')
 
 def user(request):
     return render(request, 'user.html')
-
 
 def change_password(request):
   if request.method == "POST":
@@ -85,3 +86,4 @@ def change_password(request):
     return render(request, 'change_password.html')
   else:
     return render(request, 'change_password.html')
+
