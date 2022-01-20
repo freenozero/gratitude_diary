@@ -6,9 +6,10 @@
 </head>
 <body>
 
-{% csrf_token %}
-<textarea name="content" cols="30" rows="20" >{{ datas.content }}</textarea>
-<input type="submit" value="수정하기"/>
-
+<form action="" method="get">
+    {% csrf_token %}
+    <textarea name="content" cols="30" rows="20" >{{ datas.content }}</textarea>
+    <input type="submit" value="수정하기"/>
+</form>
 </body>
 </html>

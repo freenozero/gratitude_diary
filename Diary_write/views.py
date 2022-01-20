@@ -1,3 +1,4 @@
+import data as data
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import Data
@@ -29,8 +30,13 @@ def write_view(request):
 
 
 def edit_view(request, diary_cnt):
+    datas = Data.objects.get(diary_cnt=diary_cnt)
     if request.method == "POST":
-        datas = Data.objects.get(diary_cnt=diary_cnt)
+        return render(request, 'DiaryEdit.html', {'datas':datas})
+    elif request.method == "GET":
+        content = request.GET['content']
+        datas.content = content
+        datas.save()
         return render(request, 'DiaryEdit.html', {'datas':datas})
     return render(request, 'DiaryEdit.html')
 
