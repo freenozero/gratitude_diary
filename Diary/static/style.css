@@ -100,16 +100,31 @@ body{
     position: relative;
     right: -530px;
     top: -105px;
+
 }
 .signup_button{
-    width: 70px;
-    height: 25px;
     position: relative;
     right: -530px;
     top: -105px;
+
+}
+.logout_button{
+
+    position: relative;
+    right: -537px;
+    top: -105px;
+
+}
+.main_button{
+
+    position: relative;
+    right: -537px;
+    top: -105px;
+
 }
 a{
     text-decoration-line: none;
     color: black;
 }
+
 
