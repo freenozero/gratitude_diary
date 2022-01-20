@@ -36,7 +36,6 @@ def signOut(request):
 def login_view(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
-
         if login_form.is_valid():
             email = login_form.cleaned_data['email']
             password = login_form.cleaned_data['password']
@@ -57,7 +56,8 @@ def login_view(request):
     }
     return render(request, 'index.html', context)
 
-def logout(request):
+def logout_view(request):
+    logout(request)
     return redirect('index')
 
 def main(request):
