@@ -33,13 +33,23 @@
                     <form action="{% url 'DiaryRead' forloop.counter %}" method="post">
                         {% csrf_token %}
                         <button name="input_num">
-                            <div style="border: 1px solid black;width:100px;">
-                            <p>{{ data.diary_cnt }}</p>
-                            <p>이메일: {{ data.email}}</p>
-                            <p>ID: {{ data.id}}</p>
-                            <p>내용: {{ data.content}}</p>
-                            <p>다이어리 날짜: {{ data.diary_date }}</p>
-                            </div>
+                                {% if forloop.counter == data.diary_cnt %}
+                                    <div style="border: 1px solid black;width:100px;">
+                                    <p>{{ forloop.counter }}</p>
+                                    <p>이메일: {{ data.email}}</p>
+                                    <p>ID: {{ data.id}}</p>
+                                    <p>내용: {{ data.content}}</p>
+                                    <p>다이어리 날짜: {{ data.diary_date }}</p>
+                                    </div>
+                                {% else %}
+                                    <div style="border: 1px solid black;width:100px;">
+                                    <p>{{ forloop.counter }}</p>
+                                    <p>이메일: None</p>
+                                    <p>ID: None</p>
+                                    <p>내용: None</p>
+                                    <p>다이어리 날짜: None</p>
+                                    </div>
+                                {% endif %}
                         </button>
                     </form>
                 </div>

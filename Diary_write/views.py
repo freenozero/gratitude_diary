@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import Data
-from datetime import datetime
+import datetime
 from django.db import models
 # Create your views here.
 
@@ -12,7 +12,7 @@ def main(request):
 
 def diary_view(request):
     datas = Data.objects.filter(id=request.user.id)
-    return render(request, 'Diary.html', {'datas': datas})
+    return render(request, 'Diary.html', {'datas': datas, 'datetime':datetime})
 
 
 def write_view(request):
@@ -30,7 +30,7 @@ def write_view(request):
         except Data.DoesNotExist: #datas로 받아온 다이어라가 없을 때 그냥 저장
             newData.save()
             return redirect('Diary')
-    return render(request, 'DiaryWrite.html', {"times":datetime.today()})
+    return render(request, 'DiaryWrite.html')
 
 
 def edit_view(request, diary_cnt):
@@ -57,6 +57,7 @@ def read_view(request, diary_cnt):
 
 def erase_view(request, diary_cnt):
     datas = Data.objects.get(diary_cnt=diary_cnt)
+    print(request.POST)
     if 're_ask' in request.POST:
         datas.delete()
         return redirect('Diary')
