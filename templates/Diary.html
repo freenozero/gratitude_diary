@@ -27,14 +27,16 @@
             <div class="day">토</div>
         </div>
         <div class="dates">
-            {% for i in "x"|rjust:"6" %}
-                <div class="Diary_day">
-                    <form action="{% url 'DiaryRead' forloop.counter %}" method="post">
-                        {% csrf_token %}
-                        <button name="input_num">
-
-                        </button>
-                    </form>
+            {% for i in "y"|rjust:"6" %}
+                <div style="border:solid 1px;"class="week">
+                    {% for j in "x"|rjust:"7" %}
+                        <div class="Diary_day{{ i }}{{ j }}">
+                            <form action="{% url 'DiaryRead' forloop.counter %}" method="post">
+                                {% csrf_token %}
+                                <button name="input_num">버튼.</button>
+                            </form>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endfor %}
         </div>

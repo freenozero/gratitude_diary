@@ -128,6 +128,13 @@ a{
 
 .dates {
     display: flex;
-    flex-flow: row wrap;
-    border: 1px solid #333333;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.week{
+    flex-shrink: 2;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
