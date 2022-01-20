@@ -16,14 +16,17 @@
         <p>#body</p>
 
         {% if request.user.is_authenticated %}
-            <div class="logout_button">
+
+            <div class="login-wrapper">
                 <button class="logout_button"><a href="{% url 'logout' %}">로그아웃</a></button>
+                <button class="change_password_button"><a href="{% url 're_password' %}">비밀번호 변경</a></button>
+
             </div>
+
         {% else %}
             {% include "login.html" %}
             <button class="signup_button"><a href="{% url 'signup' %}">회원가입</a></button>
 
-            <button class="change_password_button"><a href="{% url 're_password' %}">비밀번호 변경</a></button>
         {% endif %}
     </div>
 </body>
