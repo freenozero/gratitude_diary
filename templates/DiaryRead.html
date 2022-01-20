@@ -9,9 +9,11 @@
     <form action="{% url 'DiaryEdit' datas.diary_cnt %}" method="post">
         {% csrf_token %}
         <div>
-            <button class="edit_button">수정하기</button>
             {{ datas.diary_date }}
+            <br>
             {{ datas.content }}
+            <br>
+            <button class="edit_button">수정하기</button>
         </div>
     </form>
 </div>
