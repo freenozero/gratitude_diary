@@ -9,7 +9,19 @@ def main(request):
 def diary_view(request):
     datas = Data.objects.filter(id=request.user.id)
     times = datetime.date.today()
-    return render(request, 'Diary.html', {'datas':datas, 'times':times})
+    day_of_week = datetime.date.today().weekday()
+    this_month = datetime.date.today().month
+    this_month_firstday = datetime.date(times.year, times.month, 1).weekday()
+    if this_month in [1, 3, 5, 7, 8, 10, 12]:
+        last_day = 31
+    elif this_month == 2:
+        if times.year % 4 == 0:
+            last_day = 29
+        else:
+            last_day = 28
+    else:
+        last_day = 30
+    return render(request, 'Diary.html', {'datas':datas, 'times':times, 'day_of_week':day_of_week, 'last_day':last_day, 'firstday':this_month_firstday})
 
 
 def write_view(request):
