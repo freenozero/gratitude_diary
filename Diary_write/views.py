@@ -13,6 +13,7 @@ def diary_view(request):
 
 
 def write_view(request):
+    times = datetime.date.today()
     if request.method == "POST":
         newData = Data()
         newData.id = request.user.id
@@ -27,7 +28,7 @@ def write_view(request):
         except Data.DoesNotExist: #datas로 받아온 다이어라가 없을 때 그냥 저장
             newData.save()
             return redirect('Diary')
-    return render(request, 'DiaryWrite.html')
+    return render(request, 'DiaryWrite.html', {'times':times})
 
 
 def edit_view(request, diary_cnt):

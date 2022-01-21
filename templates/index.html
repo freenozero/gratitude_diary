@@ -4,6 +4,7 @@
 <head style='border:solid'>
     {% load static %}
     <meta charset="UTF-8">
+    <title> 메인화면 </title>
     <link rel="stylesheet" href="{% static "style.css" %}">
 </head>
 
@@ -20,7 +21,6 @@
             <div class="login-wrapper">
                 <button class="logout_button"><a href="{% url 'logout' %}">로그아웃</a></button>
                 <button class="change_password_button"><a href="{% url 're_password' %}">비밀번호 변경</a></button>
-
             </div>
 
         {% else %}

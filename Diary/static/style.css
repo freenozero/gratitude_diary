@@ -147,3 +147,7 @@ a{
     flex-wrap: wrap;
 }
 
+.calendar_main{
+    margin: 0 auto;
+    width: 60%;
+}
