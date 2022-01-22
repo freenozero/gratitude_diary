@@ -70,18 +70,28 @@
     color: green;
 }
 
-.login-wrapper{
+.index_div{
       display: flex;
       justify-content: center; /* flex-start / center / flex-end */
 }
 
-.logout_button{
+.index_user_button{
     padding: 30px 40px;
 }
 
-.change_password_button{
-    padding: 30px 40px;
+
+.log_main_div{
+    float:right;
 }
+
+
+.log_main_button{
+    padding: 10px 10px;
+    border: 0;
+    outline: 0;
+    background: white;
+}
+
 
 #content {
     height: 35%;

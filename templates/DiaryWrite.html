@@ -9,6 +9,7 @@
 <body>
 <form action="" method="POST">
     {% csrf_token %}
+    {% include 'logtout&main.html'%}
     <input type="date" name="input_date" value="{{times|date:'Y-m-d'}}" required>
     <textarea name="content" cols="100" rows="20"></textarea>
     <input type="submit" value="글쓰기"/>

@@ -18,14 +18,15 @@
 
         {% if request.user.is_authenticated %}
 
-            <div class="login-wrapper">
-                <button class="logout_button" onclick="location.href={% url 'logout' %}">로그아웃</button>
-                <button class="change_password_button" onclick="location.href={% url 're_password' %}">비밀번호 변경</button>
+            <div class="index_div">
+                <button class="index_user_button" onclick="location.href={% url 'logout' %}">로그아웃</button>
+                <button class="index_user_button" onclick="location.href={% url 're_password' %}">비밀번호 변경</button>
+                <button class="index_user_button" onclick=location.href="{% url 'main' %}">MAIN</button>
             </div>
 
         {% else %}
             {% include "login.html" %}
-            <button class="signup_button"><a href="{% url 'signup' %}">회원가입</a></button>
+            <button class="signup_button" onclick="location.href={% url 'signup' %}">회원가입</button>
 
         {% endif %}
     </div>
