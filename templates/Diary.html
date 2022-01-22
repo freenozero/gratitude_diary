@@ -10,6 +10,7 @@
 <body>
 
 <a href="{% url 'DiaryWrite' %}">다이어리 쓰기</a>
+{% include 'logtout&main.html'%}
 <div class="calendar">
     <div class="calendar_head">
     </div>
@@ -25,7 +26,7 @@
         </div>
         <div class="dates">
             {% for i in "x"|rjust:10 %}
-                {% if firstday >= forloop.counter %}
+                {% if firstday >= forloop.counter0 %}
                     <div class="Diary_day">
                         <button name="input_num"><p>공백</p></button>
                     </div>
