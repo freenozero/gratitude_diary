@@ -125,7 +125,6 @@ a{
     border: solid 1px;
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
 }
 
 .day {
@@ -139,6 +138,7 @@ a{
     flex-direction: row;
     flex-grow: 1;
     flex-wrap: wrap;
+    justify-content: center;
 
 }
 .Diary_week {
@@ -153,8 +153,6 @@ a{
 }
 
 .calendar_main{
-    max-width: 800px;
-    min-width: 800px;
     border: solid 1px;
     margin: 0 auto;
 }
