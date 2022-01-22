@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% load static %}
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{% static "style.css" %}">
+<div class="log_main_div">
+    <button class="log_main_button" onclick=location.href="{% url 'logout' %}">로그아웃</button>
+    <button class="log_main_button" onclick=location.href="{% url 'main' %}">MAIN</button>
+</div>

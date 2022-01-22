@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko-kr">
+<html lang="en">
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -8,27 +8,26 @@
     <title>Title</title>
 </head>
 <body>
-<header>
-<a href="{% url 'DiaryWrite' %}">다이어리 쓰기</a>
 
-</header>
+<a href="{% url 'DiaryWrite' %}">다이어리 쓰기</a>
 <div class="calendar">
+    <div class="calendar_head">
     </div>
     <div class="calendar_main">
         <div class="calendar_days">
-            <div class="day">일</div>
-            <div class="day">월</div>
-            <div class="day">화</div>
-            <div class="day">수</div>
-            <div class="day">목</div>
-            <div class="day">금</div>
-            <div class="day">토</div>
+            <span class="day">일</span>
+            <span class="day">월</span>
+            <span class="day">화</span>
+            <span class="day">수</span>
+            <span class="day">목</span>
+            <span class="day">금</span>
+            <span class="day">토</span>
         </div>
         <div class="dates">
             {% for i in "x"|rjust:10 %}
-                {% if firstday >= forloop.counter0 %}
+                {% if firstday >= forloop.counter %}
                     <div class="Diary_day">
-                        <button name="day_button"><p>공백</p></button>
+                        <button name="input_num"><p>공백</p></button>
                     </div>
                 {% endif %}
             {% endfor %}
@@ -36,21 +35,19 @@
                 <div class="Diary_day">
                     <form action="{% url 'DiaryRead' 2022 01 forloop.counter %}" method="post">
                         {% csrf_token %}
-                        <button name="day_button">{{ forloop.counter }}<p>날짜</p>
+                        <button name="input_num">{{ forloop.counter }}<p>날짜</p>
                         </button>
                     </form>
                 </div>
             {% endfor %}
         </div>
+        <div class="calendar_footer">
+            <span class="year">{{ times.year }}</span>년
+            <span class="month">{{ times.month }}</span>월
+            <span class="day">{{ times.day }}</span>일
+            <span class="day_of_week">{{ day_of_week }}</span>번째 일
+        </div>
     </div>
 </div>
-<footer>
-    <div class="calendar_footer">
-        <span class="year">{{ times.year }}</span>년
-        <span class="month">{{ times.month }}</span>월
-        <span class="day">{{ times.day }}</span>일
-        <span class="day_of_week">{{ day_of_week }}</span>번째 일
-    </div>
-</footer>
 </body>
 </html>
