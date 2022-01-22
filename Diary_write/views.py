@@ -30,8 +30,8 @@ def write_view(request):
         newData = Data()
         newData.id = request.user.id
         newData.email = request.user.email
-        newData.edit_date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
-        newData.write_date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
+        newData.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+        newData.write_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
         newData.diary_date = request.POST['input_date']
         newData.content = request.POST['content']
         try:
@@ -49,7 +49,7 @@ def edit_view(request, diary_cnt):
         return render(request, 'DiaryEdit.html', {'datas':datas})
     elif request.method == "GET":
         content = request.GET['content']
-        datas.edit_date = datetime.date.today().strftime('%Y-%m-%d %H:%M:%S')
+        datas.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
         datas.content = content
         print(datas.content)
         datas.save()
