@@ -93,12 +93,6 @@
 }
 
 
-#content {
-    height: 35%;
-    border: solid 1px;
-    color: blue;
-    text-align: center;
-}
 #id_email{
     width: 165px;
     height: 25px;
@@ -166,3 +160,5 @@ a{
     border: solid 1px;
     margin: 0 auto;
 }
+
+

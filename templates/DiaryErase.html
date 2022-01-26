@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko-kr">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static "style.css" %}">
 </head>
 <body>
 <form method="post" name="re_ask">
     {% csrf_token %}
     {{ datas.diary_date }}<br>
-    {{ datas.content }}<br>
+    {{ datas.content }}
     <button name="re_ask">진짜 삭제하시겠습니까?</button>
 </form>
 
