@@ -34,6 +34,7 @@
             {% endfor %}
             {% for i in "x"|rjust:last_day %}
                 <div class="Diary_day">
+
                     <form action="{% url 'DiaryRead' 2022 01 forloop.counter %}" method="post">
                         {% csrf_token %}
                         <button name="input_num">{{ forloop.counter }}<p>날짜</p>
@@ -46,9 +47,11 @@
             <span class="year">{{ times.year }}</span>년
             <span class="month">{{ times.month }}</span>월
             <span class="day">{{ times.day }}</span>일
-            <span class="day_of_week">{{ day_of_week }}</span>번째 일
+            <span class="day_of_week">{{ day_of_week }}</span>번째
         </div>
+
     </div>
 </div>
+<button name = "input_num"><p>Today Diary Write</p></button>
 </body>
 </html>
