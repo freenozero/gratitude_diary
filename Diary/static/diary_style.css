@@ -7,7 +7,7 @@
 .note {
     font-size: 12px;
     line-height: 32px;
-    border: 2px solid var(--border-color);
+    border: 3px solid var(--border-color);
     background: -webkit-linear-gradient(
         top,
         var(--border-color) 0%,
@@ -23,4 +23,5 @@
         var(--bg-transparent) 100%
     );
     background-size: 100% 32px;
+
 }

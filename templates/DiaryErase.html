@@ -10,11 +10,10 @@
 <form method="post" name="re_ask">
     {% csrf_token %}
     {{ datas.diary_date }}<br>
-    <p class="note">
+    <pre class="note">
         {{ datas.content }}
-    </p>
+    </pre>
     <button name="re_ask">진짜 삭제하시겠습니까?</button>
 </form>
-
 </body>
 </html>
