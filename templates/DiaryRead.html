@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<div class="diary_read">
+<div>
     {% include 'logtout&main.html'%}
     <form action="{% url 'DiaryEdit' datas.diary_cnt %}" method="post">
         {% csrf_token %}
