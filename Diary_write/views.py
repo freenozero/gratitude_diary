@@ -54,7 +54,6 @@ def edit_view(request, diary_cnt):
         content = request.GET['content']
         datas.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
         datas.content = content
-        print(datas.content)
         datas.save()
         return redirect('Diary')
     return render(request, 'Diary.html')
@@ -74,7 +73,6 @@ def read_view(request, year, month, day):
 
 def erase_view(request, diary_cnt):
     datas = Data.objects.get(diary_cnt=diary_cnt)
-    print(request.POST)
     if 're_ask' in request.POST:
         datas.delete()
         return redirect('Diary')

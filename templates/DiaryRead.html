@@ -15,13 +15,13 @@
             <p>
                 다이어리 날짜:{{ datas.diary_date }}
             </p>
-            <p class="note">
+            <pre class="note">
                 {{ datas.content }}
-            </p>
+            </pre>
             <p>
                 최종 수정 날짜: {{ datas.edit_date }}
             </p>
-            <button class="edit_button">수정하기</button>
+            <button name="edit_button">수정하기</button>
         </div>
     </form>
     <form action="{% url 'DiaryErase' datas.diary_cnt %}" method="post">
