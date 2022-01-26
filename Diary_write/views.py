@@ -4,7 +4,7 @@ import datetime
 
 
 def main(request):
-    return render(request, 'main.html')
+    return render(request, 'index.html')
 
 
 def diary_view(request):
