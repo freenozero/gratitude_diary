@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="{% static "diary_style.css" %}">
 </head>
 <body>
+{{ datas.diary_date }}
 <form method="post" name="re_ask">
     {% csrf_token %}
-    {{ datas.diary_date }}<br>
-    <pre class="note">
-        {{ datas.content }}
-    </pre>
     <button name="re_ask">진짜 삭제하시겠습니까?</button>
 </form>
+<pre class="note">
+        {{ datas.content }}
+    </pre>
 </body>
 </html>
