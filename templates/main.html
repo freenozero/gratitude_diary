@@ -7,9 +7,7 @@
     <style>
             .container{
 
-
     }
-
     *{
       box-sizing: border-box;
     }
@@ -50,36 +48,54 @@
     .container footer{
       clear: both;
     }
-    .item{
-        border: solid gray;
+    .in-container{
 
+        display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+
+
+    .in-item{background-color:red;
+    border : 5px solid grey;}
+
+
+
+    @media (max-width:599px) {
+        .container .content {
+            padding-left: 0;
+            padding-right: 0;
+            overflow: visible;
+        }
+
+        .container .content > * {
+            float: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .container .content main {
+            width: 100%;
+        }
+
+        .container .content nav {
+            width: auto;
+            margin-left: 0;
+            left: 0;
+            position: relative;
+        }
+
+        .container .content aside {
+            width: auto;
+            margin-right: 0;
+        }
     }
 
-    @media (max-width:599px){
-      .container .content{
-        padding-left:0;
-        padding-right:0;
-        overflow: visible;
-      }
-      .container .content>*{
-        float:none;
-        padding-bottom:0;
-        margin-bottom:0;
-      }
-      .container .content main{
-        width:100%;
-      }
-      .container .content nav{
-        width:auto;
-        margin-left: 0;
-        left:0;
-        position: relative;
-      }
-      .container .content aside{
-        width:auto;
-        margin-right:0;
-      }
-    }
+            .in-item{
+                in-item:0;
+                background-color: white;
+            }
     </style>
 
 </head>
@@ -101,40 +117,85 @@
 
     <section class="content">
       <main>
-          <div class = "item">1.</div>
-        <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
-          <div class = "item">1.</div>
+          <div class = in-container>
+              <div class = "in-item">item01
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item02
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item03
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item04
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item05
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item06
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
 
+          </div>
 
+          <div class = in-container>
+              <div class = "in-item">item07
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item08
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item09
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item10
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item11
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
+              <div class = "in-item">item12
+                  <div>1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+              </div>
 
-
-
+          </div>
 
       </main>
       <nav>
