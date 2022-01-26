@@ -3,7 +3,7 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" href="{% static "diary_style.css" %}">
     <title>Title</title>
 </head>
 <body>
@@ -12,12 +12,15 @@
     <form action="{% url 'DiaryEdit' datas.diary_cnt %}" method="post">
         {% csrf_token %}
         <div>
-            다이어리 날짜:{{ datas.diary_date }}
-            <br>
-            {{ datas.content }}
-            <br>
-            최종 수정 날짜: {{ datas.edit_date }}
-            <br>
+            <p>
+                다이어리 날짜:{{ datas.diary_date }}
+            </p>
+            <p class="note">
+                {{ datas.content }}
+            </p>
+            <p>
+                최종 수정 날짜: {{ datas.edit_date }}
+            </p>
             <button class="edit_button">수정하기</button>
         </div>
     </form>

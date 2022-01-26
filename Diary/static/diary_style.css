@@ -1,0 +1,26 @@
+:root {
+    --bg-color: #fff;
+    --bg-transparent: rgba(255, 0, 255, 0);
+    --border-color: black;
+}
+
+.note {
+    font-size: 12px;
+    line-height: 32px;
+    border: 2px solid var(--border-color);
+    background: -webkit-linear-gradient(
+        top,
+        var(--border-color) 0%,
+        var(--border-color) 1px,
+        var(--bg-transparent) 1px,
+        var(--bg-transparent) 100%
+    );
+    background: linear-gradient(
+        to bottom,
+        var(--border-color) 0%,
+        var(--border-color) 1px,
+        var(--bg-transparent) 1px,
+        var(--bg-transparent) 100%
+    );
+    background-size: 100% 32px;
+}

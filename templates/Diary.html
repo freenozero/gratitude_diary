@@ -36,9 +36,6 @@
                 <div class="Diary_day">
                     <form action="{% url 'DiaryRead' 2022 01 forloop.counter %}" method="post">
                         {% csrf_token %}
-                        {% if datas. %}
-
-                        {% endif %}
                         <button name="input_num">{{ forloop.counter }}<p>날짜</p>
                         </button>
                     </form>
