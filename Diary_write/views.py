@@ -9,6 +9,14 @@ def main(request):
 
 def diary_view(request):
     datas = Data.objects.filter(id=request.user.id)
+    datas_date = []
+    datas_cnt = []
+    for i in datas:
+        datas_date.append(i.diary_date.day)
+    for i in datas:
+        datas_cnt.append(i.diary_cnt)
+    print(datas_date)
+    print(datas_cnt)
     times = datetime.date.today()
     day_of_week = datetime.date.today().weekday()
     this_month = datetime.date.today().month
@@ -22,20 +30,21 @@ def diary_view(request):
             last_day = 28
     else:
         last_day = 30
+    last_day -= len(datas)
     return render(request, 'Diary.html',
-                  {'datas': datas, 'times': times, 'day_of_week': day_of_week, 'last_day': last_day,
+                  {'datas': datas, 'datas_date':datas_date, 'datas_cnt':datas_cnt, 'times': times, 'day_of_week': day_of_week, 'last_day': last_day,
                    'firstday': this_month_firstday})
 
 
-def write_view(request):
-    times = datetime.date.today()
+def write_view(request, year, month, day):
+    times = datetime.date(year, month, day)
     if request.method == "POST":
         newData = Data()
         newData.id = request.user.id
         newData.email = request.user.email
         newData.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
         newData.write_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
-        newData.diary_date = request.POST['input_date']
+        newData.diary_date = datetime.date(year, month, day)
         newData.content = request.POST['content']
         try:
             datas = Data.objects.get(id=request.user.id, diary_date=newData.diary_date)
@@ -60,15 +69,8 @@ def edit_view(request, diary_cnt):
 
 
 def read_view(request, year, month, day):
-    try:
-        if request.method == "POST":
-            datas = Data.objects.get(diary_date__year=year, diary_date__month=month, diary_date__day=day)
-            return render(request, 'DiaryRead.html', {'datas': datas})
-        else:
-            return render(request, 'DiaryRead.html')
-    except:
-        times = datetime.datetime.strptime(str(year)+"-"+str(month)+"-"+str(day), '%Y-%m-%d')
-        return render(request, 'DiaryWrite.html', {'times': times})
+    datas = Data.objects.get(diary_date__year=year, diary_date__month=month, diary_date__day=day)
+    return render(request, 'DiaryRead.html', {'datas': datas})
 
 
 def erase_view(request, diary_cnt):
