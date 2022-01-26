@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Data
 import datetime
 
+
 def main(request):
     return render(request, 'main.html')
 
@@ -21,7 +22,9 @@ def diary_view(request):
             last_day = 28
     else:
         last_day = 30
-    return render(request, 'Diary.html', {'datas':datas, 'times':times, 'day_of_week':day_of_week, 'last_day':last_day, 'firstday':this_month_firstday})
+    return render(request, 'Diary.html',
+                  {'datas': datas, 'times': times, 'day_of_week': day_of_week, 'last_day': last_day,
+                   'firstday': this_month_firstday})
 
 
 def write_view(request):
@@ -36,17 +39,17 @@ def write_view(request):
         newData.content = request.POST['content']
         try:
             datas = Data.objects.get(id=request.user.id, diary_date=newData.diary_date)
-            return render(request, 'DiaryRead.html', {'datas':datas})
-        except Data.DoesNotExist: #datas로 받아온 다이어라가 없을 때 그냥 저장
+            return render(request, 'DiaryRead.html', {'datas': datas})
+        except Data.DoesNotExist:  # datas로 받아온 다이어라가 없을 때 그냥 저장
             newData.save()
             return redirect('Diary')
-    return render(request, 'DiaryWrite.html', {'times':times})
+    return render(request, 'DiaryWrite.html', {'times': times})
 
 
 def edit_view(request, diary_cnt):
     datas = Data.objects.get(diary_cnt=diary_cnt)
     if request.method == "POST":
-        return render(request, 'DiaryEdit.html', {'datas':datas})
+        return render(request, 'DiaryEdit.html', {'datas': datas})
     elif request.method == "GET":
         content = request.GET['content']
         datas.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
@@ -65,8 +68,8 @@ def read_view(request, year, month, day):
         else:
             return render(request, 'DiaryRead.html')
     except:
-        return redirect('DiaryWrite')
-
+        times = datetime.datetime.strptime(str(year)+"-"+str(month)+"-"+str(day), '%Y-%m-%d')
+        return render(request, 'DiaryWrite.html', {'times': times})
 
 
 def erase_view(request, diary_cnt):
@@ -76,5 +79,5 @@ def erase_view(request, diary_cnt):
         datas.delete()
         return redirect('Diary')
     if request.method == "POST":
-        return render(request, 'DiaryErase.html', {'datas':datas})
+        return render(request, 'DiaryErase.html', {'datas': datas})
     return render(request, 'DiaryErase.html')
