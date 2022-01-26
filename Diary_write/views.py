@@ -58,11 +58,15 @@ def edit_view(request, diary_cnt):
 
 
 def read_view(request, year, month, day):
-    if request.method == "POST":
-        datas = Data.objects.get(diary_date__year=year, diary_date__month=month, diary_date__day=day)
-        return render(request, 'DiaryRead.html', {'datas':datas})
-    else:
-        return render(request, 'DiaryRead.html')
+    try:
+        if request.method == "POST":
+            datas = Data.objects.get(diary_date__year=year, diary_date__month=month, diary_date__day=day)
+            return render(request, 'DiaryRead.html', {'datas': datas})
+        else:
+            return render(request, 'DiaryRead.html')
+    except:
+        return redirect('DiaryWrite')
+
 
 
 def erase_view(request, diary_cnt):
