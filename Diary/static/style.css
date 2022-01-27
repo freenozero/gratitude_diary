@@ -44,21 +44,21 @@
 }
 
 .login_button{                           /*자물쇠 그림*/
-    border: solid 1px;
+    border: none;
     background:url("img/lock.png");
-
     height: 100px;
     width: 100px;
-    background-size: 100px;
+    background-size: 89px;       /*이미지 사이즈 줄이기*/
     background-repeat: no-repeat;
     position: relative;
     right: -270px;
-    top: -105px;
+    top: -95px;
+    transition: all 0.05s linear;
 }
 
 .login_button:hover{                      /*그림 마우스 -> 포인트*/
     cursor: pointer;
-    border: solid 1px;
+    transform: scale(1.04);
 }
 
 .login{                                   /**/
@@ -84,7 +84,6 @@
     float:right;
 }
 
-
 .log_main_button{
     padding: 10px 10px;
     border: 0;
@@ -92,6 +91,9 @@
     background: white;
 }
 
+.log_main_button:hover{
+    cursor:pointer;
+}
 
 #id_email{
     width: 165px;
