@@ -9,7 +9,8 @@
 </head>
 <body>
 
-{#<a href="{% url 'DiaryWrite' %}">다이어리 쓰기</a>#}
+
+<button><p><a href="{% url 'DiaryWrite' times.year times.month times.day %}">오늘 노트쓰기</a></p></button>
 {% include 'logtout&main.html' %}
 <div class="calendar">
     <div class="calendar_head">
@@ -28,23 +29,19 @@
             {% for i in "x"|rjust:10 %}
                 {% if firstday >= forloop.counter0 %}
                     <div class="Diary_day">
-                        <button name="input_num"><p>공백</p></button>
                     </div>
                 {% endif %}
             {% endfor %}
             {% for i in "x"|rjust:last_day %}
                 <div class="Diary_day">
                     {% if forloop.counter in datas_date %}
-                        <button ><p><a href="{% url 'DiaryRead' times.year times.month forloop.counter %}">다이어리
-                            읽기</a></p></button>
+                        <button class='calendar_day'><a href="{% url 'DiaryRead' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진 다이어리</a></button>
 
                     {% else %}
-                        <button><p><a href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">다이어리 쓰기</a></p>
-                        </button>
+                        <button class='calendar_day'><a href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는 다이어리</a></button>
                     {% endif %}
                 </div>
             {% endfor %}
-        }
     </div>
 </div>
 <div class="calendar_footer">
@@ -56,6 +53,5 @@
 
 </div>
 </div>
-{#<button name = "input_num"><a href="{% url 'DiaryWrite' %}">Today Diary Write</a></button>#}
 </body>
 </html>
