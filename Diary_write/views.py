@@ -10,7 +10,7 @@ def main(request):
         return redirect('logout')
 
 
-def diary_view(request, year=0, month=0, day=0, move=0):
+def diary_view(request, year=datetime.date.today().year, month=datetime.date.today().month, day=datetime.date.today().day, move=0):
     times = datetime.date(year,month, day)
     if request.user.is_authenticated:
         if move == 1: #뒤로 이동
@@ -19,12 +19,13 @@ def diary_view(request, year=0, month=0, day=0, move=0):
             else:
                 times = datetime.date(times.year-1, 12, times.day)
 
-        else: #앞으로 이동
+        elif move == 2: #앞으로 이동
             if times.month < 12:
                 times = datetime.date(times.year, times.month +1, times.day)
             else:
                 times = datetime.date(times.year+1, 1, times.day)
-
+        else:
+            times.today()
         datas = Data.objects.filter(id=request.user.id)
         datas_date = []
         datas_cnt = []
