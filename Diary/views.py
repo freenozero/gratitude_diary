@@ -20,17 +20,20 @@ def signup(request):
 
 
 def signOut(request):
-    if request.method == "POST":
-        pw = request.POST["pw"]
-        user = request.user
-        if check_password(pw, user.password):
-            request.user.delete()
-            messages.success(request, '탈퇴가 정상적으로 되었습니다.')
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            pw = request.POST["pw"]
+            user = request.user
+            if check_password(pw, user.password):
+                request.user.delete()
+                messages.success(request, '탈퇴가 정상적으로 되었습니다.')
+            else:
+                messages.error(request, '탈퇴가 정상적으로 되지 않았습니다.')
+            return redirect('index')
         else:
-            messages.error(request, '탈퇴가 정상적으로 되지 않았습니다.')
-        return redirect('index')
+            return render(request, 'signOut.html')
     else:
-        return render(request, 'signOut.html')
+        return redirect('logout')
 
 
 def login_view(request):
@@ -63,28 +66,27 @@ def logout_view(request):
 def main(request):
     return redirect('index')
 
-def user(request):
-    return render(request, 'user.html')
-
 def change_password(request):
-  if request.method == "POST":
-    user = request.user
-    origin_password = request.POST["origin_password"]
-    if check_password(origin_password, user.password):
-      new_password = request.POST["new_password"]
-      confirm_password = request.POST["confirm_password"]
-      if new_password == confirm_password:
-        user.set_password(new_password)
-        user.save()
-        messages.success(request, '비밀번호가 변경되었습니다.')
-        auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        return redirect('index')
-      else:
-        messages.error(request, '비밀번호가 같지 않습니다.')
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            user = request.user
+            origin_password = request.POST["origin_password"]
+            if check_password(origin_password, user.password):
+                new_password = request.POST["new_password"]
+                confirm_password = request.POST["confirm_password"]
+                if new_password == confirm_password:
+                    user.set_password(new_password)
+                    user.save()
+                    messages.success(request, '비밀번호가 변경되었습니다.')
+                    auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                    return redirect('index')
+                else:
+                    messages.error(request, '비밀번호가 같지 않습니다.')
+            else:
+                messages.error(request, '현재 비밀번호가 올바르지 않습니다.')
+            return render(request, 'change_password.html')
+        else:
+            return render(request, 'change_password.html')
     else:
-      messages.error(request, '현재 비밀번호가 올바르지 않습니다.')
-    return render(request, 'change_password.html')
-  else:
-    return render(request, 'change_password.html')
-
+        return redirect('logout')
 
