@@ -10,8 +10,21 @@ def main(request):
         return redirect('logout')
 
 
-def diary_view(request):
+def diary_view(request, year=0, month=0, day=0, move=0):
+    times = datetime.date(year,month, day)
     if request.user.is_authenticated:
+        if move == 1: #뒤로 이동
+            if times.month > 1:
+                times = datetime.date(times.year, times.month - 1, times.day)
+            else:
+                times = datetime.date(times.year-1, 12, times.day)
+
+        else: #앞으로 이동
+            if times.month < 12:
+                times = datetime.date(times.year, times.month +1, times.day)
+            else:
+                times = datetime.date(times.year+1, 1, times.day)
+
         datas = Data.objects.filter(id=request.user.id)
         datas_date = []
         datas_cnt = []
@@ -19,9 +32,8 @@ def diary_view(request):
             datas_date.append(i.diary_date.day)
         for i in datas:
             datas_cnt.append(i.diary_cnt)
-        times = datetime.date.today()
-        this_month = datetime.date.today().month
-        this_year = datetime.date.today().year
+        this_month = times.month
+        this_year = times.year
         this_month_firstday = datetime.date(times.year, times.month, 1).weekday()
         last_day = month_last_day(this_month, times)  # 마지막 날짜 구하기
         return render(request, 'Diary.html',
