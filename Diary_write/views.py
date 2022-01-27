@@ -26,17 +26,16 @@ def diary_view(request, year=datetime.date.today().year, month=datetime.date.tod
                 times = datetime.date(times.year+1, 1, times.day)
         else:
             times.today()
-        datas = Data.objects.filter(id=request.user.id)
-        datas_date = []
-        datas_cnt = []
-        for i in datas:
-            datas_date.append(i.diary_date.day)
-        for i in datas:
-            datas_cnt.append(i.diary_cnt)
+        datas = Data.objects.filter(id=request.user.id, diary_date__month=times.month)
         this_month = times.month
         this_year = times.year
         this_month_firstday = datetime.date(times.year, times.month, 1).weekday()
         last_day = month_last_day(this_month, times)  # 마지막 날짜 구하기
+        datas_date = [0 for _ in range(last_day)]
+        print(datas_date)
+        for i in range(len(datas)):
+            datas_date[i] = datetime.date(datas[i].diary_date.year, datas[i].diary_date.month, datas[i].diary_date.day)
+        print(datas_date)
         return render(request, 'Diary.html',
                       {'datas_date': datas_date, 'times': times, 'last_day': last_day,
                        'firstday': this_month_firstday, 'this_month': this_month, 'this_year': this_year})
