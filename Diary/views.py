@@ -89,4 +89,3 @@ def change_password(request):
             return render(request, 'change_password.html')
     else:
         return redirect('logout')
-

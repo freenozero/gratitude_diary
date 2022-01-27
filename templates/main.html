@@ -5,20 +5,30 @@
     <title>Title</title>
 
     <style>
-            .container{
+        .container{
+            display: block;
     }
+        .h1 {
+            border: solid 1px;
+            display: flex;
+            flex-direction: row;
+        }
+
     *{
       box-sizing: border-box;
     }
     .container{
+        float: left;
+         display: inline-block;
+        align-items: center;
         width: auto;
-      border:5px solid black;
+      border:1px solid black;
     }
     .container>*{
-      border:5px solid black;
+      border:1px solid black;
     }
     .container>.content>*{
-      border:5px solid black;
+      border:1px solid black;
     }
     .container .content{
       padding-left:200px;
@@ -52,12 +62,23 @@
         display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 }
+    .book{
+        font-size: 20px;
+
+    }
 
 
 
 
-    .in-item{background-color:red;
-    border : 5px solid grey;}
+    .in-item{
+
+
+        border : 1px solid gray;
+        display: grid;
+        grid-gap: 1px;
+
+        justify-content: center;
+        width: 100%;}
 
 
 
@@ -102,94 +123,99 @@
 
 <body>
 
-
-
-<div class="container">
-    <header>
-      <h1>HEADER</h1>
-    </header>
     {% include 'logtout&main.html'%}
 {{ user.name }}님 환영합니다.<br>
 <button class="Diary_button" onclick=location.href="{% url 'Diary' %}">다이어리</button>
 <button class="sign_out_button" onclick="location.href={% url 'signOut' %}">회원탈퇴</button>
+
+    <header>
+      <h1>HEADER</h1>
+    </header>
+
+<div class="container">
+
+
     <section class="content">
       <main>
           <div class = in-container>
-              <div class = "in-item">item01
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">January<br>
+
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
+
               </div>
-              <div class = "in-item">item02
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+
+              <div class = "in-item">February<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item03
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item03<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item04
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item04<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item05
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item05<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item06
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item06<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
 
           </div>
 
           <div class = in-container>
-              <div class = "in-item">item07
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item07<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item08
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item08<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item09
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item09<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item10
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item10<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item11
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item11<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
-              <div class = "in-item">item12
-                  <div>1</div>
-                  <div>2</div>
-                  <div>3</div>
-                  <div>4</div>
+              <div class = "in-item">item12<br>
+                  <button class ="book">*book 1*</button><br>
+                  <button class ="book">*book 2*</button><br>
+                  <button class ="book">*book 3*</button><br>
+                  <button class ="book">*book 4*</button><br>
               </div>
 
           </div>

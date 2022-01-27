@@ -169,4 +169,6 @@ a{
     margin: 0 auto;
 }
 
-
+.calendar_main > div{
+    text-align: center;
+}
