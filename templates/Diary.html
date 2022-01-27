@@ -9,11 +9,19 @@
 </head>
 <body>
 <button><p><a href="{% url 'DiaryWrite' times.year times.month times.day %}">오늘 노트쓰기</a></p></button>
-{% include 'logtout&main.html' %}
+{% include 'logtout&main.html' %}<br>
+
 <div class="calendar">
+
     <div class="calendar_head">
+        <div class="calendar_nav">
+            <button class="nav-btn go-prev">&lt;</button>
+            <a>{{ this_year }}년 {{ this_month }}월</a>
+            <button class="nav-btn go-next">&gt;</button>
+        </div>
     </div>
     <div class="calendar_main">
+
         <div class="calendar_days">
             <span class="day">일</span>
             <span class="day">월</span>
@@ -33,10 +41,9 @@
             {% for i in "x"|rjust:last_day %}
                 <div class="Diary_day">
                     {% if forloop.counter in datas_date %}
-                        <button ><a class='calendar_day' href="{% url 'DiaryRead' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진<br>다이어리</a></button>
-
+                        <button ><a class='calendar_day' href="{% url 'DiaryRead' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진 다이어리</a></button>
                     {% else %}
-                        <button ><a class='calendar_day' href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는<br>다이어리</a></button>
+                        <button ><a class='calendar_day' href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는 다이어리</a></button>
                     {% endif %}
                 </div>
             {% endfor %}
@@ -46,7 +53,7 @@
         <span class="year">{{ times.year }}</span>년
         <span class="month">{{ times.month }}</span>월
         <span class="day">{{ times.day }}</span>일
-        <span class="day_of_week">{{ day_of_week }}</span>번째
+        <span class="day_of_week">{{ datetime.date.today.weekday }}</span>번째
     </div>
 </div>
 </div>
