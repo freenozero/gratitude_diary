@@ -20,11 +20,10 @@ def diary_view(request):
             datas_date.append(i.diary_date.day)
         for i in datas:
             datas_cnt.append(i.diary_cnt)
-        print(datas_date)
-        print(datas_cnt)
         times = datetime.date.today()
         day_of_week = datetime.date.today().weekday()
         this_month = datetime.date.today().month
+        this_year = datetime.date.today().year
         this_month_firstday = datetime.date(times.year, times.month, 1).weekday()
         if this_month in [1, 3, 5, 7, 8, 10, 12]:
             last_day = 31
@@ -35,10 +34,9 @@ def diary_view(request):
                 last_day = 28
         else:
             last_day = 30
-        last_day -= len(datas)
         return render(request, 'Diary.html',
-                      {'datas': datas, 'datas_date':datas_date, 'datas_cnt':datas_cnt, 'times': times, 'day_of_week': day_of_week, 'last_day': last_day,
-                       'firstday': this_month_firstday})
+                      {'datas_date':datas_date, 'times': times, 'day_of_week': day_of_week, 'last_day': last_day,
+                       'firstday': this_month_firstday, 'this_month':this_month, 'this_year':this_year})
     else:
         return redirect('logout')
 
