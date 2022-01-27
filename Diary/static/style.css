@@ -86,9 +86,13 @@
 
 .log_main_button{
     padding: 10px 10px;
-    border: 0;
-    outline: 0;
+    border: solid 1px;
+    outline: 1px;
     background: white;
+    width: 76px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 .log_main_button:hover{
@@ -154,7 +158,7 @@ a{
 
 .calendar_day{
     display: block;
-    padding: 30px 30px;
+    padding: 38px 38px;
     margin: 0 auto;
 
 }

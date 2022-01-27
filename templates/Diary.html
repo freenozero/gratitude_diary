@@ -33,10 +33,10 @@
             {% for i in "x"|rjust:last_day %}
                 <div class="Diary_day">
                     {% if forloop.counter in datas_date %}
-                        <button ><a class='calendar_day' href="{% url 'DiaryRead' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진 다이어리</a></button>
+                        <button ><a class='calendar_day' href="{% url 'DiaryRead' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진<br>다이어리</a></button>
 
                     {% else %}
-                        <button ><a class='calendar_day' href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는 다이어리</a></button>
+                        <button ><a class='calendar_day' href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는<br>다이어리</a></button>
                     {% endif %}
                 </div>
             {% endfor %}
