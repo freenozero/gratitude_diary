@@ -8,8 +8,6 @@
     <title>Title</title>
 </head>
 <body>
-
-
 <button><p><a href="{% url 'DiaryWrite' times.year times.month times.day %}">오늘 노트쓰기</a></p></button>
 {% include 'logtout&main.html' %}
 <div class="calendar">
@@ -42,15 +40,14 @@
                     {% endif %}
                 </div>
             {% endfor %}
+        </div>
     </div>
-</div>
-<div class="calendar_footer">
-    <span class="year">{{ times.year }}</span>년
-    <span class="month">{{ times.month }}</span>월
-    <span class="day">{{ times.day }}</span>일
-    <span class="day_of_week">{{ day_of_week }}</span>번째
-</div>
-
+    <div class="calendar_footer">
+        <span class="year">{{ times.year }}</span>년
+        <span class="month">{{ times.month }}</span>월
+        <span class="day">{{ times.day }}</span>일
+        <span class="day_of_week">{{ day_of_week }}</span>번째
+    </div>
 </div>
 </div>
 </body>
