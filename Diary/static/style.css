@@ -145,7 +145,6 @@ a{
 
 .dates{
     display: grid;
-    grid-gap: 8px;
     grid-template-columns: repeat(7, 1fr);
     justify-content: center;
 
@@ -169,7 +168,7 @@ a{
 
 .calendar_day{
     display: block;
-    padding: 38px 38px;
+    padding: 15px 15px;
     margin: 0 auto;
     color:green;
 }
