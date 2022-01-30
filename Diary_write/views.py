@@ -10,35 +10,34 @@ def main(request):
         return redirect('logout')
 
 
-def diary_view(request, year=datetime.date.today().year, month=datetime.date.today().month, day=datetime.date.today().day, move=0):
-    times = datetime.date(year,month, day)
+def diary_view(request, year=datetime.date.today().year, month=datetime.date.today().month,
+               day=datetime.date.today().day, move=0):
+    times = datetime.date(year, month, day)
     if request.user.is_authenticated:
-        if move == 1: #뒤로 이동
+        if move == 1:  # 뒤로 이동
             if times.month > 1:
-                times = datetime.date(times.year, times.month - 1, times.day)
+                times = datetime.date(times.year, times.month - 1, 1)
+                if times.month == datetime.date.today().month:
+                    times = datetime.date(times.year, times.month, datetime.date.today().day)
             else:
-                times = datetime.date(times.year-1, 12, times.day)
+                times = datetime.date(times.year - 1, 12, 1)
 
-        elif move == 2: #앞으로 이동
+        elif move == 2:  # 앞으로 이동
             if times.month < 12:
-                times = datetime.date(times.year, times.month +1, times.day)
+                times = datetime.date(times.year, times.month + 1, 1)
             else:
-                times = datetime.date(times.year+1, 1, times.day)
+                times = datetime.date(times.year + 1, 1, 1)
         else:
-            times.today()
-        datas = Data.objects.filter(id=request.user.id, diary_date__month=times.month)
-        this_month = times.month
-        this_year = times.year
-        this_month_firstday = datetime.date(times.year, times.month, 1).weekday()
-        last_day = month_last_day(this_month, times)  # 마지막 날짜 구하기
+            times = times.today()
+        datas = Data.objects.filter(id=request.user.id, diary_date__year=times.year, diary_date__month=times.month)
+        first_day = datetime.date(times.year, times.month, 1).weekday()
+        last_day = month_last_day(times.month, times)  # 마지막 날짜 구하기
         datas_date = [0 for _ in range(last_day)]
-        print(datas_date)
         for i in range(len(datas)):
-            datas_date[i] = datetime.date(datas[i].diary_date.year, datas[i].diary_date.month, datas[i].diary_date.day)
-        print(datas_date)
+            datas_date[i] = datas[i].diary_date.day
         return render(request, 'Diary.html',
-                      {'datas_date': datas_date, 'times': times, 'last_day': last_day,
-                       'firstday': this_month_firstday, 'this_month': this_month, 'this_year': this_year})
+                      {'datas_date': datas_date, 'times': times,
+                       'firstday': first_day,'datas': datas})
     else:
         return redirect('logout')
 

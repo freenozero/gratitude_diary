@@ -156,11 +156,22 @@ a{
     flex-direction: row;
 }
 
+.Diary_day_read, .Diary_day_write   {
+    border: solid 1px;
+}
+
+.Diary_day_read > a{
+    color: red;
+}
+.Diary_day_write > a{
+    color: green;
+}
+
 .calendar_day{
     display: block;
     padding: 38px 38px;
     margin: 0 auto;
-
+    color:green;
 }
 
 .calendar_main{
