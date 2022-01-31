@@ -1,14 +1,44 @@
+@font-face {
+     font-family: 'S-CoreDream-1Thin';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-1Thin.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+@font-face {
+     font-family: 'S-CoreDream-4Regular';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+body{
+    font-family: 'S-CoreDream-4Regular', sans-serif !important;
+}
 #head {
-    border: solid 1px;
+    font-family: "S-CoreDream-1Thin", sans-serif !important;
     height: 63%;
-    /*높이 전체의 63% 비율을 차지하게 하는 명령*/
     margin: 0 auto;
-    color: red;
     text-align: center;
 }
+.index_msg{
+    border: solid 1px;
+    font-size: 100px;
+}
+.head_sub{
+    font-family: "S-CoreDream-4Regular", sans-serif !important;
+    width: 400px;
+    text-align: right;
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+.head_main{
+    padding-top: 30px;
+
+}
+
 #main_body{
     margin: 0px;
-    background-image: url("img/test7.jpg");
+    background-image: url("img/bg_img.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -16,7 +46,6 @@
     width: 100%;
 }
 .bt{
-    border: solid 1px;
     height: 2rem;
     color: black;
 }
@@ -26,14 +55,15 @@
     border: solid 1px;
 
 }
-#msg{                                   /*없는 회원 정보 메시ㅁㄴㅇ지*/
+
+/*===========메세지===========*/
+#msg {
     position: relative;
     background-color: thistle;
     color: black;
     width: 300px;
     height: 23px;
     margin: 0 auto;
-    border: 1px solid black;
     border-radius: 5px;
 }
 #msgRemove{
@@ -43,7 +73,9 @@
     background-color: white;
 }
 
-.login_button{                           /*자물쇠 그림*/
+/*==========Index 화면이 로그인 관련 ============*/
+
+.login_button{ /*로그인 버튼*/
     border: none;
     background:url("img/lock.png");
     height: 100px;
@@ -55,35 +87,29 @@
     top: -95px;
     transition: all 0.05s linear;
 }
-
-.login_button:hover{                      /*그림 마우스 -> 포인트*/
+.login_button:hover{ /*로그인 버튼에 마우스 올릴 경우*/
     cursor: pointer;
     transform: scale(1.04);
 }
-
-.login{                                   /**/
-
-    border: solid 1px;
+.login{
     width: 400px;
     bottom: 300px;
     margin: 0 auto;
     color: green;
 }
-
 .index_div{
       display: flex;
       justify-content: center; /* flex-start / center / flex-end */
 }
-
+/*===== 회원가입 후 index의 버튼 설정 =======*/
 .index_user_button{
     padding: 30px 40px;
 }
 
-
+/*===== 오른쪽 상단에 위치해 있는 네비게이션 바*/
 .log_main_div{
     float:right;
 }
-
 .log_main_button{
     padding: 10px 10px;
     border: solid 1px;
@@ -99,6 +125,7 @@
     cursor:pointer;
 }
 
+/* ==== signup 페이지 id 입력창 ======*/
 #id_email{
     width: 165px;
     height: 25px;
@@ -109,6 +136,7 @@
     border: 1px solid black;
     border-radius: 10px;
 }
+/* ==== signup 페이지 password 입력창 ======*/
 #id_password{
     width: 165px;
     height: 25px;
@@ -119,18 +147,14 @@
     border: 1px solid black;
     border-radius: 10px;
 }
-.signup_button{
-    width: 70px;
-    height: 25px;
-    position: relative;
-    right: -105px;
-    top: -103px;
-}
+
+/*a 태그의 url로 인한 언더바, 색변화 방지*/
 a{
     text-decoration-line: none;
     color: black;
 }
 
+/*=== 달력 관련 ====*/
 .calendar_days {
     border: solid 1px;
     display: flex;
