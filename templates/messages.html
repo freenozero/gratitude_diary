@@ -1,3 +1,6 @@
+{% load static %}
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{% static "style.css" %}">
 {% if messages %}
     {% for message in messages %}
         <div id="msg" role="alert">

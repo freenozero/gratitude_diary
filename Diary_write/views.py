@@ -95,7 +95,7 @@ def edit_view(request, diary_cnt):
 
 def read_view(request, year, month, day):
     if request.user.is_authenticated:
-        datas = Data.objects.get(diary_date__year=year, diary_date__month=month, diary_date__day=day)
+        datas = Data.objects.get(id=request.user.id, diary_date__year=year, diary_date__month=month, diary_date__day=day)
         return render(request, 'DiaryRead.html', {'datas': datas})
     else:
         return redirect('logout')

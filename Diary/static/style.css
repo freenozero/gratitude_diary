@@ -206,3 +206,8 @@ a{
 .calendar_nav{
     text-align: center;
 }
+
+/*메시지 가운데 정렬*/
+#msg{
+    text-align: center;
+}
