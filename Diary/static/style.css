@@ -58,10 +58,11 @@ body{
 
 /*===========메세지===========*/
 #msg {
+    text-align: center;
     position: relative;
     background-color: thistle;
     color: black;
-    width: 300px;
+    width: 400px;
     height: 23px;
     margin: 0 auto;
     border-radius: 5px;
@@ -207,7 +208,3 @@ a{
     text-align: center;
 }
 
-/*메시지 가운데 정렬*/
-#msg{
-    text-align: center;
-}
