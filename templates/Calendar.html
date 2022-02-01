@@ -1,0 +1,50 @@
+<div class="calendar">
+    <div class="calendar_head">
+        <h1>달력</h1>
+    </div>
+    <div class="calendar_main">
+        <div class="calendar_nav">
+            <a href="{% url 'Diary' times.year times.month times.day 1 %}">
+                <button class="nav-btn go-prev"><</button>
+            </a>
+            <a>{{ times.year }}년 {{ times.month }}월</a>
+            <a href="{% url 'Diary' times.year times.month times.day 2 %}">
+                <button class="nav-btn go-prev">></button>
+            </a>
+        </div>
+        <div class="calendar_days">
+            <span class="day">일</span>
+            <span class="day">월</span>
+            <span class="day">화</span>
+            <span class="day">수</span>
+            <span class="day">목</span>
+            <span class="day">금</span>
+            <span class="day">토</span>
+        </div>
+        <div class="dates">
+            {% for _ in "x"|rjust:10 %}
+                {% if firstday >= forloop.counter0 %}
+                    <div class="Diary_day">
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% for j in datas_date %}
+                {% if forloop.counter in datas_date %}
+                    <div class="Diary_day_read">
+                        <a class='calendar_day'
+                                   href="{% url 'DiaryRead' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진
+                            다이어리</a>
+                    </div>
+                        {% else %}
+                    <div class="Diary_day_write">
+                        <a class='calendar_day'
+                                   href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는
+                            다이어리</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="calendar_footer">
+    </div>
+</div>
