@@ -30,7 +30,7 @@
             {% endfor %}
             {% for j in datas_date %}
                 {% if forloop.counter in datas_date %}
-                    {% if forloop.counter == today.day %}
+                    {% if forloop.counter == today.day and times.year == today.year and times.month == today.month %}
                         <div class="Diary_day_read">
                             <a class='calendar_today'
                                href="{% url 'DiaryRead' today.year today.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진
@@ -44,7 +44,7 @@
                         </div>
                     {% endif %}
                 {% else %}
-                    {% if forloop.counter == today.day %}
+                    {% if forloop.counter == today.day and times.year == today.year and times.month == today.month %}
                         <div class="Diary_day_write">
                             <a class='calendar_today'
                                href="{% url 'DiaryWrite' today.year today.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는
