@@ -180,7 +180,7 @@ a{
     flex-direction: row;
 }
 
-.Diary_day_read, .Diary_day_write, .Diary_day_today   {
+.Diary_day_read, .Diary_day_write{
     border: solid 1px;
 }
 
@@ -192,8 +192,12 @@ a{
     color: green;
 }
 
-.Diary_day_today > a{
-    background: tan;
+
+.calendar_day{
+    display: block;
+    padding: 15px 15px;
+    margin: 0 auto;
+    color:green;
 }
 
 .calendar_today{
@@ -201,13 +205,6 @@ a{
     display: block;
     padding: 15px 15px;
     margin: 0 auto;
-}
-
-.calendar_day{
-    display: block;
-    padding: 15px 15px;
-    margin: 0 auto;
-    color:green;
 }
 
 .calendar_main{
