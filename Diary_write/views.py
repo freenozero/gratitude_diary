@@ -13,6 +13,7 @@ def main(request):
 def diary_view(request, year=datetime.date.today().year, month=datetime.date.today().month,
                day=datetime.date.today().day, move=0):
     times = datetime.date(year, month, day)
+    today = datetime.date(year, month, day)
     if request.user.is_authenticated:
         if move == 1:  # 뒤로 이동
             if times.month > 1:
@@ -36,7 +37,7 @@ def diary_view(request, year=datetime.date.today().year, month=datetime.date.tod
         for i in range(len(datas)):
             datas_date[i] = datas[i].diary_date.day
         return render(request, 'Diary.html',
-                      {'datas_date': datas_date, 'times': times,
+                      {'datas_date': datas_date, 'times': times, 'today':today,
                        'firstday': first_day,'datas': datas})
     else:
         return redirect('logout')

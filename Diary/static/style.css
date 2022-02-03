@@ -180,15 +180,27 @@ a{
     flex-direction: row;
 }
 
-.Diary_day_read, .Diary_day_write   {
+.Diary_day_read, .Diary_day_write, .Diary_day_today   {
     border: solid 1px;
 }
 
 .Diary_day_read > a{
     color: red;
 }
+
 .Diary_day_write > a{
     color: green;
+}
+
+.Diary_day_today > a{
+    background: tan;
+}
+
+.calendar_today{
+    background: black;
+    display: block;
+    padding: 15px 15px;
+    margin: 0 auto;
 }
 
 .calendar_day{
