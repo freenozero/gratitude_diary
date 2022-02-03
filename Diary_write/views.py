@@ -17,17 +17,17 @@ def diary_view(request, year=datetime.date.today().year, month=datetime.date.tod
     if request.user.is_authenticated:
         if move == 1:  # 뒤로 이동
             if times.month > 1:
-                times = datetime.date(times.year, times.month - 1, 1)
+                times = datetime.date(times.year, times.month - 1, times.day)
                 if times.month == datetime.date.today().month:
-                    times = datetime.date(times.year, times.month, datetime.date.today().day)
+                    times = datetime.date(times.year, times.month, times.day)
             else:
-                times = datetime.date(times.year - 1, 12, 1)
+                times = datetime.date(times.year - 1, 12, times.day)
 
         elif move == 2:  # 앞으로 이동
             if times.month < 12:
-                times = datetime.date(times.year, times.month + 1, 1)
+                times = datetime.date(times.year, times.month + 1, times.day)
             else:
-                times = datetime.date(times.year + 1, 1, 1)
+                times = datetime.date(times.year + 1, 1, times.day)
         else:
             times = times.today()
         datas = Data.objects.filter(id=request.user.id, diary_date__year=times.year, diary_date__month=times.month)
