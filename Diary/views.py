@@ -21,14 +21,12 @@ def signups(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
-            print(email)
-            print(User.objects.filter())
-            if User.objects.filter(email=email).count() != 1:
+            if User.objects.filter(email=email).count() == 0:
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
                 current_site = get_current_site(request)
-                mail_subject = 'Activate your account.'
+                mail_subject = '[감사노트] 계정 활성화 이메일'
                 message = render_to_string('Email.html', {
                     'user': user,
                     'domain': current_site.domain,
@@ -39,6 +37,7 @@ def signups(request):
                 send_mail(mail_subject, message, 'whdms1107@gmail.com', [to_email])
                 messages.success(request, '입력한 아이디의 메일을 통해 인증을 해주세요.')  # 회원가입 되었을때
                 return redirect('/')
+
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
