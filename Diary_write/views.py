@@ -10,26 +10,25 @@ def main(request):
         return redirect('logout')
 
 
-def diary_view(request, year=datetime.date.today().year, month=datetime.date.today().month,
-               day=datetime.date.today().day, move=0):
-    times = datetime.date(year, month, day)
-    today = datetime.date(year, month, day)
+def diary_view(request):
+    times = datetime.date.today()
+    today = times
     if request.user.is_authenticated:
-        if move == 1:  # 뒤로 이동
-            if times.month > 1:
-                times = datetime.date(times.year, times.month - 1, times.day)
-                if times.month == datetime.date.today().month:
-                    times = datetime.date(times.year, times.month, times.day)
+        if request.method == 'POST':
+            post_data = request.POST['cal_btn'].split('_')
+            post_data[1], post_data[2] = int(post_data[1]), int(post_data[2])
+            if post_data[0] == 'right':
+                if post_data[2] < 12:
+                    times = datetime.date(post_data[1], post_data[2] + 1, 1)
+                else:
+                    times = datetime.date(post_data[1] + 1, 1, 1)
             else:
-                times = datetime.date(times.year - 1, 12, times.day)
-
-        elif move == 2:  # 앞으로 이동
-            if times.month < 12:
-                times = datetime.date(times.year, times.month + 1, times.day)
-            else:
-                times = datetime.date(times.year + 1, 1, times.day)
-        else:
-            times = times.today()
+                if post_data[2] > 1:
+                    times = datetime.date(post_data[1], post_data[2] - 1, 1)
+                    if times.month == today.month and times.year == today.year:
+                        times = datetime.date(times.year, times.month, today.day)
+                else:
+                    times = datetime.date(post_data[1] - 1, 12, 1)
         datas = Data.objects.filter(id=request.user.id, diary_date__year=times.year, diary_date__month=times.month)
         first_day = datetime.date(times.year, times.month, 1).weekday()
         last_day = month_last_day(times.month, times)  # 마지막 날짜 구하기

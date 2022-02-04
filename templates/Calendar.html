@@ -4,13 +4,15 @@
     </div>
     <div class="calendar_main">
         <div class="calendar_nav">
-            <a href="{% url 'Diary' times.year times.month times.day 1 %}">
-                <button class="nav-btn go-prev"><</button>
-            </a>
             <a>{{ times.year }}년 {{ times.month }}월</a>
-            <a href="{% url 'Diary' times.year times.month times.day 2 %}">
-                <button class="nav-btn go-prev">></button>
-            </a>
+            <form action="{% url 'Diary' %}" method="post">
+                {% csrf_token %}
+                <button name='cal_btn' value='left_{{ times.year }}_{{ times.month }}'  class="nav-btn go-prev"> < </button>
+            </form>
+            <form action="{% url 'Diary' %}" method="post">
+                {% csrf_token %}
+                <button name='cal_btn' value='right_{{ times.year }}_{{ times.month }}'  class="nav-btn go-prev"> > </button>
+            </form>
         </div>
         <div class="calendar_days">
             <span class="day">일</span>
@@ -30,7 +32,7 @@
             {% endfor %}
             {% for j in datas_date %}
                 {% if forloop.counter in datas_date %}
-                    {% if forloop.counter == today.day%}
+                    {% if forloop.counter == today.day and times.month == today.month and times.year == today.year%}
                         <div class="Diary_day_read">
                             <a class='calendar_today'
                                href="{% url 'DiaryRead' today.year today.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진 다이어리 </a>
