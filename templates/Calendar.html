@@ -7,11 +7,11 @@
             <a>{{ times.year }}년 {{ times.month }}월</a>
             <form action="{% url 'Diary' %}" method="post">
                 {% csrf_token %}
-                <button name='cal_btn' value='left_{{ times.year }}_{{ times.month }}'  class="nav-btn go-prev"> < </button>
+                <button type='submit' name='cal_btn' value='left_{{ times.year }}_{{ times.month }}'  class="nav-btn go-prev"> < </button>
             </form>
             <form action="{% url 'Diary' %}" method="post">
                 {% csrf_token %}
-                <button name='cal_btn' value='right_{{ times.year }}_{{ times.month }}'  class="nav-btn go-prev"> > </button>
+                <button type='submit' name='cal_btn' value='right_{{ times.year }}_{{ times.month }}'  class="nav-btn go-prev"> > </button>
             </form>
         </div>
         <div class="calendar_days">
@@ -34,28 +34,43 @@
                 {% if forloop.counter in datas_date %}
                     {% if forloop.counter == today.day and times.month == today.month and times.year == today.year%}
                         <div class="Diary_day_read">
-                            <a class='calendar_today'
-                               href="{% url 'DiaryRead' today.year today.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진 다이어리 </a>
+                            <form action="{% url 'DiaryRead'%}" method="get">
+                                {% csrf_token %}
+                                <button class='calendar_today' name='cal_date' value='{{ times.year }}_{{ times.month }}_{{ forloop.counter }}'>
+                                    {{ forloop.counter }}일<br>쓰여진 다이어리
+                                </button>
+                            </form>
                         </div>
                     {% else %}
                         <div class="Diary_day_read">
-                            <a class='calendar_day'
-                               href="{% url 'DiaryRead' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>쓰여진 다이어리</a>
-
+                            <form action="{% url 'DiaryRead'%}" method="get">
+                                {% csrf_token %}
+                                <button class='calendar_day' name='cal_date' value='{{ times.year }}_{{ times.month }}_{{ forloop.counter }}'>
+                                    {{ forloop.counter }}일<br>쓰여진 다이어리
+                                </button>
+                            </form>
                         </div>
                     {% endif %}
                 {% else %}
                     {% if forloop.counter == today.day and times.year == today.year and times.month == today.month %}
                         <div class="Diary_day_write">
-                            <a class='calendar_today'
-                               href="{% url 'DiaryWrite' today.year today.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는
-                                다이어리</a>
+                            <form action="{% url 'DiaryWrite' %}" method="get">
+                                {% csrf_token %}
+                                <button class='calendar_today' name='cal_date'
+                                        value='{{ times.year }}_{{ times.month }}_{{ forloop.counter }}'>
+                                    {{ forloop.counter }}일<br>비어있는 다이어리
+                                </button>
+                            </form>
                         </div>
                     {% else %}
                         <div class="Diary_day_write">
-                            <a class='calendar_day'
-                               href="{% url 'DiaryWrite' times.year times.month forloop.counter %}">{{ forloop.counter }}일<br>비어있는
-                                다이어리</a>
+                            <form action="{% url 'DiaryWrite' %}" method="get">
+                                {% csrf_token %}
+                                <button class='calendar_day' name='cal_date'
+                                        value='{{ times.year }}_{{ times.month }}_{{ forloop.counter }}'>
+                                    {{ forloop.counter }}일<br>비어있는 다이어리
+                                </button>
+                            </form>
                         </div>
                     {% endif %}
                 {% endif %}

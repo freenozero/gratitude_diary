@@ -55,16 +55,17 @@ def month_last_day(this_month, times):
     return last_day
 
 
-def write_view(request, year, month, day):
+def write_view(request):
     if request.user.is_authenticated:
-        times = datetime.date(year, month, day)
+        get_data = list(map(int,request.GET['cal_date'].split('_')))
+        times = datetime.date(get_data[0], get_data[1], get_data[2])
         if request.method == "POST":
             newData = Data()
             newData.id = request.user.id
             newData.email = request.user.email
             newData.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
             newData.write_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
-            newData.diary_date = datetime.date(year, month, day)
+            newData.diary_date = datetime.date(times.year, times.month, times.day)
             newData.content = request.POST['content']
             try:
                 datas = Data.objects.get(id=request.user.id, diary_date=newData.diary_date)
@@ -72,7 +73,8 @@ def write_view(request, year, month, day):
             except Data.DoesNotExist:  # datas로 받아온 다이어라가 없을 때 그냥 저장
                 newData.save()
                 return redirect('Diary')
-        return render(request, 'DiaryWrite.html', {'times': times})
+        else:
+            return render(request, 'DiaryWrite.html', {'times': times})
     else:
         return redirect('logout')
 
@@ -93,9 +95,10 @@ def edit_view(request, diary_cnt):
         return redirect('logout')
 
 
-def read_view(request, year, month, day):
+def read_view(request):
     if request.user.is_authenticated:
-        datas = Data.objects.get(id=request.user.id, diary_date__year=year, diary_date__month=month, diary_date__day=day)
+        get_data = list(map(int,request.GET['cal_date'].split('_')))
+        datas = Data.objects.get(id=request.user.id, diary_date__year=get_data[0], diary_date__month=get_data[1], diary_date__day=get_data[2])
         return render(request, 'DiaryRead.html', {'datas': datas})
     else:
         return redirect('logout')
