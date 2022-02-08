@@ -36,7 +36,7 @@
                 {% else %} class="Diary_day_write"
                 {% endif %}>
                     <form action= {% if forloop.counter in datas_date %} {% url 'DiaryRead' %}
-                        {% else %}{% url 'DiaryWrite' times.year times.month times.day%} {% endif %} method="get">
+                        {% else %}{% url 'DiaryWrite' times.year times.month forloop.counter%} {% endif %} method="get">
                         {% csrf_token %}
                         <button
                                 {% if forloop.counter == today.day and times.month == today.month and times.year == today.year %}
