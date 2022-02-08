@@ -8,7 +8,7 @@
     <title>Title</title>
 </head>
 <body>
-<button><a href="{% url 'DiaryWrite'%}">오늘 노트쓰기</a></button>
+<button><a href="{% url 'DiaryWrite' today.year today.month today.day %}">오늘 노트쓰기</a></button>
 {% include 'logtout&main.html' %}<br>
 {% include 'Calendar.html' %}
 </body>

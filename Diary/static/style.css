@@ -193,18 +193,18 @@ a{
 }
 
 
+.calendar_today{
+    background: cornflowerblue;
+    display: block;
+    padding: 15px 15px;
+    margin: 0 auto;
+}
+
 .calendar_day{
     display: block;
     padding: 15px 15px;
     margin: 0 auto;
     color:green;
-}
-
-.calendar_today{
-    background: black;
-    display: block;
-    padding: 15px 15px;
-    margin: 0 auto;
 }
 
 .calendar_main{

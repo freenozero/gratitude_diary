@@ -33,10 +33,10 @@
             {% endfor %}
             {% for j in datas_date %}
                 <div {% if forloop.counter in datas_date %} class="Diary_day_read"
-                     {% else %} class="Diary_day_write"
-                     {% endif %}>
+                {% else %} class="Diary_day_write"
+                {% endif %}>
                     <form action= {% if forloop.counter in datas_date %} {% url 'DiaryRead' %}
-                                  {% else %}{% url 'DiaryWrite' %} {% endif %} method="get">
+                        {% else %}{% url 'DiaryWrite' times.year times.month times.day%} {% endif %} method="get">
                         {% csrf_token %}
                         <button
                                 {% if forloop.counter == today.day and times.month == today.month and times.year == today.year %}
@@ -44,8 +44,8 @@
                                     {% else %}class='calendar_day'{% endif %} name='cal_date'
                                     value='{{ times.year }}_{{ times.month }}_{{ forloop.counter }}'>
                             {{ forloop.counter }}일<br>{% if forloop.counter in datas_date %}쓰여진 노트
-                             {% else %} 쓰여지지 않은 노트
-                             {% endif %}
+                        {% else %} 쓰여지지 않은 노트
+                        {% endif %}
                         </button>
                     </form>
                 </div>

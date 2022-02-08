@@ -58,17 +58,17 @@ def month_last_day(this_month, times):
     return last_day
 
 
-def write_view(request):
+
+def write_view(request, year, month, day):
     if request.user.is_authenticated:
-        get_data = list(map(int, request.GET['cal_date'].split('_')))
-        times = datetime.date(get_data[0], get_data[1], get_data[2])
+        times = datetime.date(year, month, day)
         if request.method == "POST":
             newData = Data()
             newData.id = request.user.id
             newData.email = request.user.email
             newData.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
             newData.write_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
-            newData.diary_date = datetime.date(times.year, times.month, times.day)
+            newData.diary_date = datetime.date(year, month, day)
             newData.content = request.POST['content']
             try:
                 datas = Data.objects.get(id=request.user.id, diary_date=newData.diary_date)
@@ -76,10 +76,10 @@ def write_view(request):
             except Data.DoesNotExist:  # datas로 받아온 다이어라가 없을 때 그냥 저장
                 newData.save()
                 return redirect('Diary')
-        else:
-            return render(request, 'DiaryWrite.html', {'times': times})
+        return render(request, 'DiaryWrite.html', {'times': times})
     else:
         return redirect('logout')
+
 
 
 def edit_view(request, diary_cnt):
