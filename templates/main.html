@@ -27,12 +27,15 @@
         <main>
 
             <div class=in-container>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
+                <form action="{% url 'decorate_note' %}" method="post">
+                    <div class="in-item">
+                        {% csrf_token %}
+                        <button class="book">*book 1*</button>
+                        <button class="book">*book 2*</button>
+                        <button class="book">*book 3*</button>
+                        <button class="book">*book 4*</button>
+                    </div>
+                </form>
                 <div class="in-item">
                     <button class="book">*book 1*</button>
                     <button class="book">*book 2*</button>

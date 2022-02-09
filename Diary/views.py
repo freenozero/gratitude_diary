@@ -108,6 +108,7 @@ def main(request):
     return redirect('index')
 
 
+
 def change_password(request):
     if request.user.is_authenticated:
         if request.method == "POST":
