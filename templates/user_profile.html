@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<link rel="stylesheet" href="{% static "style.css" %}">
+<html lang="ko-kr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>profile</title>
 </head>
 <body>
-이메일: {{ user.email }}<br>
-전화번호: {{ user.phone_num }}<br>
-생년월일: {{ user.date_of_birth}}<br>
-나이: {{ user.age }}<br>
-이름: {{ user.name }}<br>
-마지막 접속일: {{ user.last_login }}<br>
-<button class="re_phonenum_button" onclick="location.href={% url 're_phonenum' %}">전화번호 변경</button>
-<button class="re_password_button" onclick="location.href={% url 're_password' %}">비밀번호 변경</button>
+<div class="profile">
+    이메일: {{ user.email }}<br>
+    전화번호: {{ user.phone_num }}<br>
+    생년월일: {{ user.date_of_birth}}<br>
+    나이: {{ user.age }}<br>
+    이름: {{ user.name }}<br>
+    마지막 접속일: {{ user.last_login }}<br>
+    <button class="re_phonenum_button" onclick="location.href={% url 're_phonenum' %}">전화번호 변경</button>
+    <button class="re_password_button" onclick="location.href={% url 're_password' %}">비밀번호 변경</button>
+</div>
 </body>
 </html>
