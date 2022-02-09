@@ -1,6 +1,5 @@
 {% autoescape off %}
-Hi ,
-Please click on the link to confirm your registration,
+Diary 회원가입 이메일 인증 입니다.
+아래 링크를 클릭하여 인증을 완료 하세요.
 http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
-
 {% endautoescape %}

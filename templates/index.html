@@ -9,9 +9,15 @@
 </head>
 
 <body id="main_body">
+    <div id="message">{% include 'messages.html'%}</div>
     <div id="head">
-        {% include 'messages.html'%}
-        <p>#head</p>
+        <div class="head_main">
+            <a class="index_msg">감사 노트</a>
+        </div>
+        <div class="head_sub">
+            <p>오늘 하루 <br>감사함을 나눠보세요</p>
+            <p></p>
+        </div>
     </div>
     <div id="body">
         <p>#body</p>

@@ -151,7 +151,7 @@ EMAIL_PORT = '587'
 # gmail과의 통신하는 포트
 EMAIL_HOST_USER = 'whdms1107@gmail.com'
 # 발신할 이메일
-EMAIL_HOST_PASSWORD = 'dudnqlbn6600qe'
+EMAIL_HOST_PASSWORD = 'vcmqxcgbkzxunbwv'
 # 발신할 메일의 비밀번호
 EMAIL_USE_TLS = True
 # TLS 보안 방법

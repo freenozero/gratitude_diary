@@ -7,239 +7,230 @@
     <style>
         .container{
             display: block;
-    }
+        }
         .h1 {
             border: solid 1px;
             display: flex;
             flex-direction: row;
         }
 
-    *{
-      box-sizing: border-box;
-    }
-    .container{
-        float: left;
-         display: inline-block;
-        align-items: center;
-        width: auto;
-      border:1px solid black;
-    }
-    .container>*{
-      border:1px solid black;
-    }
-    .container>.content>*{
-      border:1px solid black;
-    }
-    .container .content{
-      padding-left:200px;
-      padding-right:150px;
-      overflow: hidden;
-    }
-    .container .content>*{
-      float:left;
-      padding-bottom:2500px;
-      margin-bottom:-2500px;
-    }
-    .container .content main{
-      width:100%;
-
-    }
-    .container .content nav{
-      width:200px;
-      margin-left: -100%;
-      left:-200px;
-      position: relative;
-    }
-    .container .content aside{
-      width:150px;
-      margin-right:-150px;
-    }
-    .container footer{
-      clear: both;
-    }
-    .in-container{
-
-        display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-}
-    .book{
-        font-size: 20px;
-
-    }
-
-
-
-
-    .in-item{
-
-
-        border : 1px solid gray;
-        display: grid;
-        grid-gap: 1px;
-
-        justify-content: center;
-        width: 100%;}
-
-
-
-    @media (max-width:599px) {
-        .container .content {
-            padding-left: 0;
-            padding-right: 0;
-            overflow: visible;
+        *{
+            box-sizing: border-box;
         }
-
-        .container .content > * {
-            float: none;
-            padding-bottom: 0;
-            margin-bottom: 0;
-        }
-
-        .container .content main {
-            width: 100%;
-        }
-
-        .container .content nav {
+        .container{
+            float: left;
+            display: inline-block;
+            align-items: center;
             width: auto;
-            margin-left: 0;
-            left: 0;
+            border:1px solid black;
+        }
+        .container>*{
+            border:1px solid black;
+        }
+        .container>.content>*{
+            border:1px solid black;
+        }
+        .container .content{
+            padding-left:200px;
+            padding-right:150px;
+            overflow: hidden;
+        }
+        .container .content>*{
+            float:left;
+            padding-bottom:2500px;
+            margin-bottom:-2500px;
+        }
+        .container .content main{
+            width:100%;
+
+        }
+        .container .content nav{
+            width:200px;
+            margin-left: -100%;
+            left:-200px;
             position: relative;
         }
-
-        .container .content aside {
-            width: auto;
-            margin-right: 0;
+        .container .content aside{
+            width:150px;
+            margin-right:-150px;
         }
-    }
+        .container footer{
+            clear: both;
+        }
+        .in-container{
 
-            .in-item{
-                in-item:0;
-                background-color: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        .book{
+            font-size: 20px;
+
+        }
+
+
+
+
+        .in-item{
+
+
+            border : 1px solid gray;
+            display: grid;
+            grid-gap: 1px;
+
+            justify-content: center;
+            width: 100%;}
+
+
+
+        @media (max-width:599px) {
+            .container .content {
+                padding-left: 0;
+                padding-right: 0;
+                overflow: visible;
             }
+
+            .container .content > * {
+                float: none;
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+
+            .container .content main {
+                width: 100%;
+            }
+
+            .container .content nav {
+                width: auto;
+                margin-left: 0;
+                left: 0;
+                position: relative;
+            }
+
+            .container .content aside {
+                width: auto;
+                margin-right: 0;
+            }
+        }
+
+        .in-item{
+            in-item:0;
+            background-color: white;
+        }
     </style>
-
 </head>
-
-
 <body>
 
-    {% include 'logtout&main.html'%}
+{% include 'logtout&main.html'%}
 {{ user.name }}님 환영합니다.<br>
 <button class="Diary_button" onclick=location.href="{% url 'Diary' %}">다이어리</button>
 <button class="sign_out_button" onclick="location.href={% url 'signOut' %}">회원탈퇴</button>
 
-    <header>
-      <h1>HEADER</h1>
-    </header>
+<header>
+    <h1>HEADER</h1>
+</header>
 
 <div class="container">
 
-
     <section class="content">
-      <main>
-          <div class = in-container>
-              <div class = "in-item">January<br>
+        <main>
+            <div class = in-container>
+                <div class = "in-item">January<br>
 
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
 
-              </div>
+                </div>
 
-              <div class = "in-item">February<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item03<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item04<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item05<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item06<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
+                <div class = "in-item">February<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item03<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item04<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item05<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item06<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
 
-          </div>
+            </div>
 
-          <div class = in-container>
-              <div class = "in-item">item07<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item08<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item09<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item10<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item11<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
-              <div class = "in-item">item12<br>
-                  <button class ="book">*book 1*</button><br>
-                  <button class ="book">*book 2*</button><br>
-                  <button class ="book">*book 3*</button><br>
-                  <button class ="book">*book 4*</button><br>
-              </div>
+            <div class = in-container>
+                <div class = "in-item">item07<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item08<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item09<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item10<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item11<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
+                <div class = "in-item">item12<br>
+                    <button class ="book">*book 1*</button><br>
+                    <button class ="book">*book 2*</button><br>
+                    <button class ="book">*book 3*</button><br>
+                    <button class ="book">*book 4*</button><br>
+                </div>
 
-          </div>
+            </div>
 
-      </main>
-      <nav>
-        <ul>
-          <li>귤</li>
-          <li>안녕</li>
-          <li>민수</li>
-        </ul>
-      </nav>
-      <aside>
-        아이유
-      </aside>
+        </main>
+        <nav>
+            <ul>
+                <li>귤</li>
+                <li>안녕</li>
+                <li>민수</li>
+            </ul>
+        </nav>
+        <aside>
+            아이유
+        </aside>
     </section>
     <footer>
-      10CM
+        10CM
     </footer>
-  </div>
-
-
-
+</div>
 </body>
-
-
 </html>

@@ -1,0 +1,77 @@
+<div class="calendar">
+    <div class="calendar_head">
+        <h1>달력</h1>
+    </div>
+    <div class="calendar_main">
+        <form action={% url "DiaryWrite" %} method="get">
+            {% csrf_token %}
+            <button name='cal_date' value='{{ today.year }}_{{ today.month }}_{{ today.day }}'>
+                오늘 노트쓰기
+            </button>
+        </form>
+        <div class="calendar_nav">
+            <a>{{ times.year }}년 {{ times.month }}월</a>
+            <form action="{% url 'Diary' %}" method="post">
+                {% csrf_token %}
+                <button type='submit' name='cal_btn' value='left_{{ times.year }}_{{ times.month }}'
+                        class="nav-btn go-prev"> <
+                </button>
+            </form>
+            <form action="{% url 'Diary' %}" method="post">
+                {% csrf_token %}
+                <button type='submit' name='cal_btn' value='right_{{ times.year }}_{{ times.month }}'
+                        class="nav-btn go-prev"> >
+                </button>
+            </form>
+        </div>
+        <div class="calendar_days">
+            <span class="day">일</span>
+            <span class="day">월</span>
+            <span class="day">화</span>
+            <span class="day">수</span>
+            <span class="day">목</span>
+            <span class="day">금</span>
+            <span class="day">토</span>
+        </div>
+        <div class="dates">
+            {% for _ in "x"|rjust:firstday %}
+                <div class="Diary_day"></div>
+            {% endfor %}
+            {% for j in datas_date %}
+                {% if forloop.counter in datas_date %}
+                    <div class="Diary_day_read">
+                    <form action= {% url 'DiaryRead' %} method="get">
+                        {% csrf_token %}
+                        <button
+                                {% if forloop.counter == today.day and times.month == today.month and times.year == today.year %}
+                                    class='calendar_today'
+                                    {% else %}class='calendar_day'{% endif %} name='cal_date'
+                                    value='{{ times.year }}_{{ times.month }}_{{ forloop.counter }}'>
+                            {{ forloop.counter }}일<br>{% if forloop.counter in datas_date %}쓰여진 노트
+                        {% else %} 쓰여지지 않은 노트
+                        {% endif %}
+                        </button>
+                    </form>
+                    </div>
+                {% else %}
+                    <div class="Diary_day_write">
+                        <form action= {% url 'DiaryWrite' %} method="get">
+                            {% csrf_token %}
+                            <button
+                                    {% if forloop.counter == today.day and times.month == today.month and times.year == today.year %}
+                                        class='calendar_today'
+                                        {% else %}class='calendar_day'{% endif %} name='cal_date'
+                                        value='{{ times.year }}_{{ times.month }}_{{ forloop.counter }}'>
+                                {{ forloop.counter }}일<br>{% if forloop.counter in datas_date %}쓰여진 노트
+                            {% else %} 쓰여지지 않은 노트
+                            {% endif %}
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+                {% endfor %}
+        </div>
+    </div>
+    <div class="calendar_footer">
+    </div>
+</div>
