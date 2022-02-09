@@ -5,4 +5,6 @@ urlpatterns = [
     path('', include('Diary.urls')),
     path('Diary/', include('Diary_write.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
+
 ]
