@@ -3,6 +3,12 @@
         <h1>달력</h1>
     </div>
     <div class="calendar_main">
+        <form action={% url "DiaryWrite" %} method="get">
+            {% csrf_token %}
+            <button name='cal_date' value='{{ today.year }}_{{ today.month }}_{{ today.day }}'>
+                오늘 노트쓰기
+            </button>
+        </form>
         <div class="calendar_nav">
             <a>{{ times.year }}년 {{ times.month }}월</a>
             <form action="{% url 'Diary' %}" method="post">
@@ -36,7 +42,7 @@
                 {% else %} class="Diary_day_write"
                 {% endif %}>
                     <form action= {% if forloop.counter in datas_date %} {% url 'DiaryRead' %}
-                        {% else %}{% url 'DiaryWrite' times.year times.month forloop.counter%} {% endif %} method="get">
+                        {% else %}{% url 'DiaryWrite' %} {% endif %} method="get">
                         {% csrf_token %}
                         <button
                                 {% if forloop.counter == today.day and times.month == today.month and times.year == today.year %}
