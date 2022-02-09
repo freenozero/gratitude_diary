@@ -131,3 +131,26 @@ def change_password(request):
             return render(request, 'change_password.html')
     else:
         return redirect('logout')
+
+
+def userprofile(request):
+    user = request.user
+    if user.is_authenticated:
+        return render(request, 'user_profile.html')
+    else:
+        return redirect('logout')
+
+
+def change_phonenum(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            user = request.user
+            new_phonenum = request.POST["new_phonenum"]
+            user.phone_num = new_phonenum
+            user.save()
+            messages.success(request, '전화번호가 변경되었습니다')
+            return redirect('index')
+        else:
+            return render(request, 'change_phonenum.html')
+    else:
+        return redirect('logout')
