@@ -5,6 +5,7 @@ import datetime
 
 def main(request):
     book_year = datetime.date.today().year
+
     if request.user.is_authenticated:
         book_datas = []
         if request.method == 'POST':
@@ -25,7 +26,19 @@ def main(request):
                     book_datas.append(month_cnt[i][j])
             print(book_datas)
 
-            return render(request, 'main.html', {'book_year': book_year, 'books': books, 'book_datas':book_datas})
+            return render(request, 'main.html', {'book_year': book_year, 'books': books,
+                                                 'datas_1':month_cnt[0],
+                                                 'datas_2':month_cnt[1],
+                                                 'datas_3':month_cnt[2],
+                                                 'datas_4':month_cnt[3],
+                                                 'datas_5':month_cnt[4],
+                                                 'datas_6':month_cnt[5],
+                                                 'datas_7':month_cnt[6],
+                                                 'datas_8':month_cnt[7],
+                                                 'datas_9':month_cnt[8],
+                                                 'datas_10':month_cnt[9],
+                                                 'datas_11':month_cnt[10],
+                                                 'datas_12':month_cnt[11]})
 
         else:
             books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)

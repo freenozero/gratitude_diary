@@ -28,86 +28,112 @@
         <main>
             <div class=in-container>
                 <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
                     <div class="in-item">
-                        {% csrf_token %}
-                        <button class="book">1월<br>1주</button>
-                        <button class="book">1월<br>2주</button>
-                        <button class="book">1월<br>3주</button>
-                        <button class="book">1월<br>4주</button>
+                        {% for cnt in datas_1 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
                     </div>
                 </form>
-                <div class="in-item">
-                    <button class="book">2월<br>1주</button>
-                    <button class="book">2월<br>2주</button>
-                    <button class="book">2월<br>3주</button>
-                    <button class="book">2월<br>4주</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">3월<br>1주</button>
-                    <button class="book">3월<br>2주</button>
-                    <button class="book">3월<br>3주</button>
-                    <button class="book">3월<br>4주</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">4월<br>1주</button>
-                    <button class="book">4월<br>2주</button>
-                    <button class="book">4월<br>3주</button>
-                    <button class="book">4월<br>4주</button>
-                </div>
-            </div>
 
-            <div class=in-container>
-                <div class="in-item">
-                    <button class="book">5월<br>1주</button>
-                    <button class="book">5월<br>2주</button>
-                    <button class="book">5월<br>3주</button>
-                    <button class="book">5월<br>4주</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_2 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
 
-            </div>
-            <div class=in-container>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_3 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_4 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_5 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_6 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_7 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_8 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_9 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_10 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_11 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
+
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in datas_12 %}
+                            <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                        {% endfor %}
+                    </div>
+                </form>
 
             </div>
         </main>
