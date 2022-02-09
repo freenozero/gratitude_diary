@@ -42,13 +42,6 @@ INSTALLED_APPS = [
     'Diary.apps.DiaryConfig',
     'Diary_write',
 
-    # allauth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    #provider
-    'allauth.socialaccount.providers.google'
 ]
 
 MIDDLEWARE = [
@@ -160,7 +153,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 )
 SITE_ID = 1
 
