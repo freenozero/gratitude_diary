@@ -13,12 +13,12 @@
     grid-gap: 30px;
     place-items: center;
 }
-.in-item{
 
+.in-item{
     display: grid;
     grid-template-columns: repeat(4, 50px);
-
 }
+
 .book{
   height: 100px;
 }
