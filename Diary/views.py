@@ -29,7 +29,7 @@ def signups(request):
                 mail_subject = '[감사노트] 계정 활성화 이메일'
                 message = render_to_string('Email.html', {
                     'user': user,
-                    'domain': current_site.domain,
+                    'domain': '127.0.0.1:8000',
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': account_activation_token.make_token(user),
                 })
