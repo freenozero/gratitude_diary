@@ -9,5 +9,6 @@ urlpatterns = [
     path('MyDiary/write/', views.write_view, name='DiaryWrite'),
     path('MyDiary/read/', views.read_view, name='DiaryRead'),
     path('MyDiary/edit/<int:diary_cnt>', views.edit_view, name='DiaryEdit'),
-    path('MyDiary/erase/<int:diary_cnt>', views.erase_view, name='DiaryErase')
+    path('MyDiary/erase/<int:diary_cnt>', views.erase_view, name='DiaryErase'),
+    path('decorate_note/',views.decorate_note, name= "decorate_note"),
 ]

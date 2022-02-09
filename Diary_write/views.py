@@ -150,3 +150,7 @@ def erase_view(request, diary_cnt):
             return render(request, 'DiaryErase.html', {'datas': datas})
     else:
         return redirect('logout')
+
+
+def decorate_note(request):
+    return render(request, 'decorate_note.html')
