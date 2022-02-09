@@ -1,3 +1,10 @@
+.book-label{
+    display: grid;
+    text-align: center;
+    grid-gap: 35px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
 .in-container {
     display: grid;
     grid-template-columns: 200px 200px 200px 200px;

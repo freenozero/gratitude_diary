@@ -20,15 +20,24 @@
                     class="nav-btn go-prev"> >
             </button>
         </form>
+        <a href="{% url 'Diary' %}">달력</a>
     </header>
     <section class="content">
         <nav>
         </nav>
         <main>
-
-            <div class=in-container>
+            <div class="book-label">
+                <span>1월</span>
+                <span>2월</span>
+                <span>3월</span>
+                <span>4월</span>
+            </div>
+        {% for i in books %}
+            {{ i.diary_date.month }}월 {{ i.diary_date.weekday }}주
+        {% endfor %}
+                <div class=in-container>
                 <div class="in-item">
-                    <button class="book">*book 1*</button>
+                    <button class="book">{{ forloop.counter }}월 :</button>
                     <button class="book">*book 2*</button>
                     <button class="book">*book 3*</button>
                     <button class="book">*book 4*</button>
@@ -53,6 +62,12 @@
                 </div>
             </div>
 
+            <div class="book-label">
+                <span>5월</span>
+                <span>6월</span>
+                <span>7월</span>
+                <span>8월</span>
+            </div>
             <div class=in-container>
                 <div class="in-item">
                     <button class="book">*book 1*</button>
@@ -79,6 +94,12 @@
                     <button class="book">*book 4*</button>
                 </div>
 
+            </div>
+            <div class="book-label">
+                <span>9월</span>
+                <span>10월</span>
+                <span>11월</span>
+                <span>12월</span>
             </div>
             <div class=in-container>
                 <div class="in-item">
@@ -113,7 +134,6 @@
         </aside>
     </section>
     <footer>
-        <a href="https://opentutorials.org/course/1">홈페이지</a>
     </footer>
 </div>
 </body>
