@@ -4,8 +4,19 @@ import datetime
 
 
 def main(request):
+    book_year = datetime.date.today().year
     if request.user.is_authenticated:
-        return render(request, 'main.html')
+        if request.method == 'POST':
+            post_data = request.POST['book_year'].split('_')
+            book_year = int(post_data[0])
+            if post_data[1] == 'right':
+                book_year += 1
+            else:  # 날짜를 왼쪽[달 감소]
+                book_year -= 1
+            books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
+            return render(request, 'main.html', {'book_year':book_year, 'books':books})
+        else:
+            return render(request, 'main.html', {'book_year':book_year})
     else:
         return redirect('logout')
 
