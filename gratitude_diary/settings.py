@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Diary.apps.DiaryConfig',
     'Diary_write',
+    'phonenumber_field',
 
 ]
 
