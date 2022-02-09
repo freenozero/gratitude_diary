@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Diary.apps.DiaryConfig',
     'Diary_write',
-
 ]
 
 MIDDLEWARE = [

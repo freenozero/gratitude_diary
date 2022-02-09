@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
-
+from django.core.validators import RegexValidator
 
 class UserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, name=None, password=None, phone_num=None):
@@ -32,7 +32,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     email = models.EmailField(verbose_name='이메일', max_length=255, unique=True)
     date_of_birth = models.DateField(verbose_name="생년월일", null=False)
-    phone_num = models.CharField(verbose_name="전화번호", max_length=15)
+    phone_num = models.CharField(verbose_name="전화번호", null=True, validators=[RegexValidator(r'^\d{3}-\d{4}-\d{4}$')], max_length=13)
     age = models.PositiveIntegerField(default=0, null=False, blank=False)
     name = models.CharField(verbose_name="이름", max_length=10)
     is_active = models.BooleanField(default=True)

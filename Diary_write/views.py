@@ -6,6 +6,7 @@ import datetime
 def main(request):
     book_year = datetime.date.today().year
     if request.user.is_authenticated:
+        book_datas = []
         if request.method == 'POST':
             post_data = request.POST['book_year'].split('_')
             book_year = int(post_data[0])
@@ -14,20 +15,32 @@ def main(request):
             else:  # 날짜를 왼쪽[달 감소]
                 book_year -= 1
             books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
+            month_cnt = [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],\
+                        [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],  [0, 0, 0, 0, 0],\
+                        [0, 0, 0, 0, 0],[0, 0, 0, 0, 0], [0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0]
             for j in books:
-                print(j.diary_date.day)
-            return render(request, 'main.html', {'book_year':book_year, 'books':books})
+                month_cnt[j.diary_date.month-1][get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day)-1] += 1
+            for i in range(12):
+                for j in range(5):
+                    book_datas.append(month_cnt[i][j])
+            print(book_datas)
+
+            return render(request, 'main.html', {'book_year': book_year, 'books': books, 'book_datas':book_datas})
+
         else:
-            return render(request, 'main.html', {'book_year':book_year})
+            books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
+        for j in books:
+            print(j.diary_date.month, "달 :", get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day))
+        return render(request, 'main.html', {'book_year': book_year})
+
     else:
         return redirect('logout')
 
+
 def get_date(y, m, d):
-  '''y: year(4 digits)
-   m: month(2 digits)
-   d: day(2 digits'''
-  s = f'{y:04d}-{m:02d}-{d:02d}'
-  return datetime.datetime.strptime(s, '%Y-%m-%d')
+    s = f'{y:04d}-{m:02d}-{d:02d}'
+    return datetime.datetime.strptime(s, '%Y-%m-%d')
+
 
 def get_week_no(y, m, d):
     target = get_date(y, m, d)
@@ -37,8 +50,9 @@ def get_week_no(y, m, d):
     elif firstday.weekday() < 3:
         origin = firstday - datetime.timedelta(days=firstday.weekday() + 1)
     else:
-        origin = firstday + datetime.timedelta(days=6-firstday.weekday())
+        origin = firstday + datetime.timedelta(days=6 - firstday.weekday())
     return (target - origin).days // 7 + 1
+
 
 def diary_view(request):
     times = datetime.date.today()  # 현재 날짜 정보 저장
@@ -88,7 +102,6 @@ def month_last_day(this_month, times):
     return last_day
 
 
-
 def write_view(request):
     if request.user.is_authenticated:
         get_data = list(map(int, request.GET['cal_date'].split('_')))
@@ -111,7 +124,6 @@ def write_view(request):
             return render(request, 'DiaryWrite.html', {'times': times})
     else:
         return redirect('logout')
-
 
 
 def edit_view(request, diary_cnt):
