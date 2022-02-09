@@ -36,7 +36,7 @@ def signups(request):
                 to_email = form.cleaned_data.get('email')
                 send_mail(mail_subject, message, 'whdms1107@gmail.com', [to_email])
                 messages.success(request, '입력한 아이디의 메일을 통해 인증을 해주세요.')  # 회원가입 되었을때
-                return redirect('/')
+                return redirect('index')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -130,5 +130,28 @@ def change_password(request):
             return render(request, 'change_password.html')
         else:
             return render(request, 'change_password.html')
+    else:
+        return redirect('logout')
+
+
+def userprofile(request):
+    user = request.user
+    if user.is_authenticated:
+        return render(request, 'user_profile.html')
+    else:
+        return redirect('logout')
+
+
+def change_phonenum(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            user = request.user
+            new_phonenum = request.POST["new_phonenum"]
+            user.phone_num = new_phonenum
+            user.save()
+            messages.success(request, '전화번호가 변경되었습니다')
+            return redirect('index')
+        else:
+            return render(request, 'change_phonenum.html')
     else:
         return redirect('logout')
