@@ -57,22 +57,35 @@ body{
 }
 
 /*===========메세지===========*/
-#msg {
+#msg_error {
     text-align: center;
     position: relative;
-    background-color: thistle;
+    background-color: red;
     color: black;
     width: 400px;
     height: 23px;
     margin: 0 auto;
     border-radius: 5px;
 }
+
+#msg_success{
+    text-align: center;
+    position: relative;
+    background-color: blue;
+    color: black;
+    width: 400px;
+    height: 23px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
 #msgRemove{
     width :12px;
     height: 16px;
     color : mediumpurple;
     background-color: white;
 }
+
 
 /*==========Index 화면이 로그인 관련 ============*/
 

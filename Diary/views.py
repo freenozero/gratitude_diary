@@ -37,7 +37,6 @@ def signups(request):
                 send_mail(mail_subject, message, 'whdms1107@gmail.com', [to_email])
                 messages.success(request, '입력한 아이디의 메일을 통해 인증을 해주세요.')  # 회원가입 되었을때
                 return redirect('/')
-
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
