@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
+from gratitude_diary import settings
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, name=None, password=None, phone_num=None):

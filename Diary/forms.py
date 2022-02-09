@@ -2,14 +2,18 @@ from datetime import date
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.forms import UserCreationForm
+
+from gratitude_diary import settings
 from .models import User
 
 class UserCreationForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('email', 'date_of_birth', 'name', 'phone_num')
+        fields = ('email','date_of_birth', 'name', 'phone_num')
     password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
     password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
+    date_of_birth = forms.DateField(label='생년월일', localize=True,
+        widget=forms.DateInput(format = '%Y-%m-%d',attrs={'type': 'date'}))
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
