@@ -19,6 +19,7 @@ def main(request):
             month_cnt = [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],\
                         [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],  [0, 0, 0, 0, 0],\
                         [0, 0, 0, 0, 0],[0, 0, 0, 0, 0], [0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0]
+            #4주차이면 0이 4개 5주차이면 5개
             for j in books:
                 month_cnt[j.diary_date.month-1][get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day)-1] += 1
             for i in range(12):
