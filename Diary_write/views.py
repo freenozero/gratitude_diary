@@ -16,16 +16,29 @@ def main(request):
             else:  # 날짜를 왼쪽[달 감소]
                 book_year -= 1
             books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
-            month_cnt = [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],\
-                        [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],  [0, 0, 0, 0, 0],\
-                        [0, 0, 0, 0, 0],[0, 0, 0, 0, 0], [0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0]
+
+            month_cnt = []
+            for i in range(12):
+                month_cnt.append([0,0,0,0])
+
             #4주차이면 0이 4개 5주차이면 5개
             for j in books:
-                month_cnt[j.diary_date.month-1][get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day)-1] += 1
-            for i in range(12):
-                for j in range(5):
+                print(get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day))
+                if  get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day) == 5: #5주차일떄
+                    if len(month_cnt[j.diary_date.month - 1]) == 4: #4주차까지 등록되었을때
+                        month_cnt[j.diary_date.month - 1].append(1) #5주차 추가
+                    else: #5주차까지 등록되었을때 5주차 증가
+                        month_cnt[j.diary_date.month - 1][get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day) - 1] += 1
+
+                elif get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day) == 0: #0주차일때
+                    month_cnt[j.diary_date.month - 1][0] += 1 #1주차증가
+
+                elif get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day) < 5:
+                    month_cnt[j.diary_date.month-1][get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day)-1] += 1
+            for i in range(len(month_cnt)):
+                for j in range(len(month_cnt[i])):
                     book_datas.append(month_cnt[i][j])
-            print(book_datas)
+
 
             return render(request, 'main.html', {'book_year': book_year, 'books': books,
                                                  'datas_1':month_cnt[0],
