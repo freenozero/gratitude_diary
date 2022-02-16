@@ -2,18 +2,20 @@
     display: grid;
     grid-template-columns: 200px 200px 200px 200px;
     border: solid 1px;
+    padding-top: 30px;
     margin: 0 auto;
     grid-gap: 30px;
     place-items: center;
 }
+
 .in-item{
-
     display: grid;
-    grid-template-columns: repeat(5, 30px);
-
+    grid-template-columns: repeat(5, auto);
+    grid-template-rows: repeat(3, minmax(20px, 45px));
 }
+
 .book{
-  height: 100px;
+    height: 100px;
 }
 
 .container {

@@ -32,7 +32,25 @@
                         {% csrf_token %}
                         <div class="in-item">
                             {% for cnt in value.getweek_cnt %}
-                                <button class="book"><br>{{ forloop.counter }}주<br>{{ cnt }}</button>
+                                {% if cnt == 0 %}
+                                    
+                                {% elif cnt == 1 %}
+                                    <button class="book" style="width: 20px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% elif cnt == 2 or cnt == 3 %}
+                                    <button class="book" style="width: 30px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% elif cnt == 4 or cnt == 5 %}
+                                    <button class="book" style="width: 40px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% else %}
+                                    <button class="book" style="width: 45px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </form>
