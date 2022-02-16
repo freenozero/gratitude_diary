@@ -18,10 +18,6 @@
     height: 100px;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-}
 
 header {
   border-bottom: 1px solid gray;
@@ -36,6 +32,7 @@ footer {
 
 .content {
   display: flex;
+  flex-direction: column;
 }
 
 .content nav {
@@ -46,9 +43,8 @@ footer {
   border-left: 1px solid gray;
 }
 
-nav,
-aside {
-  flex-basis: 150px;
+nav{
+  flex-basis: 50px;
   flex-shrink: 0;
 }
 
