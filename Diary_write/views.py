@@ -7,19 +7,34 @@ import datetime
 class Week:
     def __init__(self, year, month, request):
         self.last_day = datetime.date(year, month, month_last_day(year, month))
-        self.diary_cnt = week_cnt(request, datetime.date(year, month, 1), self.last_day)
+        self.diary_cnt = week_cnt(datetime.date(year, month, 1), self.last_day)
         self.week_cnt = []
         for i in range(self.diary_cnt):
             self.week_cnt.append(0)
         books = Data.objects.filter(id=request.user.id, diary_date__year=year, diary_date__month=month)
+        for i in books:
+            try:
+                self.week_cnt[(today_week(i.diary_date))-1] += 1
+            except:
+                self.week_cnt[self.diary_cnt-1] += 1
+        print(self.week_cnt[0], self.week_cnt[1],self.week_cnt[2],self.week_cnt[3])
+
     def getdiary(self):
         return self.diary_cnt
+
 
     def getweek_cnt(self):
         return self.week_cnt
 
+def today_week(date):
+    if date.month == 1:
+        return date.isocalendar().week
+    else:
+        return_data = date.isocalendar().week - datetime.date(date.year,date.month-1,month_last_day(date.year, date.month)).isocalendar().week
+        return return_data
 
-def week_cnt(request, date, last_day):
+
+def week_cnt(date, last_day):
     week_check = datetime.date(date.year, date.month, 1).weekday()
     cnt = 0
     if week_check != 6:
