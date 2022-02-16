@@ -13,6 +13,12 @@
 body{
     font-family: 'S-CoreDream-4Regular', sans-serif !important;
 }
+
+#body{
+    position: relative;
+    z-index:1;
+}
+
 #head {
     font-family: "S-CoreDream-1Thin", sans-serif !important;
     height: 63%;
@@ -37,7 +43,7 @@ body{
 }
 
 #main_body{
-    margin: 0px;
+    margin: 0;
     background-image: url("img/bg_img.png");
     background-size: cover;
     background-repeat: no-repeat;
