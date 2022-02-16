@@ -57,7 +57,7 @@ body {
 .container .title p {
   position: absolute;
   height: 150px;
-  z-index: 1;
+  z-index: 5;
   color: #fff;
   font-size: 4rem;
   text-shadow: 0 0 5px #fefce5, 0 0 10px #fffef3, 0 0 15px #fee2a2, 0 0 20px #f0c780, 0 0 30px #fef7cc, 0 0 40px #ff9f00, 0 0 55px #ff9700, 0 0 75px #fec379, 2px 2px 2px rgba(142, 139, 116, 0), 2px 2px 2px;
@@ -69,7 +69,7 @@ body {
 }
 
 .container .stage {
-  background-image: url("asdasd.jpg");
+  z-index: 5;
   background-size: cover;
   background-position: center;
   /*[4-2] 부모인 container 클래스 안에서 중앙 정렬하고
