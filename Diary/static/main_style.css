@@ -6,6 +6,7 @@
     margin: 0 auto;
     grid-gap: 30px;
     place-items: center;
+    justify-content: center;
 }
 
 .in-item{
