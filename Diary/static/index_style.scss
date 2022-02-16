@@ -1,0 +1,116 @@
+@charset "UTF-8";
+/* scss */
+/* 스압을 줄이기 위해 한줄로 작성하였습니다 */
+/* [1] 폰트asd는 상업용 무료폰트 사이트인 '눈누' 에서
+    '카페24고운밤' 폰트를 사용하였습니다. (폰트 너무예뻐♥) */
+@font-face {
+  font-family: 'Cafe24Oneprettynight';
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* [2] 바디에 기본 스타일 및 폰트 적용해주기
+    (백그라운드에 이미지를 적용할 예정이지만
+    이미지 로딩이 느릴걸 예상해서 기본 그라디언트 배경을 적용해줌) */
+body {
+  font-family: 'Cafe24Oneprettynight';
+  margin: 0;
+  padding: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#5b4331), color-stop(53%, #19110b), to(#000000));
+  background: linear-gradient(180deg, #5b4331 0%, #19110b 53%, #000000 100%);
+}
+
+/* [3] 이제 불빛 그림그리기~ */
+/* 텍스트와 불빛을 감싸는 부모 container에 전체화면 스타일 적용 */
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* [3-1] 브라우저에서 title 클래스 위치 잡기 */
+  /* [4] stage 클래스에 불빛 만들어주기 */
+  /* [4-1] 불빛 백그라운드에 트리 이미지 적용해줌
+           이미지 사이즈 상관없이 이미지를 브라우저 전체 적용하고
+           center로 포지션 잡아두면 브라우저 크기가 줄어들었을때
+           그대로 중앙 정렬이 유지됨 */
+}
+
+.container .title {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  /* [3-1-1] <p>태그에 빛나는 라이팅 효과 주기*/
+  /* [3-1-2] 두번째 p 태그인
+               <p>행복한 연말 보내세요!</p> 부분에 스타일 적용
+               폰트사이즈가 4rem으로 너무 크기 때문에
+               간격을 -3px 줄여서 한글 가독성 좋게 만듬 */
+}
+
+.container .title p {
+  position: absolute;
+  height: 150px;
+  z-index: 1;
+  color: #fff;
+  font-size: 4rem;
+  text-shadow: 0 0 5px #fefce5, 0 0 10px #fffef3, 0 0 15px #fee2a2, 0 0 20px #f0c780, 0 0 30px #fef7cc, 0 0 40px #ff9f00, 0 0 55px #ff9700, 0 0 75px #fec379, 2px 2px 2px rgba(142, 139, 116, 0), 2px 2px 2px;
+}
+
+.container .title p:nth-of-type(2) {
+  height: 70px;
+  letter-spacing: -3px;
+}
+
+.container .stage {
+  background-image: url("asdasd.jpg");
+  background-size: cover;
+  background-position: center;
+  /*[4-2] 부모인 container 클래스 안에서 중앙 정렬하고
+            불빛이 브라우저 밖을 넘어가면 보이지 않도록 적용 */
+  position: absolute;
+  overflow: hidden;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  /* [4-3] 반짝반짝 불빛 컬러 적용 */
+  /* [4-4] 큰 불빛 스타일 적용 */
+}
+
+.container .stage span {
+  position: absolute;
+  /* 작은 불빛 사이즈 */
+  width: 1px;
+  height: 1px;
+  /* 작은 불빛 컬러를 3단계로 주광색, 주백색, 전구색 으로 적용해서
+         불빛이 자연스럽게 빛나도록 쉐도우 적용 */
+  -webkit-box-shadow: 0 0 0 2px #fff, 0 0 0 3px #ffb68b, 0 0 5px 3px #ff9d00;
+          box-shadow: 0 0 0 2px #fff, 0 0 0 3px #ffb68b, 0 0 5px 3px #ff9d00;
+  /* 불빛은 기본 사각형으로 생겨서 radius로 원형을 만들어줌 */
+  border-radius: 50%;
+  /* 작은 불빛 블러 */
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  /* 큰 불빛 컬러
+        (작은 불빛은 그라디언트 쉐도우가 불빛의 width와 height의
+         크기보다 크기 때문에 백그라운드 컬러가 안보임)*/
+  background-color: #af855d;
+}
+
+.container .stage .blur {
+  /* 큰 불빛 사이즈 */
+  width: 100px;
+  height: 100px;
+  /* 큰 불빛 블러 */
+  -webkit-filter: blur(7px);
+          filter: blur(7px);
+}
+/*# sourceMappingURL=style.css.map */
