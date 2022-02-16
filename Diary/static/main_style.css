@@ -1,9 +1,8 @@
 .in-container {
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px;
-    border: solid 1px;
+    grid-template-columns: repeat(4, 250px);
     margin: 0 auto;
-    grid-gap: 30px;
+    grid-gap: 50px;
     place-items: center;
     justify-content: center;
 }
@@ -11,7 +10,7 @@
 .in-item{
     display: grid;
     grid-template-columns: repeat(5, auto);
-    grid-template-rows: repeat(3, minmax(25px, 45px));
+    grid-template-rows: repeat(3, minmax(35px, 50px));
 }
 
 .content{
@@ -61,7 +60,7 @@ footer {
 
 nav,
 aside {
-  flex-basis: 50px;
+  flex-basis: 40px;
   flex-shrink: 0;
 }
 
