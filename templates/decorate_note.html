@@ -1,13 +1,115 @@
 {% include 'logtout&main.html' %}
 <!DOCTYPE html>
-<html>
-<head>
-</head>
-<html lang="ko-kr">
-<head>
-    {% load static %}
+<body>
+     {% load static %}
     <link rel="stylesheet" href="{% static "decorate_note.css" %}">
     <meta charset="UTF-8">
-    <div class="square"><h1>다이어리 꾸미기</h1></div>
-</head>
-</html>
+    <div class="View">
+    <div class="Menu" id="MenuId">
+    <body id="colorCont">
+
+      <h1>Menu</h1>
+      <div><button onclick="colorChange()">배경 색상 변경</button></div>
+      <div>다이어리 색상 변경</div>
+      <div>제목 변경</div>
+      <div>아이콘 추가</div>
+      <div>어떤걸 넣을까</div>
+      <div onclick="closeLeftMenu(); return false;">Close</div>
+   </body>
+</div>
+<div class="button" id="button" onclick="showLeftMenu(); return false;">
+<i class= "icon-align-justify"></i></div>
+  </div>
+</body>
+
+<style>
+.View .Menu div{  /*메뉴바 선 굵기, 바 사이 여백*/
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+body{
+    text-align: center;
+    background-color: #ebe5e5;
+}
+.View {
+    width: 800px;
+    height: 500px;
+    /*overflow: hidden;*/
+    position: relative;
+}
+.Menu {
+    width: 270px;
+    height: 95%;
+    background-color: #ffffff;
+    padding-top: 10px;
+    transition: transform 600ms;
+    transform: translate(-250px, 0px);
+
+    -ms-transition: -ms-transform 600ms;
+    -webkit-transition: -webkit-transform 600ms;
+    -moz-transition: -moz-transform 600ms;
+    -o-transition: -o-transform 600ms;
+
+    -ms-transform: translate(-250px, 0px);
+    -webkit-transform: translate(-250px, 0px);
+    -moz-transform: translate(-250px, 0px);
+    -o-transform: translate(-250px, 0px);
+}
+.Menu div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    width: 250px;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    color:  #716f6f;
+    cursor: pointer;
+    margin-bottom: 1px;
+}
+.Menu div:hover {
+    background-color: lavenderblush;
+}
+.button {
+    font-size:30px;
+    width: 100px;
+    height: 1500px;
+    position: absolute;
+    bottom: 10px;
+    left: 23px;
+    cursor: pointer;
+    color: lavenderblush;
+}
+.button:hover {
+}
+</style>
+
+<script>
+function colorChange() {
+  var color = [ "#FFFFCC", "#FFCCCC", "#CCCCFF", "#FFD7B5","#CCCCCC"];
+
+  var num = Math.floor(Math.random() * color.length);
+  var bodyTag = document.getElementById("colorCont");
+  bodyTag.style.backgroundColor = color[num];
+}
+
+function showLeftMenu(){
+      var circleBtObj = document.getElementById('button');
+      var leftMenuObj = document.getElementById('MenuId');
+      circleBtObj.style['display'] = "none";
+      leftMenuObj.style['transform'] = "translate(0px, 0px)";
+
+      leftMenuObj.style['msTransform'] = "translate(0px, 0px)";
+      leftMenuObj.style['mozTransform'] = "translate(0px, 0px)";
+      leftMenuObj.style['webkitTransform'] = "translate(0px, 0px)";
+      leftMenuObj.style['oTransform'] = "translate(0px, 0px)";
+}
+function closeLeftMenu() {
+      var circleBtObj = document.getElementById('button');
+      var leftMenuObj = document.getElementById('MenuId');
+
+      circleBtObj.style['display'] = "block";
+      leftMenuObj.removeAttribute("style");
+}
+</script>
