@@ -22,10 +22,13 @@
         </form>
     </header>
     <section class="content">
-        <nav>
+        <nav class="content-nav">
+            <div>
+
             <a href="{% url 'Diary' %}">다이어리 가기</a>
+            </div>
         </nav>
-        <main>
+        <main class="content-main">
             <div class=in-container>
                 {% for value in datas %}
                     <form action="{% url 'decorate_note' %}" method="post">
@@ -57,11 +60,16 @@
                 {% endfor %}
             </div>
         </main>
-        <aside>
-            AD
+        <aside class="content-aside">
+            <div>
+                <a href="">ad</a>
+            </div>
         </aside>
     </section>
-    <footer>
+    <footer class="content-footer">
+        <div>
+            foot
+        </div>
     </footer>
 </div>
 </body>
