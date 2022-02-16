@@ -2,7 +2,21 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="{% static "style.css" %}">
 <div class="log_main_div">
-    <a href="{% url 'userprofile' %}"><button class="log_main_button">{{ user.name }}님</button></a>
-    <a href="{% url 'logout' %}"><button class="log_main_button" >로그아웃</button></a>
-     <a href="{% url 'index' %}"><button class="log_main_button">index</button></a>
+    <div>
+        <a href="{% url 'userprofile' %}">
+            <button class="log_main_button">{{ user.name }}님</button>
+        </a>
+
+    </div>
+    <div>
+        <a href="{% url 'logout' %}">
+            <button class="log_main_button">로그아웃</button>
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'index' %}">
+            <button class="log_main_button">index</button>
+        </a>
+
+    </div>
 </div>

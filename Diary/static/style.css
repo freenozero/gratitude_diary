@@ -132,7 +132,9 @@ body{
 
 /*===== 오른쪽 상단에 위치해 있는 네비게이션 바*/
 .log_main_div{
-    float:right;
+    display: flex;
+    position: absolute;
+    right: 30px;
 }
 .log_main_button{
     padding: 10px 10px;
@@ -191,7 +193,7 @@ a{
 }
 
 .dates{
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(7, 1fr);
     justify-content: center;
 

@@ -6,12 +6,34 @@
     grid-gap: 30px;
     place-items: center;
 }
-.in-item{
-
+.in-item {
     display: grid;
     grid-template-columns: repeat(5, 30px);
-
 }
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-nav{
+    border: solid 1px;
+}
+
+.content-footer{
+    margin-top: auto;
+}
+
+.content-aside{
+    border: solid 1px;
+}
+
+.content-main{
+    margin: 0 auto;
+    max-width: 850px;
+    flex-grow: 2;
+}
+
 .book{
   height: 100px;
 }
@@ -32,21 +54,10 @@ footer {
   text-align: center;
 }
 
-.content {
-  display: flex;
-}
-
-.content nav {
-  border-right: 1px solid gray;
-}
-
-.content aside {
-  border-left: 1px solid gray;
-}
 
 nav,
 aside {
-  flex-basis: 150px;
+  flex-basis: 50px;
   flex-shrink: 0;
 }
 
