@@ -36,16 +36,18 @@
                         <div class="in-item">
                             {% for cnt in value.getweek_cnt %}
                                 {% if cnt == 0 %}
-                                    
-                                {% elif cnt == 1 %}
+                                    <button class="book" style="visibility: hidden">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% elif cnt == 1 or cnt == 2%}
                                     <button class="book" style="width: 20px">
                                         <br>{{ forloop.counter }}주<br>{{ cnt }}
                                     </button>
-                                {% elif cnt == 2 or cnt == 3 %}
+                                {% elif cnt == 3 or cnt == 4 %}
                                     <button class="book" style="width: 30px">
                                         <br>{{ forloop.counter }}주<br>{{ cnt }}
                                     </button>
-                                {% elif cnt == 4 or cnt == 5 %}
+                                {% elif cnt == 5 or cnt == 6 %}
                                     <button class="book" style="width: 40px">
                                         <br>{{ forloop.counter }}주<br>{{ cnt }}
                                     </button>
