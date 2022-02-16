@@ -1,12 +1,63 @@
 from django.shortcuts import render, redirect
 from .models import Data
+import calendar
 import datetime
+
+
+class Week:
+    def __init__(self, year, month, request):
+        self.last_day = datetime.date(year, month, month_last_day(year, month))
+        self.diary_cnt = week_cnt(datetime.date(year, month, 1), self.last_day)
+        self.week_cnt = []
+        for i in range(self.diary_cnt):
+            self.week_cnt.append(0)
+        books = Data.objects.filter(id=request.user.id, diary_date__year=year, diary_date__month=month)
+        for i in books:
+            try:
+                self.week_cnt[(today_week(i.diary_date)) - 1] += 1
+            except:
+                self.week_cnt[self.diary_cnt - 1] += 1
+        print(self.week_cnt[0], self.week_cnt[1], self.week_cnt[2], self.week_cnt[3])
+
+    def getdiary(self):
+        return self.diary_cnt
+
+    def getweek_cnt(self):
+        return self.week_cnt
+
+
+def today_week(date):
+    if date.month == 1:
+        return date.isocalendar().week
+    else:
+        return_data = date.isocalendar().week - datetime.date(date.year, date.month - 1,
+                                                              month_last_day(date.year, date.month)).isocalendar().week
+        return return_data
+
+
+def week_cnt(date, last_day):
+    week_check = datetime.date(date.year, date.month, 1).weekday()
+    cnt = 0
+    if week_check != 6:
+        this_sunday = 1 + (6 - week_check)  # 첫째주 의 일요일 날짜
+    else:
+        this_sunday = 1
+    for j in range(this_sunday, last_day.day + 1, 7):
+        if j == week_check:
+            continue
+        cnt += 1
+    if 3 <= week_check < 6:
+        cnt -= 1
+    if 3 <= last_day.weekday() < 6:
+        cnt += 1
+    return cnt
 
 
 def main(request):
     book_year = datetime.date.today().year
     if request.user.is_authenticated:
-        book_datas = []
+        week_class = []
+        books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
         if request.method == 'POST':
             post_data = request.POST['book_year'].split('_')
             book_year = int(post_data[0])
@@ -15,24 +66,13 @@ def main(request):
             else:  # 날짜를 왼쪽[달 감소]
                 book_year -= 1
             books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
-            month_cnt = [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],\
-                        [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0],  [0, 0, 0, 0, 0],\
-                        [0, 0, 0, 0, 0],[0, 0, 0, 0, 0], [0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0]
-            for j in books:
-                month_cnt[j.diary_date.month-1][get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day)-1] += 1
-            for i in range(12):
-                for j in range(5):
-                    book_datas.append(month_cnt[i][j])
-            print(book_datas)
+        for i in range(1, 13):
+            week_class.append(Week(book_year, i, request))
+        # for i in range(len(week_class)):
+        #     print(week_class[i].getweek_cnt())
 
-            return render(request, 'main.html', {'book_year': book_year, 'books': books, 'book_datas':book_datas})
-
-        else:
-            books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
-        for j in books:
-            print(j.diary_date.month, "달 :", get_week_no(j.diary_date.year, j.diary_date.month, j.diary_date.day))
-        return render(request, 'main.html', {'book_year': book_year})
-
+        return render(request, 'main.html', {'book_year': book_year, 'books': books,
+                                             'datas': week_class})
     else:
         return redirect('logout')
 
@@ -42,8 +82,8 @@ def get_date(y, m, d):
     return datetime.datetime.strptime(s, '%Y-%m-%d')
 
 
-def get_week_no(y, m, d):
-    target = get_date(y, m, d)
+def get_week_no(date):
+    target = get_date(date.year, date.month, date.day)
     firstday = target.replace(day=1)
     if firstday.weekday() == 6:
         origin = firstday
@@ -78,7 +118,8 @@ def diary_view(request):
                     times = datetime.date(post_data[1] - 1, 12, 1)  # 표시된 월이 1월 보다 작을 경우
         datas = Data.objects.filter(id=request.user.id, diary_date__year=times.year, diary_date__month=times.month)
         first_day = datetime.date(times.year, times.month, 1).weekday() + 1
-        last_day = month_last_day(times.month, times)  # 마지막 날짜 구하기
+        last_day = month_last_day(times.year, times.month)  # 마지막 날짜 구하기
+        print(last_day)
         datas_date = [0 for _ in range(last_day)]
         for i in range(len(datas)):
             datas_date[i] = datas[i].diary_date.day
@@ -89,17 +130,8 @@ def diary_view(request):
         return redirect('logout')
 
 
-def month_last_day(this_month, times):
-    if this_month in [1, 3, 5, 7, 8, 10, 12]:
-        last_day = 31
-    elif this_month == 2:
-        if times.year % 4 == 0:
-            last_day = 29
-        else:
-            last_day = 28
-    else:
-        last_day = 30
-    return last_day
+def month_last_day(year, month):
+    return calendar.monthrange(year, month)[1]
 
 
 def write_view(request):

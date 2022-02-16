@@ -2,24 +2,23 @@
     display: grid;
     grid-template-columns: 200px 200px 200px 200px;
     border: solid 1px;
+    padding-top: 30px;
     margin: 0 auto;
     grid-gap: 30px;
     place-items: center;
+    justify-content: center;
 }
+
 .in-item{
-
     display: grid;
-    grid-template-columns: repeat(4, 50px);
-
+    grid-template-columns: repeat(5, auto);
+    grid-template-rows: repeat(3, minmax(20px, 45px));
 }
+
 .book{
-  height: 100px;
+    height: 100px;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-}
 
 header {
   border-bottom: 1px solid gray;
@@ -34,6 +33,8 @@ footer {
 
 .content {
   display: flex;
+  flex-direction: column;
+    justify-content: center;
 }
 
 .content nav {
@@ -44,9 +45,8 @@ footer {
   border-left: 1px solid gray;
 }
 
-nav,
-aside {
-  flex-basis: 150px;
+nav{
+  flex-basis: 50px;
   flex-shrink: 0;
 }
 

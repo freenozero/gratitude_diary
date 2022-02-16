@@ -88,7 +88,7 @@ def login_view(request):
             )
             if user is not None:
                 login(request, user)
-                return render(request, 'main.html')
+                return redirect('main')
             else:
                 messages.error(request, '없는 회원정보 입니다.')
     else:

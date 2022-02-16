@@ -22,101 +22,54 @@
         </form>
     </header>
     <section class="content">
-        <nav>
+        <nav class="content-nav">
+            <div>
+
             <a href="{% url 'Diary' %}">다이어리 가기</a>
+            </div>
         </nav>
-        <main>
+        <main class="content-main">
             <div class=in-container>
-                <form action="{% url 'decorate_note' %}" method="post">
-                    <div class="in-item">
+                {% for value in datas %}
+                    <form action="{% url 'decorate_note' %}" method="post">
                         {% csrf_token %}
-                        <button class="book">1월<br>1주</button>
-                        <button class="book">1월<br>2주</button>
-                        <button class="book">1월<br>3주</button>
-                        <button class="book">1월<br>4주</button>
-                    </div>
-                </form>
-                <div class="in-item">
-                    <button class="book">2월<br>1주</button>
-                    <button class="book">2월<br>2주</button>
-                    <button class="book">2월<br>3주</button>
-                    <button class="book">2월<br>4주</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">3월<br>1주</button>
-                    <button class="book">3월<br>2주</button>
-                    <button class="book">3월<br>3주</button>
-                    <button class="book">3월<br>4주</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">4월<br>1주</button>
-                    <button class="book">4월<br>2주</button>
-                    <button class="book">4월<br>3주</button>
-                    <button class="book">4월<br>4주</button>
-                </div>
-            </div>
-
-            <div class=in-container>
-                <div class="in-item">
-                    <button class="book">5월<br>1주</button>
-                    <button class="book">5월<br>2주</button>
-                    <button class="book">5월<br>3주</button>
-                    <button class="book">5월<br>4주</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-
-            </div>
-            <div class=in-container>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-                <div class="in-item">
-                    <button class="book">*book 1*</button>
-                    <button class="book">*book 2*</button>
-                    <button class="book">*book 3*</button>
-                    <button class="book">*book 4*</button>
-                </div>
-
+                        <div class="in-item">
+                            {% for cnt in value.getweek_cnt %}
+                                {% if cnt == 0 %}
+                                    
+                                {% elif cnt == 1 %}
+                                    <button class="book" style="width: 20px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% elif cnt == 2 or cnt == 3 %}
+                                    <button class="book" style="width: 30px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% elif cnt == 4 or cnt == 5 %}
+                                    <button class="book" style="width: 40px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% else %}
+                                    <button class="book" style="width: 45px">
+                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                    </button>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </form>
+                {% endfor %}
             </div>
         </main>
-        <aside>
-            AD
+        <aside class="content-aside">
+            <div>
+                <a href="">ad</a>
+            </div>
         </aside>
     </section>
-    <footer>
-        <a href="https://opentutorials.org/course/1">홈페이지</a>
+    <footer class="content-footer">
+        <div>
+            foot
+        </div>
     </footer>
 </div>
 </body>
