@@ -3,7 +3,6 @@ from .models import Data
 import calendar
 import datetime
 
-
 class Week:
     def __init__(self, year, month, request):
         self.last_day = datetime.date(year, month, month_last_day(year, month))
