@@ -3,6 +3,7 @@ from .models import Data
 import calendar
 import datetime
 
+
 class Week:
     def __init__(self, year, month, request):
         self.last_day = datetime.date(year, month, month_last_day(year, month))
@@ -13,23 +14,24 @@ class Week:
         books = Data.objects.filter(id=request.user.id, diary_date__year=year, diary_date__month=month)
         for i in books:
             try:
-                self.week_cnt[(today_week(i.diary_date))-1] += 1
+                self.week_cnt[(today_week(i.diary_date)) - 1] += 1
             except:
-                self.week_cnt[self.diary_cnt-1] += 1
-        print(self.week_cnt[0], self.week_cnt[1],self.week_cnt[2],self.week_cnt[3])
+                self.week_cnt[self.diary_cnt - 1] += 1
+        print(self.week_cnt[0], self.week_cnt[1], self.week_cnt[2], self.week_cnt[3])
 
     def getdiary(self):
         return self.diary_cnt
 
-
     def getweek_cnt(self):
         return self.week_cnt
+
 
 def today_week(date):
     if date.month == 1:
         return date.isocalendar().week
     else:
-        return_data = date.isocalendar().week - datetime.date(date.year,date.month-1,month_last_day(date.year, date.month)).isocalendar().week
+        return_data = date.isocalendar().week - datetime.date(date.year, date.month - 1,
+                                                              month_last_day(date.year, date.month)).isocalendar().week
         return return_data
 
 
@@ -40,7 +42,7 @@ def week_cnt(date, last_day):
         this_sunday = 1 + (6 - week_check)  # 첫째주 의 일요일 날짜
     else:
         this_sunday = 1
-    for j in range(this_sunday, last_day.day+1, 7):
+    for j in range(this_sunday, last_day.day + 1, 7):
         if j == week_check:
             continue
         cnt += 1

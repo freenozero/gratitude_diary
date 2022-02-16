@@ -156,9 +156,12 @@ input:focus {outline:none;}
     background-color:transparent;
     border: none;
     margin-left: 5px;
+    position: relative;
+    top: 2px;
 }
 /* ==== signup 페이지 password 입력창 ======*/
 #id_password{
+    top: 2px;
     background-color:transparent;
     border: none;
     margin-left: 5px;

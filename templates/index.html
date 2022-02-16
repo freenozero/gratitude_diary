@@ -24,10 +24,9 @@
         {% if request.user.is_authenticated %}
 
             <div class="index_div">
-                <button class="index_user_button" onclick="location.href={% url 'logout' %}">로그아웃</button>
-                <button class="index_user_button" onclick="location.href={% url 're_password' %}">비밀번호 변경</button>
-                <button class="index_user_button" onclick=location.href="{% url 'main' %}">MAIN</button>
-
+                <a href="{% url 'logout' %}"><button class="index_user_button">로그아웃</button></a>
+                <a href="{% url 're_password' %}"><button class="index_user_button">비밀번호 변경</button></a>
+                <a href="{% url 'main' %}"><button class="index_user_button">메인메뉴</button></a>
             </div>
 
         {% else %}
