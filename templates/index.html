@@ -25,7 +25,7 @@
             <p></p>
         </div>
     </div>
-    <div id="body">
+    <div style="position: relative;z-index:1;"id="body">
 
         {% if request.user.is_authenticated %}
 
@@ -41,6 +41,7 @@
         {% endif %}
     </div>
 </body>
-
+<footer>
+</footer>
     <script src="{% static "script.js"%}" type="text/javascript"></script>
 </html>

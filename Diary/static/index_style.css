@@ -55,7 +55,8 @@ body {
 }
 
 .container .title p {
-  position: absolute;
+  position: relative;
+  z-index: 2;
   height: 150px;
   z-index: 5;
   color: #fff;
@@ -65,11 +66,13 @@ body {
 
 .container .title p:nth-of-type(2) {
   height: 70px;
+  z-index: 2;
+  position: relative;
   letter-spacing: -3px;
 }
 
 .container .stage {
-  z-index: 5;
+  z-index: 0;
   background-size: cover;
   background-position: center;
   /*[4-2] 부모인 container 클래스 안에서 중앙 정렬하고

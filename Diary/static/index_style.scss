@@ -69,12 +69,12 @@ body {
 }
 
 .container .stage {
-  z-index: 5;
+  z-index: 2;
   background-size: cover;
   background-position: center;
   /*[4-2] 부모인 container 클래스 안에서 중앙 정렬하고
             불빛이 브라우저 밖을 넘어가면 보이지 않도록 적용 */
-  position: absolute;
+  position: relative;
   overflow: hidden;
   margin: auto;
   left: 0;
@@ -86,7 +86,8 @@ body {
 }
 
 .container .stage span {
-  position: absolute;
+  z-index: 2;
+  position: relative;
   /* 작은 불빛 사이즈 */
   width: 1px;
   height: 1px;
