@@ -17,7 +17,7 @@ class Week:
                 self.week_cnt[(today_week(i.diary_date)) - 1] += 1
             except:
                 self.week_cnt[self.diary_cnt - 1] += 1
-        print(self.week_cnt[0], self.week_cnt[1], self.week_cnt[2], self.week_cnt[3])
+        # print(self.week_cnt[0], self.week_cnt[1], self.week_cnt[2], self.week_cnt[3])
 
     def getdiary(self):
         return self.diary_cnt

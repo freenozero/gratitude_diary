@@ -23,50 +23,42 @@
     </header>
     <section class="content">
         <nav class="content-nav">
-            <div>
-
-            <a href="{% url 'Diary' %}">다이어리 가기</a>
+            <div class="go_to_diary">
+                <a id="go_diary" href="{% url 'Diary' %}">다이어리 가기</a>
             </div>
         </nav>
-        <main class="content-main">
-            <div class=in-container>
-                {% for value in datas %}
-                    <form action="{% url 'decorate_note' %}" method="post">
-                        {% csrf_token %}
-                        <div class="in-item">
-                            {% for cnt in value.getweek_cnt %}
-                                {% if cnt == 0 %}
-                                    <button class="book" style="visibility: hidden">
-                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                    </button>
-                                {% elif cnt == 1 or cnt == 2%}
-                                    <button class="book" style="width: 40px">
-                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                    </button>
-                                {% elif cnt == 3 or cnt == 4 %}
-                                    <button class="book" style="width: 45px">
-                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                    </button>
-                                {% elif cnt == 5 or cnt == 6 %}
-                                    <button class="book" style="width: 50px">
-                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                    </button>
-                                {% else %}
-                                    <button class="book" style="width: 55px">
-                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                    </button>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </form>
-                {% endfor %}
-            </div>
-        </main>
-        <aside class="content-aside">
-            <div>
-                <a href="">ad</a>
-            </div>
-        </aside>
+        <div class=in-container>
+            {% for value in datas %}
+                <form action="{% url 'decorate_note' %}" method="post">
+                    {% csrf_token %}
+                    <div class="in-item">
+                        {% for cnt in value.getweek_cnt %}
+                            {% if cnt == 0 %}
+                                <button class="book" style="visibility: hidden">
+                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                </button>
+                            {% elif cnt == 1 or cnt == 2%}
+                                <button class="book" style="width: 40px">
+                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                </button>
+                            {% elif cnt == 3 or cnt == 4 %}
+                                <button class="book" style="width: 45px">
+                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                </button>
+                            {% elif cnt == 5 or cnt == 6 %}
+                                <button class="book" style="width: 50px">
+                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                </button>
+                            {% else %}
+                                <button class="book" style="width: 55px">
+                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </form>
+            {% endfor %}
+        </div>
     </section>
     <footer class="content-footer">
         <div>
