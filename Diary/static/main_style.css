@@ -1,16 +1,19 @@
 .in-container {
     display: grid;
-    grid-template-columns: repeat(4, 250px);
+    grid-template-columns: 200px 200px 200px 200px;
     margin: 0 auto;
-    grid-gap: 50px;
     place-items: center;
     justify-content: center;
+    background: #5b4331;
+    column-gap: 120px;
+    height: 530px;
+    width: 1500px;
 }
 
 .in-item{
     display: grid;
+    background: #e2e2e2;
     grid-template-columns: repeat(5, auto);
-    grid-template-rows: repeat(3, minmax(35px, 50px));
 }
 
 .content{
@@ -31,14 +34,9 @@
     border: solid 1px;
 }
 
-.content-main{
-    margin: 0 auto;
-    max-width: 850px;
-    flex-grow: 2;
-}
-
 .book{
   height: 100px;
+    background: white;
 }
 
 .container {
@@ -58,10 +56,16 @@ footer {
 }
 
 
-nav,
-aside {
-  flex-basis: 40px;
-  flex-shrink: 0;
+.content-nav{
+    background: #5b4331;
+    border: none;
+    width: 1500px;
+    align-self: center;
+    color: white;
+}
+
+#go_diary{
+    color: white;
 }
 
 main {
