@@ -44,7 +44,7 @@ body{
 
 #main_body{
     margin: 0;
-    background-image: url("img/bg_img.png");
+    background-image: url("img/index.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -94,16 +94,23 @@ body{
 
 
 /*==========Index 화면이 로그인 관련 ============*/
-.form-group{
+.form-email{
     background-color: aliceblue;
     width: 200px;
     height: 30px;
     position: relative;
-    margin-left: 100px;
+    margin: 0 auto;
     opacity:0.7;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-top: 1px;
+    border-radius: 1px;
+}.form-pwd{
+    background-color: aliceblue;
+    width: 200px;
+    height: 30px;
+    position: relative;
+    margin: 0 auto;
+    opacity:0.7;
+    border-top: solid black 1px;
+    border-radius: 1px;
 }
 .login_button{ /*로그인 버튼*/
     border: none;
