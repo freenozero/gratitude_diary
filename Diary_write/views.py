@@ -17,7 +17,6 @@ class Week:
                 self.week_cnt[(today_week(i.diary_date)) - 1] += 1
             except:
                 self.week_cnt[self.diary_cnt - 1] += 1
-        # print(self.week_cnt[0], self.week_cnt[1], self.week_cnt[2], self.week_cnt[3])
 
     def getdiary(self):
         return self.diary_cnt
@@ -31,7 +30,7 @@ def today_week(date):
         return date.isocalendar().week
     else:
         return_data = date.isocalendar().week - datetime.date(date.year, date.month - 1,
-                                                              month_last_day(date.year, date.month)).isocalendar().week
+                                                              month_last_day(date.year, date.month-1)).isocalendar().week
         return return_data
 
 

@@ -3,10 +3,7 @@
 <link rel="stylesheet" href="{% static "style.css" %}">
 <div class="log_main_div">
     <div>
-        <a href="{% url 'userprofile' %}">
-            <button class="log_main_button">{{ user.name }}님</button>
-        </a>
-
+        <a class="log_main_button" href="{% url 'userprofile' %}">{{ user.name }} 님</a>
     </div>
     <div>
         <a href="{% url 'logout' %}">

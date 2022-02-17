@@ -147,16 +147,16 @@ body{
 .log_main_div{
     display: flex;
     position: absolute;
+    z-index: 1;
     right: 30px;
 }
 .log_main_button{
     padding: 10px 10px;
-    border: solid 1px;
     outline: 1px;
     background: white;
     width: 76px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 1px;
 }
 
 .log_main_button:hover{
