@@ -9,29 +9,47 @@
 <body>
 <div class="profile">
 
-    <h1>마이페이지</h1>
+    <header><h1>마이페이지</h1></header>
 
-    <section class="content">
-        <h2>필수 회원 정보</h2>
-        이름: {{ user.name }}<br>
-        나이: {{ user.age }}<br>
-        생년월일: {{ user.date_of_birth}}<br>
-        이메일: {{ user.email }}<br>
+    <main>
+        <section>
+            <p><h2>필수 회원 정보</h2></p>
 
-        <h2>정보 변경</h2>
-        전화번호: {{ user.phone_num }}
-        <button class="re_phonenum_button" onclick="location.href={% url 're_phonenum' %}">변경</button><br>
-        비밀번호:
-        <button class="re_password_button" onclick="location.href={% url 're_password' %}">변경</button><br>
+            <article>
+
+                    이름: {{ user.name }}<br>
+                    나이: {{ user.age }}<br>
+                    생년월일: {{ user.date_of_birth}}<br>
+                    이메일: {{ user.email }}<br>
+            </article>
+
+        </section>
+
+        <section>
+
+            <p><h2>정보 변경</h2></p>
+
+                <article>
+                    전화번호: {{ user.phone_num }}
+                    <button class="re_phonenum_button" onclick="location.href={% url 're_phonenum' %}">변경</button><br>
+                    비밀번호:
+                    <button class="re_password_button" onclick="location.href={% url 're_password' %}">변경</button><br>
+                </article>
+        </section>
+
+        <aside>
+            <p>aside 부분입니다.</p>
+        </aside>
+
+        </main>
+
+        <footer>
+            <h3>마지막 접속일: {{ user.last_login }}</h3>
+        </footer>
 
 
-    </section>
 
-    <footer class="content-footer">
-        <div>
-            마지막 접속일: {{ user.last_login }}<br>
-        </div>
-    </footer>
+
 
 </div>
 </body>
