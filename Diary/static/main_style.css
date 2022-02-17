@@ -12,9 +12,12 @@
 
 .in-item{
     display: grid;
+    height: 100px;
+    width: 150px;
     background: #e2e2e2;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, 1fr);
 }
+
 
 .content{
     display: flex;
