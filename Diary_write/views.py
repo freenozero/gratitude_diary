@@ -6,50 +6,19 @@ import datetime
 
 class Week:
     def __init__(self, year, month, request):
-        self.last_day = datetime.date(year, month, month_last_day(year, month))
-        self.diary_cnt = week_cnt(datetime.date(year, month, 1), self.last_day)
+        self.last_day = datetime.date(year, month, get_lastday(year, month))
+        self.diary_cnt = get_week_no(datetime.date(year, month, self.last_day.day))
         self.week_cnt = []
-        for i in range(self.diary_cnt):
+        for _ in range(self.diary_cnt):
             self.week_cnt.append(0)
-        books = Data.objects.filter(id=request.user.id, diary_date__year=year, diary_date__month=month)
-        for i in books:
-            try:
-                self.week_cnt[(today_week(i.diary_date)) - 1] += 1
-            except:
-                self.week_cnt[self.diary_cnt - 1] += 1
+        cnt = Data.objects.filter(id=request.user.id, month_check__year=year, month_check__month=month)
+        for i in cnt:
+            self.week_cnt[i.week_date - 1] += 1
+    def add_weekcnt(self, num):
+        self.week_cnt[num - 1] += 1
 
-    def getdiary(self):
-        return self.diary_cnt
-
-    def getweek_cnt(self):
+    def get_weekcnt(self):
         return self.week_cnt
-
-
-def today_week(date):
-    if date.month == 1:
-        return date.isocalendar().week
-    else:
-        return_data = date.isocalendar().week - datetime.date(date.year, date.month - 1,
-                                                              month_last_day(date.year, date.month-1)).isocalendar().week
-        return return_data
-
-
-def week_cnt(date, last_day):
-    week_check = datetime.date(date.year, date.month, 1).weekday()
-    cnt = 0
-    if week_check != 6:
-        this_sunday = 1 + (6 - week_check)  # 첫째주 의 일요일 날짜
-    else:
-        this_sunday = 1
-    for j in range(this_sunday, last_day.day + 1, 7):
-        if j == week_check:
-            continue
-        cnt += 1
-    if 3 <= week_check < 6:
-        cnt -= 1
-    if 3 <= last_day.weekday() < 6:
-        cnt += 1
-    return cnt
 
 
 def main(request):
@@ -64,12 +33,8 @@ def main(request):
                 book_year += 1
             else:  # 날짜를 왼쪽[달 감소]
                 book_year -= 1
-            books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
         for i in range(1, 13):
             week_class.append(Week(book_year, i, request))
-        # for i in range(len(week_class)):
-        #     print(week_class[i].getweek_cnt())
-
         return render(request, 'main.html', {'book_year': book_year, 'books': books,
                                              'datas': week_class})
     else:
@@ -117,8 +82,7 @@ def diary_view(request):
                     times = datetime.date(post_data[1] - 1, 12, 1)  # 표시된 월이 1월 보다 작을 경우
         datas = Data.objects.filter(id=request.user.id, diary_date__year=times.year, diary_date__month=times.month)
         first_day = datetime.date(times.year, times.month, 1).weekday() + 1
-        last_day = month_last_day(times.year, times.month)  # 마지막 날짜 구하기
-        print(last_day)
+        last_day = get_lastday(times.year, times.month)  # 마지막 날짜 구하기
         datas_date = [0 for _ in range(last_day)]
         for i in range(len(datas)):
             datas_date[i] = datas[i].diary_date.day
@@ -129,8 +93,41 @@ def diary_view(request):
         return redirect('logout')
 
 
-def month_last_day(year, month):
+def get_lastday(year, month):
     return calendar.monthrange(year, month)[1]
+
+
+def test_write(request):
+    for year in range(2020,2023):
+        for i in range(1, 13):
+            for j in range(1, calendar.monthrange(year, i)[1]):
+                times = datetime.date(year, i, j)
+                print(times)
+                newData = Data()
+                newData.id = request.user.id
+                newData.email = request.user.email
+                newData.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+                newData.write_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+                newData.diary_date = datetime.date(times.year, times.month, times.day)
+                if get_week_no(datetime.date(times.year, times.month, times.day)) == 0:
+                    if times.month == 1:
+                        newData.month_check = datetime.date(times.year - 1, 12, get_lastday(times.year - 1, 12))
+                        newData.week_date = get_week_no(datetime.date(times.year - 1, 12, newData.month_check.day))
+                    else:
+                        newData.month_check = datetime.date(times.year, times.month - 1, get_lastday(times.year, times.month - 1))
+                        newData.week_date = get_week_no(datetime.date(times.year, times.month - 1, newData.month_check.day))
+                else:
+                    newData.month_check = datetime.date(times.year, times.month, get_lastday(times.year, times.month))
+                    newData.week_date = get_week_no(datetime.date(times.year, times.month, times.day))
+
+                newData.content = str(year)+"년"+str(i)+"월"+str(j)+"일"
+                try:
+                    datas = Data.objects.get(id=request.user.id, diary_date=datetime.date(times.year, times.month, times.day))
+                    # return redirect('Diary')
+                except Data.DoesNotExist:  # datas로 받아온 다이어라가 없을 때 그냥 저장
+                    newData.save()
+                    # return redirect('Diary')
+    return redirect('main')
 
 
 def write_view(request):
@@ -144,9 +141,22 @@ def write_view(request):
             newData.edit_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
             newData.write_date = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
             newData.diary_date = datetime.date(times.year, times.month, times.day)
+            if get_week_no(datetime.date(times.year, times.month, times.day)) == 0:
+                if times.month == 1:
+                    newData.month_check = datetime.date(times.year - 1, 12, get_lastday(times.year - 1, 12))
+                    newData.week_date = get_week_no(datetime.date(times.year - 1, 12, newData.month_check.day))
+                else:
+                    newData.month_check = datetime.date(times.year, times.month - 1,
+                                                        get_lastday(times.year, times.month - 1))
+                    newData.week_date = get_week_no(datetime.date(times.year, times.month - 1, newData.month_check.day))
+            else:
+                newData.month_check = datetime.date(times.year, times.month, get_lastday(times.year, times.month))
+                newData.week_date = get_week_no(datetime.date(times.year, times.month, times.day))
+
             newData.content = request.POST['content']
             try:
-                datas = Data.objects.get(id=request.user.id, diary_date=newData.diary_date)
+                datas = Data.objects.get(id=request.user.id,
+                                         diary_date=datetime.date(times.year, times.month, times.day))
                 return render(request, 'DiaryRead.html', {'datas': datas})
             except Data.DoesNotExist:  # datas로 받아온 다이어라가 없을 때 그냥 저장
                 newData.save()

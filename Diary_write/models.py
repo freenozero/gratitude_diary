@@ -14,3 +14,5 @@ class Data(models.Model):
     edit_date = models.DateTimeField()
     write_date = models.DateTimeField()
     diary_date = models.DateField()
+    month_check = models.DateField()
+    week_date = models.IntegerField()

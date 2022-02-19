@@ -25,6 +25,7 @@
         <nav class="content-nav">
             <div class="go_to_diary">
                 <a id="go_diary" href="{% url 'Diary' %}">다이어리 가기</a>
+                <a id="go_diary" href="{% url 'DiarytestWrite' %}">|| 다이어리 테스트</a>
             </div>
         </nav>
         <div class=in-container>
@@ -32,25 +33,13 @@
                 <form action="{% url 'decorate_note' %}" method="post">
                     {% csrf_token %}
                     <div class="in-item">
-                        {% for cnt in value.getweek_cnt %}
+                        {% for cnt in value.get_weekcnt%}
                             {% if cnt == 0 %}
                                 <button class="book" style="visibility: hidden">
                                     <br>{{ forloop.counter }}주<br>{{ cnt }}
                                 </button>
-                            {% elif cnt == 1 or cnt == 2%}
-                                <button class="book" style="width: 40px">
-                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                </button>
-                            {% elif cnt == 3 or cnt == 4 %}
-                                <button class="book" style="width: 45px">
-                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                </button>
-                            {% elif cnt == 5 or cnt == 6 %}
-                                <button class="book" style="width: 50px">
-                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                </button>
                             {% else %}
-                                <button class="book" style="width: 55px">
+                                <button class="book" style="visibility: visible">
                                     <br>{{ forloop.counter }}주<br>{{ cnt }}
                                 </button>
                             {% endif %}
