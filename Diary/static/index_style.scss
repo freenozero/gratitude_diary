@@ -1,25 +1,4 @@
 @charset "UTF-8";
-/* scss */
-/* 스압을 줄이기 위해 한줄로 작성하였습니다 */
-/* [1] 폰트asd는 상업용 무료폰트 사이트인 '눈누' 에서
-    '카페24고운밤' 폰트를 사용하였습니다. (폰트 너무예뻐♥) */
-@font-face {
-  font-family: 'Cafe24Oneprettynight';
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* [2] 바디에 기본 스타일 및 폰트 적용해주기
-    (백그라운드에 이미지를 적용할 예정이지만
-    이미지 로딩이 느릴걸 예상해서 기본 그라디언트 배경을 적용해줌) */
-body {
-  font-family: 'Cafe24Oneprettynight';
-  margin: 0;
-  padding: 0;
-  background: -webkit-gradient(linear, left top, left bottom, from(#5b4331), color-stop(53%, #19110b), to(#000000));
-  background: linear-gradient(180deg, #5b4331 0%, #19110b 53%, #000000 100%);
-}
 
 /* [3] 이제 불빛 그림그리기~ */
 /* 텍스트와 불빛을 감싸는 부모 container에 전체화면 스타일 적용 */

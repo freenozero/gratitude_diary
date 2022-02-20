@@ -1,52 +1,69 @@
 <html>
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "main_style.css" %}">
     {% include 'logtout&main.html' %}
 </head>
 <body>
-<div class="container">
-    <header>
-        {% load static %}
-        <link rel="stylesheet" href="{% static "main_style.css" %}">
-        <h1>{{ book_year }}</h1>
+<div class="main_container">
+    <div class="main-header_wrap">
+        <a class="main-header_title">{{ user.name }} 님의 {{ book_year }}년 서재</a>
         <form action="{% url 'main' %}" method="post">
             {% csrf_token %}
             <button type='submit' name='book_year' value='{{ book_year }}_left'
                     class="nav-btn go-prev"> <
             </button>
-        </form>
-        <form action="{% url 'main' %}" method="post">
-            {% csrf_token %}
             <button type='submit' name='book_year' value='{{ book_year }}_right'
                     class="nav-btn go-prev"> >
             </button>
         </form>
-    </header>
-    <section class="content">
+    </div>
+    <header>
         <nav class="content-nav">
             <div class="go_to_diary">
                 <a id="go_diary" href="{% url 'Diary' %}">다이어리 가기</a>
                 <a id="go_diary" href="{% url 'DiarytestWrite' %}">|| 다이어리 테스트</a>
             </div>
         </nav>
-        <div class=in-container>
-            {% for value in datas %}
-                <form action="{% url 'decorate_note' %}" method="post">
-                    {% csrf_token %}
-                    <div class="in-item">
-                        {% for cnt in value.get_weekcnt%}
-                            {% if cnt == 0 %}
-                                <button class="book" style="visibility: hidden">
-                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                </button>
-                            {% else %}
-                                <button class="book" style="visibility: visible">
-                                    <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                </button>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </form>
-            {% endfor %}
+    </header>
+
+    <section id="main_wrap">
+        <aside class="main-aside">
+            <div class="calendar_view">
+                {% autoescape off %}
+                    {{ calendar }}
+                {% endautoescape %}
+            </div>
+            <div class="calendar_nav">
+                <a href="{% url 'decorate_note' %}">노트 이동</a>
+            </div>
+        </aside>
+        <div class="main-books">
+            <form action="{% url 'main' %}" method="post">
+                {% csrf_token %}
+                <main class="in-container">
+                    {% for value in datas %}
+                        <div class="in-item">
+                            {% for cnt in value.get_weekcnt %}
+                                {% if cnt == 0 %}
+                                    <a class="book" style="visibility: hidden">
+                                        <button name="calendar_load" class="book" type="submit" value={{ value.get_year }},{{ value.get_month }}>
+                                            <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                        </button>
+                                    </a>
+                                {% else %}
+                                    <a class="book" style="visibility: visible">
+                                        <button name="calendar_load" class="book" type="submit" value={{ value.get_year }},{{ value.get_month }}>
+                                            <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                        </button>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </main>
+            </form>
+
         </div>
     </section>
     <footer class="content-footer">

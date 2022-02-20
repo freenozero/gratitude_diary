@@ -1,19 +1,14 @@
 {% load static %}
 <meta charset="UTF-8">
-<link rel="stylesheet" href="{% static "style.css" %}">
+<link rel="stylesheet" href="{% static "style.css" %}?after">
 <div class="log_main_div">
-    <div>
-        <a class="log_main_button" href="{% url 'userprofile' %}">{{ user.name }} 님</a>
+    <div class="log_profile_button" >
+        <a href="{% url 'userprofile' %}"> {{ user.name }}님 | </a>
     </div>
-    <div>
-        <a href="{% url 'logout' %}">
-            <button class="log_main_button">로그아웃</button>
-        </a>
+    <div class="log_logout_button">
+        <a href="{% url 'logout' %}"> 로그아웃 |</a>
     </div>
-    <div>
-        <a href="{% url 'index' %}">
-            <button class="log_main_button">index</button>
-        </a>
-
+    <div class="log_index_button" >
+        <a href="{% url 'index' %}"> index </a>
     </div>
 </div>

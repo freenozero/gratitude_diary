@@ -146,9 +146,14 @@ body{
 /*===== 오른쪽 상단에 위치해 있는 네비게이션 바*/
 .log_main_div{
     display: flex;
+    background: #fef7cc;
+    justify-content: space-around;
     position: absolute;
+    border: solid 1px;
+    border-radius: 14px;
     z-index: 1;
     right: 30px;
+    width: 170px;
 }
 .log_main_button{
     padding: 10px 10px;
