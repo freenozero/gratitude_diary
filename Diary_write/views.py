@@ -6,37 +6,77 @@ import datetime
 
 class Week:
     def __init__(self, year, month, request):
-        self.last_day = datetime.date(year, month, get_lastday(year, month))
-        self.diary_cnt = get_week_no(datetime.date(year, month, self.last_day.day))
-        self.week_cnt = []
-        for _ in range(self.diary_cnt):
-            self.week_cnt.append(0)
+        self.__last_day = datetime.date(year, month, get_lastday(year, month))
+        self.__diary_cnt = get_week_no(datetime.date(year, month, self.__last_day.day))
+        self.__week_cnt = []
+        self.__year = year
+        self.__month = month
+        for _ in range(5):
+            self.__week_cnt.append(0)
         cnt = Data.objects.filter(id=request.user.id, month_check__year=year, month_check__month=month)
         for i in cnt:
-            self.week_cnt[i.week_date - 1] += 1
+            self.__week_cnt[i.week_date - 1] += 1
     def add_weekcnt(self, num):
-        self.week_cnt[num - 1] += 1
+        self.__week_cnt[num - 1] += 1
+
+    def get_year(self):
+        return self.__year
+    def get_month(self):
+        return self.__month
 
     def get_weekcnt(self):
-        return self.week_cnt
+        return self.__week_cnt
+
+
+def calendar_trans(year,month):
+    month_en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December']
+    week_en = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    week_kr = ['월', '화', '수', '목', '금', '토', '일']
+    cal_return = calendar.HTMLCalendar().formatmonth(year, month)
+    for i in range(len(month_en)):
+        if month_en[i] in cal_return:
+            cal_return = cal_return.replace(str(year), '')
+            cal_return = cal_return.replace(month_en[i], (str(year) + "년 " + str(i + 1) + "월"))
+            for i in range(len(week_en)):
+                cal_return = cal_return.replace(week_en[i], week_kr[i])
+    return cal_return
 
 
 def main(request):
     book_year = datetime.date.today().year
     if request.user.is_authenticated:
         week_class = []
+        cal_return = ''
         books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
         if request.method == 'POST':
-            post_data = request.POST['book_year'].split('_')
-            book_year = int(post_data[0])
-            if post_data[1] == 'right':
-                book_year += 1
-            else:  # 날짜를 왼쪽[달 감소]
-                book_year -= 1
+            try:
+                cal = list(map(int, request.POST['calendar_load'].split(',')))
+                book_year = cal[0]
+                cal_return = calendar_trans(book_year, cal[1])
+                for i in range(1, 13):
+                    week_class.append(Week(book_year, i, request))
+                return render(request, 'main.html', {'book_year': book_year, 'books': books,
+                                                     'datas': week_class, 'calendar': cal_return})
+            except Exception as e:
+                print(e)
+            try:
+                post_data = request.POST['book_year'].split('_')
+                book_year = int(post_data[0])
+                if post_data[1] == 'right':
+                    book_year += 1
+                else:  # 날짜를 왼쪽[달 감소]
+                    book_year -= 1
+                for i in range(1, 13):
+                    week_class.append(Week(book_year, i, request))
+            except Exception as e:
+                print(e)
+            return render(request, 'main.html', {'book_year': book_year, 'books': books,
+                                                 'datas': week_class, 'calendar': cal_return})
         for i in range(1, 13):
             week_class.append(Week(book_year, i, request))
         return render(request, 'main.html', {'book_year': book_year, 'books': books,
-                                             'datas': week_class})
+                                             'datas': week_class, 'calendar': cal_return})
     else:
         return redirect('logout')
 
@@ -98,11 +138,10 @@ def get_lastday(year, month):
 
 
 def test_write(request):
-    for year in range(2020,2023):
+    for year in range(2019,2025):
         for i in range(1, 13):
             for j in range(1, calendar.monthrange(year, i)[1]):
                 times = datetime.date(year, i, j)
-                print(times)
                 newData = Data()
                 newData.id = request.user.id
                 newData.email = request.user.email

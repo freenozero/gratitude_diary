@@ -163,7 +163,9 @@ body{
     height: 40px;
     border-radius: 1px;
 }
-
+ol, ul{
+    list-style: none;
+}
 .log_main_button:hover{
     cursor:pointer;
 }

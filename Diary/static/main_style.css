@@ -16,10 +16,9 @@ body {
     font-family: 'S-CoreDream-4Regular', sans-serif !important;
 }
 
-#main_wrap{
-  display: flex;
+#main_wrap {
     background: #5b4331;
-
+    overflow: hidden;
 }
 
 .main_container {
@@ -31,21 +30,27 @@ body {
 
 .in-container {
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: 0 auto;
     justify-content: center;
-    column-gap: 120px;
-    height: 570px;
-    width: 100%;
+    column-gap: 10px;
+    height: 550px;
 }
 
 .in-item {
     display: grid;
-    height: 100px;
-    width: 150px;
+    /*height: 150px;*/
+    width: 304px;
+    border: solid 3px;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 1px;
     text-align: center;
+}
+
+.in-item_name{
+    background: mediumspringgreen;
+    grid-column-start: 1;
+    grid-column-end: 6;
 }
 
 
@@ -55,31 +60,56 @@ body {
     justify-content: center;
 }
 
-table.month{
+table.month {
+    background: white;
     text-align: center;
     margin: 0 auto;
     border-collapse: separate;
     border: solid 1px;
     border-spacing: 23px;
 }
+
 tr.month {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
 
-th.sun , td.sun{
+ul, ol {
+    list-style: none;
+}
+
+.nav_ul {
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+}
+
+.nav_item {
+    display: inline-block;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+th.sun, td.sun {
     color: #dc143c;
 }
 
-.main-aside{
-    background-color: #666666;
+.main-aside-wrap {
+    display: flex;
+    background: #5b4331;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.main-aside {
     border: white 1px;
     min-width: 400px;
     width: 400px;
+    margin-top: 30px;
 }
 
-.main-books{
-    margin-top: 30px;
+.main-books {
+    margin-top: 20px;
 }
 
 .book {
@@ -108,6 +138,7 @@ footer {
     text-align: center;
 }
 
+
 body {
     margin: 0;
 }
@@ -122,14 +153,22 @@ body {
 
 .main-header_wrap {
     text-align: center;
-    height: 150px;
+    height: 80px;
+}
+
+.in-item-wrap {
+    background: #c18d6c;
 }
 
 .content-nav {
     background: #5b4331;
     border: none;
     align-self: center;
-    color: white;
+    padding: 11px 270px 11px 0;
+}
+
+.content-nav-wrap {
+    background: saddlebrown;
 }
 
 #go_diary {
