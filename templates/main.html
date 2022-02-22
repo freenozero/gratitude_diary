@@ -57,7 +57,7 @@
                                             <div class="in-item-wrap">
                                                 <a class="book" style="visibility: hidden">
                                                     <button name="calendar_load" class="book" type="submit"
-                                                            value={{ value.get_year }},{{ value.get_month }}>
+                                                            value={{ value.get_year }},{{ value.get_month }},{{ forloop.counter }}>
                                                         <br>{{ forloop.counter }}주<br>{{ cnt }}
                                                     </button>
                                                 </a>
@@ -66,7 +66,7 @@
                                             <div class="in-item-wrap">
                                                 <a class="book" style="visibility: visible">
                                                     <button name="calendar_load" class="book" type="submit"
-                                                            value={{ value.get_year }},{{ value.get_month }}>
+                                                            value={{ value.get_year }},{{ value.get_month }},{{ forloop.counter }}>
                                                         <br>{{ forloop.counter }}주<br>{{ cnt }}
                                                     </button>
                                                 </a>

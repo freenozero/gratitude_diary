@@ -53,6 +53,22 @@ body {
     grid-column-end: 6;
 }
 
+body {
+    margin: 0;
+}
+
+.main_header {
+}
+
+.main-header_title {
+    margin: 0 auto;
+    font-size: 30px;
+}
+
+.main-header_wrap {
+    text-align: center;
+    height: 150px;
+}
 
 .content {
     display: flex;
@@ -96,9 +112,9 @@ th.sun, td.sun {
 
 .main-aside-wrap {
     display: flex;
-    background: #5b4331;
     margin: 0 auto;
     overflow: hidden;
+    background-image: url("img/wood.jpg");
 }
 
 .main-aside {
@@ -157,7 +173,7 @@ body {
 }
 
 .in-item-wrap {
-    background: #c18d6c;
+    background-image: url("img/wood.jpg");
 }
 
 .content-nav {
@@ -168,11 +184,11 @@ body {
 }
 
 .content-nav-wrap {
-    background: saddlebrown;
+    background-image: url("img/wood2.jpg");
 }
 
 #go_diary {
-    color: white;
+    color: black;
 }
 
 main {

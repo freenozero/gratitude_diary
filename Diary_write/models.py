@@ -16,3 +16,5 @@ class Data(models.Model):
     diary_date = models.DateField()
     month_check = models.DateField()
     week_date = models.IntegerField()
+    month_check = models.DateField()
+    week_date = models.IntegerField()

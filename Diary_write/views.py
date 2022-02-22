@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Data
-import calendar
 import datetime
+import calendar
+from calendar import HTMLCalendar
 
 
 class Week:
@@ -11,16 +12,21 @@ class Week:
         self.__week_cnt = []
         self.__year = year
         self.__month = month
+
         for _ in range(5):
             self.__week_cnt.append(0)
         cnt = Data.objects.filter(id=request.user.id, month_check__year=year, month_check__month=month)
+
         for i in cnt:
-            self.__week_cnt[i.week_date - 1] += 1
+            self.__week_cnt[i.week_date - 1] += 1 #해당 주에 개수 추가
+
+
     def add_weekcnt(self, num):
         self.__week_cnt[num - 1] += 1
 
     def get_year(self):
         return self.__year
+
     def get_month(self):
         return self.__month
 
@@ -28,18 +34,20 @@ class Week:
         return self.__week_cnt
 
 
-def calendar_trans(year,month):
+def calendar_trans(year,month,week_date):
     month_en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
                 'October', 'November', 'December']
     week_en = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     week_kr = ['월', '화', '수', '목', '금', '토', '일']
-    cal_return = calendar.HTMLCalendar().formatmonth(year, month)
+
+    cal_return = HTMLCalendar().formatmonth(year, month).replace('<td','<td> <button type="button"').replace('</td>','</button></td>')
     for i in range(len(month_en)):
         if month_en[i] in cal_return:
             cal_return = cal_return.replace(str(year), '')
-            cal_return = cal_return.replace(month_en[i], (str(year) + "년 " + str(i + 1) + "월"))
+            cal_return = cal_return.replace(month_en[i], (str(year) + "년" + str(i + 1) + "월"))
             for i in range(len(week_en)):
                 cal_return = cal_return.replace(week_en[i], week_kr[i])
+
     return cal_return
 
 
@@ -53,9 +61,9 @@ def main(request):
             try:
                 cal = list(map(int, request.POST['calendar_load'].split(',')))
                 book_year = cal[0]
-                cal_return = calendar_trans(book_year, cal[1])
+                cal_return = calendar_trans(book_year, cal[1], cal[2])
                 for i in range(1, 13):
-                    week_class.append(Week(book_year, i, request))
+                    week_class.append(Week(book_year, i, request)) #해당주에 적힌 거 몇 개인지 찾기
                 return render(request, 'main.html', {'book_year': book_year, 'books': books,
                                                      'datas': week_class, 'calendar': cal_return})
             except Exception as e:
