@@ -18,8 +18,7 @@ class Week:
         cnt = Data.objects.filter(id=request.user.id, month_check__year=year, month_check__month=month)
 
         for i in cnt:
-            self.__week_cnt[i.week_date - 1] += 1 #해당 주에 개수 추가
-
+            self.__week_cnt[i.week_date - 1] += 1  # 해당 주에 개수 추가
 
     def add_weekcnt(self, num):
         self.__week_cnt[num - 1] += 1
@@ -34,13 +33,27 @@ class Week:
         return self.__week_cnt
 
 
-def calendar_trans(year,month,week_date):
+def calendar_trans(request, year, month, week_date=1):
     month_en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
                 'October', 'November', 'December']
     week_en = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     week_kr = ['월', '화', '수', '목', '금', '토', '일']
-
-    cal_return = HTMLCalendar().formatmonth(year, month).replace('<td','<td> <button type="button"').replace('</td>','</button></td>')
+    today = datetime.date.today()
+    cal_return = HTMLCalendar().formatmonth(year, month)
+    datas = []
+    for i in range(1,get_lastday(year, month)+1):
+        if get_week_no(datetime.date(year, month, i)) == week_date:
+            datas.append(i)
+    try:
+        for i in datas:
+            print(i)
+            cal_return = cal_return.replace('>' + str(i) + '<',
+                                            " style='border: solid 1px' >" + str(i) + '<')
+    except Exception:
+        print('없음')
+    if today.year == year and today.month == month:
+        cal_return = cal_return.replace('>' + str(today.day) + '<',
+                                        " style='border: solid 1px' >" + str(today.day) + '<')
     for i in range(len(month_en)):
         if month_en[i] in cal_return:
             cal_return = cal_return.replace(str(year), '')
@@ -61,9 +74,9 @@ def main(request):
             try:
                 cal = list(map(int, request.POST['calendar_load'].split(',')))
                 book_year = cal[0]
-                cal_return = calendar_trans(book_year, cal[1], cal[2])
+                cal_return = calendar_trans(request, book_year, cal[1], cal[2])
                 for i in range(1, 13):
-                    week_class.append(Week(book_year, i, request)) #해당주에 적힌 거 몇 개인지 찾기
+                    week_class.append(Week(book_year, i, request))  # 해당주에 적힌 거 몇 개인지 찾기
                 return render(request, 'main.html', {'book_year': book_year, 'books': books,
                                                      'datas': week_class, 'calendar': cal_return})
             except Exception as e:
@@ -146,9 +159,9 @@ def get_lastday(year, month):
 
 
 def test_write(request):
-    for year in range(2019,2025):
+    for year in range(2019, 2025):
         for i in range(1, 13):
-            for j in range(1, calendar.monthrange(year, i)[1]):
+            for j in range(1, calendar.monthrange(year, i)[1]+1):
                 times = datetime.date(year, i, j)
                 newData = Data()
                 newData.id = request.user.id
@@ -161,15 +174,18 @@ def test_write(request):
                         newData.month_check = datetime.date(times.year - 1, 12, get_lastday(times.year - 1, 12))
                         newData.week_date = get_week_no(datetime.date(times.year - 1, 12, newData.month_check.day))
                     else:
-                        newData.month_check = datetime.date(times.year, times.month - 1, get_lastday(times.year, times.month - 1))
-                        newData.week_date = get_week_no(datetime.date(times.year, times.month - 1, newData.month_check.day))
+                        newData.month_check = datetime.date(times.year, times.month - 1,
+                                                            get_lastday(times.year, times.month - 1))
+                        newData.week_date = get_week_no(
+                            datetime.date(times.year, times.month - 1, newData.month_check.day))
                 else:
                     newData.month_check = datetime.date(times.year, times.month, get_lastday(times.year, times.month))
                     newData.week_date = get_week_no(datetime.date(times.year, times.month, times.day))
 
-                newData.content = str(year)+"년"+str(i)+"월"+str(j)+"일"
+                newData.content = str(year) + "년" + str(i) + "월" + str(j) + "일"
                 try:
-                    datas = Data.objects.get(id=request.user.id, diary_date=datetime.date(times.year, times.month, times.day))
+                    datas = Data.objects.get(id=request.user.id,
+                                             diary_date=datetime.date(times.year, times.month, times.day))
                     # return redirect('Diary')
                 except Data.DoesNotExist:  # datas로 받아온 다이어라가 없을 때 그냥 저장
                     newData.save()

@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-        {% load static %}
-        <link rel="stylesheet" href="{% static "main_style.css" %}">
-        {% include 'logtout&main.html' %}
-    </head>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "main_style.css" %}">
+    {% include 'logtout&main.html' %}
+</head>
 <body>
 <div class="main_container">
     <div class="main-header_wrap">
@@ -32,10 +32,8 @@
                     {% endautoescape %}
                 </div>
                 <div class="calendar_nav">
-                    <a href="{% url 'decorate_note' %}">노트 이동</a>
+                    <a title="노트 작성 및 꾸미기" href="{% url 'decorate_note' %}">노트 이동</a>
                 </div>
-            </aside>
-            <div class="main-books">
                 <div class="control_book">
                     <form action="{% url 'main' %}" method="post">
                         {% csrf_token %}
@@ -47,6 +45,8 @@
                         </button>
                     </form>
                 </div>
+            </aside>
+            <div class="main-books">
                 <div class="books_view">
                     <form action="{% url 'main' %}" method="post">
                         {% csrf_token %}
