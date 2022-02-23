@@ -19,6 +19,7 @@ body {
 #main_wrap {
     background: #5b4331;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 .main_container {

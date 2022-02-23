@@ -10,6 +10,12 @@
      font-weight: normal;
      font-style: normal;
 }
+
+img{
+    width: 100%;
+    height: auto;
+}
+
 body{
     font-family: 'S-CoreDream-4Regular', sans-serif !important;
 }
