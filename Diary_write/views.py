@@ -264,4 +264,7 @@ def erase_view(request, diary_cnt):
 
 
 def decorate_note(request):
-    return render(request, 'decorate_note.html')
+    datas = Data.objects.filter(diary_date__year=2022,diary_date__month=2, week_date=3)
+    num = datas.count()+1
+    print(datas)
+    return render(request, 'decorate_note.html', {'nums':num, 'datas':datas})
