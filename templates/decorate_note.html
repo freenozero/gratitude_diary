@@ -1,48 +1,30 @@
 {% include 'logtout&main.html' %}
 <!DOCTYPE html>
-<head>
-    {% load static %}
-    <link rel="stylesheet" href="{% static "decorate_note.css" %}">
-    <meta charset="UTF-8">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-</head>
 <body>
-<div class="View">
-    <div class="Menu" id="MenuId">
-        <h1>Menu</h1>
-        <div>
-            <button onclick="colorChange()">배경 색상 변경</button>
-        </div>
-        <div>다이어리 색상 변경</div>
-        <div>제목 변경</div>
-        <div>아이콘 추가</div>
-        <div>어떤걸 넣을까</div>
-        <div onclick="closeLeftMenu(); return false;">Close</div>
-    </div>
+{% load static %}
+<link rel="stylesheet" href="{% static "decorate_note.css" %}">
+<meta charset="UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
-    <div class="button" id="button" onclick="showLeftMenu(); return false;">
-        <i class="icon-align-justify"></i></div>
-    <div>
-
-        <div id="book">
-            <div class="cover"><h1>The Diary</h1></div>
-        </div>
-
-        <div id="controls">
-            <label for="page-number">Page:</label> <input type="text" size="3" id="page-number"> of <span
-                id="number-pages"></span>
-        </div>
-    </div>
+<div id="book">
+    <div class="cover"><h1>The Diary</h1></div>
 </div>
 
-</body>
+<div id="controls">
+    <label for="page-number">Page:</label> <input type="text" size="3" id="page-number"> of <span
+        id="number-pages"></span>
+</div>
+
 <script type="text/javascript">
 
     // Sample using dynamic pages with turn.js
 
-    var numberOfPages = 100;
-
-
+    var numberOfPages = {{ nums }};
+    var length = {{ datas.count }};
+    let pages = [];
+    {% for data in datas %}
+        pages.push('{{ data.content }}');
+    {% endfor %}
     // Adds the pages that the book will need
     function addPage(page, book) {
         //  First check if the page is already in the book
@@ -56,7 +38,9 @@
             book.turn('addPage', element, page);
             // Let's assum that the data is comming from the server and the request takes 1s.
             setTimeout(function () {
-                element.html('<div class="data">Content of page ' + page + '</div>');
+                element.html('<div class="data">'+
+                    pages[page-2]+ '</div>');
+                console.log(page-2,pages[page-2]);
             }, 1000);
         }
     }
@@ -106,75 +90,8 @@
     });
 
 </script>
+
 <style>
-    .View .Menu div { /*메뉴바 선 굵기, 바 사이 여백*/
-        padding: 10px;
-        border-bottom: 1px solid #ccc;
-    }
-
-    body {
-        text-align: center;
-        background-color: #ebe5e5;
-    }
-
-    .View {
-        width: 800px;
-        height: 500px;
-        /*overflow: hidden;*/
-        position: relative;
-    }
-
-    .Menu {
-        width: 270px;
-        height: 95%;
-        background-color: #ffffff;
-        padding-top: 10px;
-        transition: transform 600ms;
-        transform: translate(-250px, 0px);
-
-        -ms-transition: -ms-transform 600ms;
-        -webkit-transition: -webkit-transform 600ms;
-        -moz-transition: -moz-transform 600ms;
-        -o-transition: -o-transform 600ms;
-
-        -ms-transform: translate(-250px, 0px);
-        -webkit-transform: translate(-250px, 0px);
-        -moz-transform: translate(-250px, 0px);
-        -o-transform: translate(-250px, 0px);
-    }
-
-    .Menu div {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: 14px;
-        width: 250px;
-        height: 30px;
-        line-height: 30px;
-        vertical-align: middle;
-        text-align: center;
-        color: #716f6f;
-        cursor: pointer;
-        margin-bottom: 1px;
-    }
-
-    .Menu div:hover {
-        background-color: lavenderblush;
-    }
-
-    .button {
-        font-size: 30px;
-        width: 100px;
-        height: 1500px;
-        position: absolute;
-        bottom: 10px;
-        left: 23px;
-        cursor: pointer;
-        color: lavenderblush;
-    }
-
-    .button:hover {
-    }
-
     body { /*바탕 색상*/
         background: white;
     }
@@ -244,34 +161,6 @@
 
 
 <script>
-    function colorChange() {
-        var color = ["#FFFFCC", "#FFCCCC", "#CCCCFF", "#FFD7B5", "#CCCCCC"];
-
-        var num = Math.floor(Math.random() * color.length);
-        var bodyTag = document.getElementById("colorCont");
-        bodyTag.style.backgroundColor = color[num];
-    }
-
-    function showLeftMenu() {
-        var circleBtObj = document.getElementById('button');
-        var leftMenuObj = document.getElementById('MenuId');
-        circleBtObj.style['display'] = "none";
-        leftMenuObj.style['transform'] = "translate(0px, 0px)";
-
-        leftMenuObj.style['msTransform'] = "translate(0px, 0px)";
-        leftMenuObj.style['mozTransform'] = "translate(0px, 0px)";
-        leftMenuObj.style['webkitTransform'] = "translate(0px, 0px)";
-        leftMenuObj.style['oTransform'] = "translate(0px, 0px)";
-    }
-
-    function closeLeftMenu() {
-        var circleBtObj = document.getElementById('button');
-        var leftMenuObj = document.getElementById('MenuId');
-
-        circleBtObj.style['display'] = "block";
-        leftMenuObj.removeAttribute("style");
-    }
-
     (function ($) {
 
         'use strict';
@@ -595,7 +484,7 @@
                                         width: pageWidth,
                                         height: pageHeight
                                     }
-                                }).css(pagePosition[(data.display == 'double') ? page % 2 : 0]);
+                                }).css(pagePosition[(data.display === 'double') ? page % 2 : 0]);
 
                                 // Append to this
                                 this.append(data.pageWrap[page]);
@@ -605,7 +494,7 @@
                             }
 
                             // If the page is in the current view, create the flip effect
-                            if (!page || turnMethods._setPageLoc.call(this, page) == 1)
+                            if (!page || turnMethods._setPageLoc.call(this, page) === 1)
                                 turnMethods._makeFlip.call(this, page);
 
                         } else {
@@ -963,7 +852,7 @@
                     var i, data = this.data();
 
                     for (i = 0; i < data.pageMv.length; i++)
-                        if (data.pageMv[i] == page) {
+                        if (data.pageMv[i] === page) {
                             data.pageMv.splice(i, 1);
                             return true;
                         }
@@ -1010,7 +899,7 @@
 
                 // Stops animations
 
-                stop: function (오케이) {
+                stop: function (ok) {
 
                     var i, opts, data = this.data(), pages = data.pageMv;
 

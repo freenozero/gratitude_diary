@@ -65,20 +65,18 @@ def calendar_trans(request, year, month, week_date=1):
 
 
 def main(request):
-    book_year = datetime.date.today().year
+    today = datetime.date.today()
+    book_year = today.year
+    cal_return = ''
     if request.user.is_authenticated:
         week_class = []
-        cal_return = ''
         books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
+        cal_return = calendar_trans(request, book_year, today.month, get_week_no(today))
         if request.method == 'POST':
             try:
                 cal = list(map(int, request.POST['calendar_load'].split(',')))
                 book_year = cal[0]
                 cal_return = calendar_trans(request, book_year, cal[1], cal[2])
-                for i in range(1, 13):
-                    week_class.append(Week(book_year, i, request))  # 해당주에 적힌 거 몇 개인지 찾기
-                return render(request, 'main.html', {'book_year': book_year, 'books': books,
-                                                     'datas': week_class, 'calendar': cal_return})
             except Exception as e:
                 print(e)
             try:
@@ -88,12 +86,9 @@ def main(request):
                     book_year += 1
                 else:  # 날짜를 왼쪽[달 감소]
                     book_year -= 1
-                for i in range(1, 13):
-                    week_class.append(Week(book_year, i, request))
+                cal_return = calendar_trans(request, book_year, today.month)
             except Exception as e:
                 print(e)
-            return render(request, 'main.html', {'book_year': book_year, 'books': books,
-                                                 'datas': week_class, 'calendar': cal_return})
         for i in range(1, 13):
             week_class.append(Week(book_year, i, request))
         return render(request, 'main.html', {'book_year': book_year, 'books': books,
@@ -269,4 +264,7 @@ def erase_view(request, diary_cnt):
 
 
 def decorate_note(request):
-    return render(request, 'decorate_note.html')
+    datas = Data.objects.filter(diary_date__year=2022,diary_date__month=2, week_date=3)
+    num = datas.count()+1
+    print(datas)
+    return render(request, 'decorate_note.html', {'nums':num, 'datas':datas})
