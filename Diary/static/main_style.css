@@ -35,13 +35,10 @@ body {
     margin: 0 auto;
     justify-content: center;
     column-gap: 10px;
-    height: 550px;
 }
 
 .in-item {
     display: grid;
-    /*height: 150px;*/
-    width: 304px;
     border: solid 3px;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 1px;
@@ -83,7 +80,7 @@ table.month {
     margin: 0 auto;
     border-collapse: separate;
     border: solid 1px;
-    border-spacing: 23px;
+    border-spacing: 6px;
 }
 
 tr.month {
@@ -130,8 +127,8 @@ th.sun, td.sun {
 }
 
 .book {
-    height: 150px;
-    width: 60px;
+    height: 130px;
+    width: 44px;
     background: white;
     border: #5b4331 1px;
 }
