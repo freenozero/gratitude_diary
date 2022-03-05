@@ -46,7 +46,6 @@ def calendar_trans(request, year, month, week_date=1):
             datas.append(i)
     try:
         for i in datas:
-            print(i)
             cal_return = cal_return.replace('>' + str(i) + '<',
                                             " style='border: solid 1px' >" + str(i) + '<')
     except Exception:
