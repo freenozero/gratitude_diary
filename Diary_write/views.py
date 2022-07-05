@@ -54,7 +54,7 @@ def calendar_trans(request, year, month, week_date=1): #year, month는 오늘 �
         print('없음')
     if today.year == year and today.month == month:
         cal_return = cal_return.replace('>' + str(today.day) + '<',
-                                        " style='border: solid 1px' >" + str(today.day) + '<')
+                                        " style='border: solid 3px' >" + str(today.day) + '<')
     for i in range(len(month_en)):
         if month_en[i] in cal_return:
             cal_return = cal_return.replace(str(year), '')
@@ -68,9 +68,12 @@ def calendar_trans(request, year, month, week_date=1): #year, month는 오늘 �
 def main(request):
     today = datetime.date.today()
     book_year = today.year
+    book_month = 0
+    book_week = 0
     cal_return = ''
     if request.user.is_authenticated:
         week_class = []
+        cal = []
         books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
         cal_return = calendar_trans(request, book_year, today.month, get_week_no(today))
         if request.method == 'POST':
@@ -78,21 +81,26 @@ def main(request):
                 cal = list(map(int, request.POST['calendar_load'].split(',')))
                 book_year = cal[0]
                 cal_return = calendar_trans(request, book_year, cal[1], cal[2])
+                book_month = cal[1]
+                book_week = cal[2]
             except Exception as e:
                 print(e)
             try:
                 post_data = request.POST['book_year'].split('_')
                 book_year = int(post_data[0])
-                if post_data[1] == 'right':
+                book_month = int(post_data[1])
+                book_week = int(post_data[2])
+                if post_data[3] == 'right':
                     book_year += 1
                 else:  # 날짜를 왼쪽[달 감소]
                     book_year -= 1
                 cal_return = calendar_trans(request, book_year, today.month)
+
             except Exception as e:
                 print(e)
         for i in range(1, 13):
             week_class.append(Week(book_year, i, request))
-        return render(request, 'main.html', {'book_year': book_year, 'books': books,
+        return render(request, 'main.html', {'book_year': book_year, 'books': books, 'book_month': book_month, 'book_week':book_week,
                                              'datas': week_class, 'calendar': cal_return})
     else:
         return redirect('logout')
