@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Data
 import datetime
 import calendar
-from calendar import HTMLCalendar
 
 
 class Week:
@@ -33,15 +32,18 @@ class Week:
         return self.__week_cnt
 
 
-def calendar_trans(request, year, month, week_date=1):
+def calendar_trans(request, year, month, week_date=1): #year, month는 오늘 날짜
     month_en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
                 'October', 'November', 'December']
-    week_en = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    week_kr = ['월', '화', '수', '목', '금', '토', '일']
+    week_en = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    week_kr = ['일', '월', '화', '수', '목', '금', '토' ]
     today = datetime.date.today()
-    cal_return = HTMLCalendar().formatmonth(year, month)
+    tc = calendar.HTMLCalendar(6)#일요일부터 시작
+    cal_return = tc.formatmonth(year, month)
+
+    print('cal_return:', cal_return)
     datas = []
-    for i in range(1, get_lastday(year, month) + 1):
+    for i in range(1, get_lastday(year, month)+1):
         if get_week_no(datetime.date(year, month, i)) == week_date:
             datas.append(i)
     try:
@@ -101,16 +103,17 @@ def get_date(y, m, d):
     return datetime.datetime.strptime(s, '%Y-%m-%d')
 
 
-def get_week_no(date):
+def get_week_no(date): #해당 날짜의 주차 계산
     target = get_date(date.year, date.month, date.day)
     firstday = target.replace(day=1)
     if firstday.weekday() == 6:
         origin = firstday
     elif firstday.weekday() < 3:
-        origin = firstday - datetime.timedelta(days=firstday.weekday() + 1)
+        origin = firstday - datetime.timedelta(days=firstday.weekday())
     else:
         origin = firstday + datetime.timedelta(days=6 - firstday.weekday())
     return (target - origin).days // 7 + 1
+
 
 
 def diary_view(request):
