@@ -109,44 +109,41 @@ img{
 
 /*==========Index 화면이 로그인 관련 ============*/
 .form-email{
-    background-color: aliceblue;
-    width: 200px;
-    height: 30px;
+    background-color: white;
+    width: 100%;
+    height: 35px;
     position: relative;
     margin: 0 auto;
-    opacity:0.7;
-    border-radius: 1px;
+    border-radius: 8px;
 }.form-pwd{
-    background-color: aliceblue;
-    width: 200px;
-    height: 30px;
+    font-size: 16px;
+    width: 100%;
+    background-color: white;
+    height: 35px;
     position: relative;
     margin: 0 auto;
-    opacity:0.7;
-    border-top: solid black 1px;
-    border-radius: 1px;
+    border-top: solid #969696 1px;
+    border-radius: 8px;
 }
 .login_button{ /*로그인 버튼*/
+    background-color: chartreuse;
+    margin-top: 20px;
     border: none;
-    background:url("img/lock.png");
-    height: 100px;
-    width: 100px;
-    background-size: 89px;       /*이미지 사이즈 줄이기*/
-    background-repeat: no-repeat;
-    position: relative;
-    right: -300px;
-    top: -110px;
-    transition: all 0.05s linear;
+    height: 50px;
+    width: 100%;
 }
 .login_button:hover{ /*로그인 버튼에 마우스 올릴 경우*/
     cursor: pointer;
     transform: scale(1.04);
 }
 .login{
-    width: 400px;
+    width: 350px;
     bottom: 300px;
     margin: 0 auto;
     color: green;
+    padding: 16px 16px 12px 17px;
+    /*background-color: #f7f9fa;*/
+    border: 1px solid #dae1e6;
 }
 .index_div{
       display: flex;
@@ -188,22 +185,26 @@ ol, ul{
 input:focus {outline:none;}
 
 #id_email{
+    width: 90%;
+    height: 100%;
     font-size: 15px;
     background-color:transparent;
     border: none;
-    margin-left: 5px;
+    margin-left: 15px;
     position: relative;
-    top: 2px;
 }
 /* ==== signup 페이지 password 입력창 ======*/
 #id_password{
-    top: 2px;
+    width: 90%;
+    height: 100%;
+    font-size: 15px;
     background-color:transparent;
     border: none;
-    margin-left: 5px;
+    margin-left: 15px;
+    position: relative;
 }
 .signup{
-    margin: 0 auto;
+    margin-top: 15px;
     text-align: center;
 }
 

@@ -5,8 +5,8 @@
 큰 불빛 갯수를 blurCount 변수에 담음
 html에서 stage class 선택해서 stage 변수에 담음
 */
-const count     = 12;
-const blurCount = 7;
+const count     = 0;
+const blurCount = 0;
 const stage = document.querySelector(".stage");
 
 /*
