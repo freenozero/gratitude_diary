@@ -9,14 +9,13 @@
             <div class="form-pwd">
                 <input type="password" name="password" class="form-control" required id="id_password" placeholder="PW">
             </div>
-            <div>
-                <div class="signup">
-                    <a href="{% url 'signup' %}">회원가입</a>
-                </div>
-                <div>
-                    <button class="login_button"></button>
-
-                </div>
+            <div class="signup">
+                <a href="{% url 'signup' %}">회원가입 | </a>
+                <a href="{% url 'signup' %}">아이디 찾기 | </a>
+                <a href="{% url 'signup' %}">비밀번호 찾기</a>
+            </div>
+            <div class="login_btn">
+                <button type="submit" class="login_button"><span>로그인</span></button>
             </div>
         </form>
     </div>

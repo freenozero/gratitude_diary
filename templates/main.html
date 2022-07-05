@@ -10,6 +10,7 @@
 <div class="main_container">
     <div class="main-header_wrap">
         <a class="main-header_title">{{ user.name }} 님의 {{ book_year }}년 서재</a>
+
     </div>
     <div class="content-nav-wrap">
         <div class="group_nav">
@@ -37,10 +38,10 @@
                 <div class="control_book">
                     <form action="{% url 'main' %}" method="post">
                         {% csrf_token %}
-                        <button type='submit' name='book_year' value='{{ book_year }}_left'
+                        <button type='submit' name='book_year' value='{{ book_year }}_{{ book_month }}_{{ book_week }}_left'
                                 class="nav-btn go-prev"> <
                         </button>
-                        <button type='submit' name='book_year' value='{{ book_year }}_right'
+                        <button type='submit' name='book_year' value='{{ book_year }}_{{ book_month }}_{{ book_week }}_right'
                                 class="nav-btn go-prev"> >
                         </button>
                     </form>
@@ -58,19 +59,34 @@
                                         {% if cnt == 0 %}
                                             <div class="in-item-wrap">
                                                 <a class="book" style="visibility: hidden">
-                                                    <button name="calendar_load" class="book" type="submit"
+                                                    {% if value.get_year == book_year and value.get_month == book_month and forloop.counter == book_week %}
+                                                        <button name="calendar_load" class="book" type="submit"
+                                                            value={{ value.get_year }},{{ value.get_month }},{{ forloop.counter }} style="background-color: red">
+                                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                                        </button>
+                                                    {% else %}
+                                                        <button name="calendar_load" class="book" type="submit"
                                                             value={{ value.get_year }},{{ value.get_month }},{{ forloop.counter }}>
                                                         <br>{{ forloop.counter }}주<br>{{ cnt }}
-                                                    </button>
+                                                        </button>
+
+                                                    {% endif %}
                                                 </a>
                                             </div>
                                         {% else %}
                                             <div class="in-item-wrap">
                                                 <a class="book" style="visibility: visible">
+                                                     {% if value.get_year == book_year and value.get_month == book_month and forloop.counter == book_week %}
+                                                         <button name="calendar_load" class="book" type="submit"
+                                                            value={{ value.get_year }},{{ value.get_month }},{{ forloop.counter }} style="background-color:red" >
+                                                        <br>{{ forloop.counter }}주<br>{{ cnt }}
+                                                    </button>
+                                                    {% else %}
                                                     <button name="calendar_load" class="book" type="submit"
                                                             value={{ value.get_year }},{{ value.get_month }},{{ forloop.counter }}>
                                                         <br>{{ forloop.counter }}주<br>{{ cnt }}
                                                     </button>
+                                                     {% endif %}
                                                 </a>
                                             </div>
                                         {% endif %}

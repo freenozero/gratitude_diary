@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Data
 import datetime
 import calendar
-from calendar import HTMLCalendar
 
 
 class Week:
@@ -33,15 +32,18 @@ class Week:
         return self.__week_cnt
 
 
-def calendar_trans(request, year, month, week_date=1):
+def calendar_trans(request, year, month, week_date=1): #year, month는 오늘 날짜
     month_en = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
                 'October', 'November', 'December']
-    week_en = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    week_kr = ['월', '화', '수', '목', '금', '토', '일']
+    week_en = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    week_kr = ['일', '월', '화', '수', '목', '금', '토' ]
     today = datetime.date.today()
-    cal_return = HTMLCalendar().formatmonth(year, month)
+    tc = calendar.HTMLCalendar(6)#일요일부터 시작
+    cal_return = tc.formatmonth(year, month)
+
+    print('cal_return:', cal_return)
     datas = []
-    for i in range(1,get_lastday(year, month)+1):
+    for i in range(1, get_lastday(year, month)+1):
         if get_week_no(datetime.date(year, month, i)) == week_date:
             datas.append(i)
     try:
@@ -52,7 +54,7 @@ def calendar_trans(request, year, month, week_date=1):
         print('없음')
     if today.year == year and today.month == month:
         cal_return = cal_return.replace('>' + str(today.day) + '<',
-                                        " style='border: solid 1px' >" + str(today.day) + '<')
+                                        " style='border: solid 3px' >" + str(today.day) + '<')
     for i in range(len(month_en)):
         if month_en[i] in cal_return:
             cal_return = cal_return.replace(str(year), '')
@@ -66,9 +68,12 @@ def calendar_trans(request, year, month, week_date=1):
 def main(request):
     today = datetime.date.today()
     book_year = today.year
+    book_month = 0
+    book_week = 0
     cal_return = ''
     if request.user.is_authenticated:
         week_class = []
+        cal = []
         books = Data.objects.filter(id=request.user.id, diary_date__year=book_year)
         cal_return = calendar_trans(request, book_year, today.month, get_week_no(today))
         if request.method == 'POST':
@@ -76,21 +81,26 @@ def main(request):
                 cal = list(map(int, request.POST['calendar_load'].split(',')))
                 book_year = cal[0]
                 cal_return = calendar_trans(request, book_year, cal[1], cal[2])
+                book_month = cal[1]
+                book_week = cal[2]
             except Exception as e:
                 print(e)
             try:
                 post_data = request.POST['book_year'].split('_')
                 book_year = int(post_data[0])
-                if post_data[1] == 'right':
+                book_month = int(post_data[1])
+                book_week = int(post_data[2])
+                if post_data[3] == 'right':
                     book_year += 1
                 else:  # 날짜를 왼쪽[달 감소]
                     book_year -= 1
                 cal_return = calendar_trans(request, book_year, today.month)
+
             except Exception as e:
                 print(e)
         for i in range(1, 13):
             week_class.append(Week(book_year, i, request))
-        return render(request, 'main.html', {'book_year': book_year, 'books': books,
+        return render(request, 'main.html', {'book_year': book_year, 'books': books, 'book_month': book_month, 'book_week':book_week,
                                              'datas': week_class, 'calendar': cal_return})
     else:
         return redirect('logout')
@@ -101,16 +111,17 @@ def get_date(y, m, d):
     return datetime.datetime.strptime(s, '%Y-%m-%d')
 
 
-def get_week_no(date):
+def get_week_no(date): #해당 날짜의 주차 계산
     target = get_date(date.year, date.month, date.day)
     firstday = target.replace(day=1)
     if firstday.weekday() == 6:
         origin = firstday
     elif firstday.weekday() < 3:
-        origin = firstday - datetime.timedelta(days=firstday.weekday() + 1)
+        origin = firstday - datetime.timedelta(days=firstday.weekday())
     else:
         origin = firstday + datetime.timedelta(days=6 - firstday.weekday())
     return (target - origin).days // 7 + 1
+
 
 
 def diary_view(request):
@@ -155,7 +166,7 @@ def get_lastday(year, month):
 def test_write(request):
     for year in range(2019, 2025):
         for i in range(1, 13):
-            for j in range(1, calendar.monthrange(year, i)[1]+1):
+            for j in range(1, calendar.monthrange(year, i)[1] + 1):
                 times = datetime.date(year, i, j)
                 newData = Data()
                 newData.id = request.user.id
@@ -263,7 +274,7 @@ def erase_view(request, diary_cnt):
 
 
 def decorate_note(request):
-    datas = Data.objects.filter(diary_date__year=2022,diary_date__month=2, week_date=3)
-    num = datas.count()+1
+    datas = Data.objects.filter(diary_date__year=2022, diary_date__month=2, week_date=3)
+    num = datas.count() + 1
     print(datas)
-    return render(request, 'decorate_note.html', {'nums':num, 'datas':datas})
+    return render(request, 'decorate_note.html', {'nums': num, 'datas': datas})
