@@ -41,7 +41,7 @@ def calendar_trans(request, year, month, week_date=1):
     today = datetime.date.today()
     cal_return = HTMLCalendar().formatmonth(year, month)
     datas = []
-    for i in range(1,get_lastday(year, month)+1):
+    for i in range(1, get_lastday(year, month) + 1):
         if get_week_no(datetime.date(year, month, i)) == week_date:
             datas.append(i)
     try:
@@ -155,7 +155,7 @@ def get_lastday(year, month):
 def test_write(request):
     for year in range(2019, 2025):
         for i in range(1, 13):
-            for j in range(1, calendar.monthrange(year, i)[1]+1):
+            for j in range(1, calendar.monthrange(year, i)[1] + 1):
                 times = datetime.date(year, i, j)
                 newData = Data()
                 newData.id = request.user.id
@@ -263,7 +263,7 @@ def erase_view(request, diary_cnt):
 
 
 def decorate_note(request):
-    datas = Data.objects.filter(diary_date__year=2022,diary_date__month=2, week_date=3)
-    num = datas.count()+1
+    datas = Data.objects.filter(diary_date__year=2022, diary_date__month=2, week_date=3)
+    num = datas.count() + 1
     print(datas)
-    return render(request, 'decorate_note.html', {'nums':num, 'datas':datas})
+    return render(request, 'decorate_note.html', {'nums': num, 'datas': datas})
