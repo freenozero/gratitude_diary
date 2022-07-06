@@ -155,3 +155,9 @@ def change_phonenum(request):
             return render(request, 'change_phonenum.html')
     else:
         return redirect('logout')
+
+def topmenu(request):
+    return render(request,'TopMenu.html')
+
+def submenu(request):
+    return render(request,'SubMenu.html')

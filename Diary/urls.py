@@ -11,6 +11,7 @@ urlpatterns = [
     path('change_phonenum/', views.change_phonenum, name="re_phonenum"),
     path('main/',views.main, name='main'),
     path('activate/<str:uidb64>/<str:token>', views.activate, name='activate'),
+    path('topmenu/', views.topmenu, name='topmenu'),
     path('userprofile/', views.userprofile, name='userprofile')
 
 ]
