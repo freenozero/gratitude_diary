@@ -1,0 +1,37 @@
+{% load static %}
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{% static "style.css" %}?after">
+<div id="top_main_menu">
+<a>{{ user.name }}님 </a>
+</div>
+
+<div id="modal_add_feed" class="modal_overlay"  data-backdrop="">
+    <div  class="modal_window">
+        <button id="close">x</button>
+        <div class="log_mypage_button">
+            <a href="{% url 'userprofile' %}"> 마이페이지</a>
+        </div>
+        <div class="log_logout_button">
+            <a href="{% url 'logout' %}"> 로그아웃</a>
+        </div>
+        <div class="log_index_button" >
+            <a href="{% url 'index' %}"> index </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    //모달 띄우기 코드
+    const modal = document.getElementById("modal_add_feed");
+    const buttonAddFeed = document.getElementById("top_main_menu");
+    buttonAddFeed.addEventListener("click", e => {
+        modal.style.display = "flex";
+    });
+
+    // 모달 닫기 코드
+    const buttonCloseModal = document.getElementById("close");
+    buttonCloseModal.addEventListener("click", e => {
+        modal.style.display = "none";
+        document.body.style.overflowY = "visible";
+    });
+</script>
