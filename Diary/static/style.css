@@ -92,7 +92,6 @@ img {
     background-color: rgba(255, 52, 62, 0.89);
     color: black;
     width: 500px;
-    height: 100%;
     margin: 0 auto;
     font-size: 20px;
     border-radius: 8px;
@@ -103,7 +102,6 @@ img {
     background-color: #6140ffe0;
     color: black;
     width: 500px;
-    height: 100%;
     margin: 0 auto;
     font-size: 20px;
     border-radius: 8px;
