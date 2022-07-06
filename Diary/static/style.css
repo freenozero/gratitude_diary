@@ -136,16 +136,46 @@ img {
 }
 
 .login_button { /*로그인 버튼*/
-    background-color: chartreuse;
+    background-color: #ffffff00;
     margin-top: 6px;
-    border: none;
     height: 50px;
     width: 100%;
+    background-image: url("img/입구3.png");
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: center;
+    border-radius: 15px;
+    border: 1px solid #dadada;;
+}
+.login_button:hover{
+    cursor: pointer;
 }
 
-.login_button:hover { /*로그인 버튼에 마우스 올릴 경우*/
+.login_btn:hover .key_img{
+    visibility: visible;
+    transform: translateX(20px);
+}
+
+.login_btn{
     cursor: pointer;
-    transform: scale(1.04);
+    position: relative;
+}
+
+.key_img{
+    visibility: hidden;
+    top:0;
+    left:0;
+    margin-left: 112px;
+    margin-top: 2px;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url("img/key.png");
+    background-repeat: no-repeat;
+    background-size: 50px;
+    background-position: center;
+    transform: translateX(0px);
+    transition: all 0.3s ease;
 }
 
 .login {
@@ -257,6 +287,9 @@ input:focus {
 .signup {
     margin-top: 15px;
     text-align: center;
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
 }
 
 /*a 태그의 url로 인한 언더바, 색변화 방지*/
