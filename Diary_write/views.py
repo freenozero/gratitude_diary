@@ -41,7 +41,6 @@ def calendar_trans(request, year, month, week_date=1): #year, month는 오늘 �
     tc = calendar.HTMLCalendar(6)#일요일부터 시작
     cal_return = tc.formatmonth(year, month)
 
-    print('cal_return:', cal_return)
     datas = []
     for i in range(1, get_lastday(year, month)+1):
         if get_week_no(datetime.date(year, month, i)) == week_date:
@@ -276,5 +275,4 @@ def erase_view(request, diary_cnt):
 def decorate_note(request):
     datas = Data.objects.filter(diary_date__year=2022, diary_date__month=2, week_date=3)
     num = datas.count() + 1
-    print(datas)
     return render(request, 'decorate_note.html', {'nums': num, 'datas': datas})
