@@ -5,13 +5,14 @@
     {% for message in messages %}
         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
         <div id="msg_error" role="alert">
-            {{ message }}
-            <button id="msgRemove"onclick="msg_error.remove(); msg_error.remove()">X</button>
+
+            <a id="msgRemove" onclick="msg_error.remove();">{{ message }} X</a>
         </div>
         {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
         <div id="msg_success" role="alert">
-            {{ message }}
-            <button id="msgRemove"onclick="msg_success.remove(); msg_success.remove()">X</button>
+
+            <a id="msgRemove" onclick="msg_success.remove();">{{ message }} X</a>
+{#            <button id="msgRemove"onclick="msg_success.remove(); msg_success.remove()">X</button>#}
         </div>
         {% endif %}
     {% endfor %}

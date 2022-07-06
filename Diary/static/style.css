@@ -82,33 +82,40 @@ img {
 }
 
 /*===========메세지===========*/
+
+#message{
+    position: relative;
+}
+
 #msg_error {
     text-align: center;
-    position: relative;
-    background-color: red;
+    background-color: rgba(255, 52, 62, 0.89);
     color: black;
-    width: 400px;
-    height: 23px;
+    width: 500px;
+    height: 100%;
     margin: 0 auto;
-    border-radius: 5px;
+    font-size: 20px;
+    border-radius: 8px;
 }
 
 #msg_success {
     text-align: center;
-    position: relative;
-    background-color: blue;
+    background-color: #6140ffe0;
     color: black;
-    width: 400px;
-    height: 23px;
+    width: 500px;
+    height: 100%;
     margin: 0 auto;
-    border-radius: 5px;
+    font-size: 20px;
+    border-radius: 8px;
 }
 
 #msgRemove {
-    width: 12px;
-    height: 16px;
-    color: mediumpurple;
-    background-color: white;
+    margin-left: 3px;
+    color: white;
+    font-size: 100%;
+}
+#msgRemove:hover{
+    cursor: pointer;
 }
 
 
