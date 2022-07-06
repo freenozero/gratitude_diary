@@ -5,25 +5,16 @@
 <link rel="stylesheet" href="{% static "decorate_note.css" %}">
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-
-
 <script type="text/javascript">
-
-    // Sample using dynamic pages with turn.js
 
     var numberOfPages = 100;
 
-
-    // Adds the pages that the book will need
     function addPage(page, book) {
-        //  First check if the page is already in the book
         if (!book.turn('hasPage', page)) {
-            // Create an element for this page
             var element = $('<div />', {
                 'class': 'page ' + ((page % 2 == 0) ? 'odd' : 'even'),
                 'id': 'page-' + page
             }).html('<i class="loader"></i>');
-            // If not then add the page
             book.turn('addPage', element, page);
             // Let's assum that the data is comming from the server and the request takes 1s.
             setTimeout(function () {
@@ -41,7 +32,6 @@
             when: {
                 turning: function (e, page, view) {
 
-                    // Gets the range of pages that the book needs right now
                     var range = $(this).turn('range', page);
 
                     // Check if each page is within the book
@@ -83,7 +73,8 @@
     }
 
     #book { /*다이어리 사이즈*/
-        margin-left: 316px;
+        margin-left: 50px;
+        margin-top: 50px;
         width: 700px;
         height: 490px;
         left: 480px;
@@ -121,7 +112,7 @@
     }
 
     #controls { /*page 찾기 부분*/
-        {#width: 1650px;#}
+        width: 1750px;
         text-align: center;
         margin: 20px 0px;
         font: 20px arial;
@@ -222,7 +213,6 @@
                 };
             },
 
-            // Gets a 2D point from a bezier curve of four points
 
             bezier = function (p1, p2, p3, p4, t) {
                 var mum1 = 1 - t,
@@ -297,9 +287,6 @@
                     obj.css({'background-image': '-webkit-gradient(linear, ' + p0.x + '% ' + p0.y + '%,  ' + p1.x + '% ' + p1.y + '%, ' + cols.join(',') + ' )'});
 
                 } else {
-
-                    // This procedure makes the gradients for non-webkit browsers
-                    // It will be reduced to one unique way for gradients in next versions
 
                     p0 = {x: p0.x / 100 * obj.width(), y: p0.y / 100 * obj.height()};
                     p1 = {x: p1.x / 100 * obj.width(), y: p1.y / 100 * obj.height()};
@@ -442,8 +429,6 @@
                     return this;
                 },
 
-                // Adds a page from internal data
-
                 _addPage: function (page) {
 
                     var data = this.data(),
@@ -474,23 +459,19 @@
                                     }
                                 }).css(pagePosition[(data.display == 'double') ? page % 2 : 0]);
 
-                                // Append to this
                                 this.append(data.pageWrap[page]);
 
-                                // Move data.pageObjs[page] (element) to wrapper
                                 data.pageWrap[page].prepend(data.pageObjs[page]);
                             }
 
-                            // If the page is in the current view, create the flip effect
                             if (!page || turnMethods._setPageLoc.call(this, page) == 1)
                                 turnMethods._makeFlip.call(this, page);
 
                         } else {
 
-                            // Place
                             data.pagePlace[page] = 0;
 
-                            // Remove element from the DOM
+
                             if (data.pageObjs[page])
                                 data.pageObjs[page].remove();
 
@@ -505,8 +486,6 @@
                     return page in this.data().pageObjs;
 
                 },
-
-                // Prepares the flip effect for a page
 
                 _makeFlip: function (page) {
 
@@ -534,8 +513,6 @@
                     return data.pages[page];
                 },
 
-                // Makes pages within a range
-
                 _makeRange: function () {
 
                     var page,
@@ -546,15 +523,6 @@
                         turnMethods._addPage.call(this, page);
 
                 },
-
-                // Returns a range of `pagesInDOM` pages that should be in the DOM
-                // Example:
-                // - page of the current view, return true
-                // * page is in the range, return true
-                // 0 page is not in the range, return false
-                //
-                // 1 2-3 4-5 6-7 8-9 10-11 12-13
-                //    **  **  --   **  **
 
                 range: function (page) {
 
@@ -589,8 +557,6 @@
 
                 },
 
-                // Detects if a page is within the range of `pagesInDOM` from the current view
-
                 _necessPage: function (page) {
 
                     if (page === 0)
@@ -601,8 +567,6 @@
                     return page >= range[0] && page <= range[1];
 
                 },
-
-                // Releases memory by removing pages from the DOM
 
                 _removeFromDOM: function () {
 
@@ -671,7 +635,6 @@
 
                 },
 
-                // Moves pages
 
                 _movePages: function (from, change) {
 
@@ -714,7 +677,6 @@
 
                 },
 
-                // Sets or Gets the display mode
 
                 display: function (display) {
 
@@ -757,7 +719,6 @@
 
                 },
 
-                // Detects if the pages are being animated
 
                 animating: function () {
 
@@ -765,7 +726,6 @@
 
                 },
 
-                // Disables and enables the effect
 
                 disable: function (bool) {
 
@@ -782,8 +742,6 @@
                     return this;
 
                 },
-
-                // Gets and sets the size
 
                 size: function (width, height) {
 
@@ -815,7 +773,6 @@
                     }
                 },
 
-                // Resizes each page
 
                 resize: function () {
 
@@ -830,10 +787,7 @@
                         if (data.pages[page])
                             data.pages[page].flip('resize', true);
 
-
                 },
-
-                // Removes an animation from the cache
 
                 _removeMv: function (page) {
 
@@ -849,8 +803,6 @@
 
                 },
 
-                // Adds an animation to the cache
-
                 _addMv: function (page) {
 
                     var data = this.data();
@@ -859,8 +811,6 @@
                     data.pageMv.push(page);
 
                 },
-
-                // Gets indexes for a view
 
                 _view: function (page) {
 
@@ -874,8 +824,6 @@
 
                 },
 
-                // Gets a view
-
                 view: function (page) {
 
                     var data = this.data(), view = turnMethods._view.call(this, page);
@@ -884,8 +832,6 @@
                         : [(view[0] > 0 && view[0] <= data.totalPages) ? view[0] : 0];
 
                 },
-
-                // Stops animations
 
                 stop: function (오케이) {
 
@@ -917,7 +863,6 @@
                     return this;
                 },
 
-                // Gets and sets the number of pages
 
                 pages: function (pages) {
 
@@ -941,7 +886,6 @@
 
                 },
 
-                // Sets a page without effect
 
                 _fitPage: function (page, ok) {
 
@@ -965,7 +909,6 @@
 
                 },
 
-                // Turns to a page
 
                 _turnPage: function (page) {
 
@@ -1019,7 +962,6 @@
 
                 },
 
-                // Gets and sets a page
 
                 page: function (page) {
 
@@ -1040,7 +982,6 @@
 
                 },
 
-                // Turns to the next view
 
                 next: function () {
 
@@ -1049,8 +990,6 @@
 
                 },
 
-                // Turns to the previous view
-
                 previous: function () {
 
                     var data = this.data();
@@ -1058,7 +997,6 @@
 
                 },
 
-                // Adds a motion to the internal list
 
                 _addMotionPage: function () {
 
@@ -2030,32 +1968,34 @@
 
     })(jQuery);
 </script>
+
 <body id="colorCont">
 <div class="View">
     <div class="Menu" id="MenuId">
         <h1>Menu</h1>
-        <div>
-            <button onclick="colorChange()">배경 색상 변경</button>
-        </div>
-        <div>다이어리 색상 변경</div>
-        <div>제목 변경</div>
-        <div>아이콘 추가</div>
-        <div>어떤걸 넣을까</div>
+        <div><button onclick="backgroundcolorchange()">배경 색상 변경</button></div>
+        <div><button onclick="">다이어리 색상 변경</button></div>
+        <div><button onclick="">제목 변경</button></div>
+        <div><button onclick="">아이콘 추가</button></div>
+        <div><button onclick="">어떤걸 넣을까</button></div>
         <div onclick="closeLeftMenu(); return false;">Close</div>
     </div>
-
+    <body id="book">
     <div id="book">
         <div class="cover"><h1>The Diary</h1></div>
-
-        <div id="controls">
-            <label for="page-number">Page:</label> <input type="text" size="3" id="page-number"> of <span
-                id="number-pages"></span>
-        </div>
     </div>
+</body>
 </div>
+
 <div class="button" id="button" onclick="showLeftMenu(); return false;">
     <i class="icon-align-justify"></i></div>
 </body>
+
+
+   <div id="controls">
+        <label for="page-number">Page:</label> <input type="text" size="3" id="page-number"> of <span
+           id="number-pages"></span>
+   </div>
 
 <style>
     .View .Menu div { /*메뉴바 선 굵기, 바 사이 여백*/
@@ -2129,13 +2069,14 @@
 </style>
 
 <script>
-    function colorChange() {
+    function backgroundcolorchange() {
         var color = ["#FFFFCC", "#FFCCCC", "#CCCCFF", "#FFD7B5", "#CCCCCC"];
 
         var num = Math.floor(Math.random() * color.length);
         var bodyTag = document.getElementById("colorCont");
         bodyTag.style.backgroundColor = color[num];
     }
+
 
     function showLeftMenu() {
         var circleBtObj = document.getElementById('button');
