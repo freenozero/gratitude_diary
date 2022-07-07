@@ -163,7 +163,7 @@ def get_lastday(year, month):
 
 
 def test_write(request):
-    for year in range(2019, 2025):
+    for year in range(2021, 2023):
         for i in range(1, 13):
             for j in range(1, calendar.monthrange(year, i)[1] + 1):
                 times = datetime.date(year, i, j)
