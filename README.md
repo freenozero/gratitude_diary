@@ -17,6 +17,4 @@ Python, HTML, CSS, JS
 6. 달력 수정(일요일 부터 시작하도록)
 7. 기타 등등..
 ## <실행 화면>
-notion 참고
-## <노션>
-https://www.notion.so/gratitude_diary-ea20dfd0ad9e4074919830de27ff2f93
+https://github.com/freenozero/gratitude_diary/wiki/%ED%99%94%EB%A9%B4-%EC%84%A4%EB%AA%85
